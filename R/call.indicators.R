@@ -1,3 +1,26 @@
+#' Call indicators CEPALSTAT
+#'
+#' @description
+#' It allows generating a data frame that contains each of the indicators by areas
+#' and subdimensions of CEPALSTAT.
+#'
+#'
+#' @param language.en
+#' If true or omitted is selected, the default language will be English.
+#' Select False to choose the Spanish language.
+#'
+#' @return
+#' @export
+#'
+#' @importFrom magrittr %>%
+#' @importFrom dplyr select
+#' @importFrom dplyr left_join
+#' @importFrom dplyr mutate_at
+#' @importFrom dplyr filter
+#'
+#' @examples
+#' data.indicators <- call.indicators()
+#' data.indicators <- call.indicators(language.en = FALSE) # To obtain the indicators in Spanish language
 
 
 call.indicators <- function(language.en = TRUE) {

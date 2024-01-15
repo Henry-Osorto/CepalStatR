@@ -21,7 +21,7 @@
 #'
 #' @examples
 #' viewer.indicators()
-#' viewer.indicators(language.en = FALSE) #To obtain the indicators in Spanish language
+#' viewer.indicators(language.en = FALSE) # To obtain the indicators in Spanish language
 
 
 

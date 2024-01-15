@@ -14,5 +14,5 @@ Allows you to view each of the indicators of the CEPALSTAT database in the R vie
 }
 \examples{
 viewer.indicators()
-viewer.indicators(language.en = FALSE) #To obtain the indicators in Spanish language
+viewer.indicators(language.en = FALSE) # To obtain the indicators in Spanish language
 }
