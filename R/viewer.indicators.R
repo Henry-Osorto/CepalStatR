@@ -1,6 +1,11 @@
 #' Viewer indicators CEPALSTAT
 #'
-#' @param language.en If true or omitted is selected, the default language will be English. Select False to choose the Spanish language.
+#'@description
+#'Allows you to view each of the indicators of the CEPALSTAT database in the R viewer window.
+#'
+#'
+#' @param language.en
+#' If true or omitted is selected, the default language will be English. Select False to choose the Spanish language.
 #'
 #' @return
 #' @export
@@ -15,6 +20,8 @@
 #' @importFrom gt tab_header
 #'
 #' @examples
+#' viewer.indicators()
+#' viewer.indicators(language.en = FALSE) #To obtain the indicators in Spanish language
 
 
 
@@ -78,7 +85,7 @@ viewer.indicators <- function(language.en = TRUE) {
       dplyr::mutate(`Indicator ID` = ifelse(is.na(id.y.y.y) & is.na(id.x), id.y.y,
                                          ifelse(is.na(id.y.y.y), id.x, id.y.y.y))) %>%
       dplyr::select(-id.y.y.y, -id.y.y, -id.x) %>%
-      dplyr::mutate_at(4:6, funs(ifelse(is.na(.), '', .)))
+      dplyr::mutate_at(4:6, ~ifelse(is.na(.), '', .))
 
     data |>
       gt::gt() |>
@@ -144,7 +151,7 @@ viewer.indicators <- function(language.en = TRUE) {
       dplyr::mutate(`Id del Indicador` = ifelse(is.na(id.y.y.y) & is.na(id.x), id.y.y,
                                          ifelse(is.na(id.y.y.y), id.x, id.y.y.y))) %>%
       dplyr::select(-id.y.y.y, -id.y.y, -id.x) %>%
-      dplyr::mutate_at(4:6, funs(ifelse(is.na(.), '', .)))
+      dplyr::mutate_at(4:6, ~ifelse(is.na(.), '', .))
 
       data |>
         gt::gt() |>
