@@ -1,8 +1,11 @@
-#' Title
+#' Call Data Indicators CEPALSTAT
 #'
 #' @param id.indicator
+#' You must determine the ID of the indicator or variable that you want to obtain.
 #' @param language.en
+#' If true or omitted is selected, the default language will be English. Select False to choose the Spanish language.
 #' @param notes
+#' They are the methodological notes that an indicator may have. Select TRUE to be able to add the notes to the data frame.
 #'
 #' @return
 #' @export
@@ -17,7 +20,7 @@
 #' @import stats setNames
 #' @import stringr str_count
 #'
-#' @examples
+#' @examples data <- call.data(id.indicator = 1)
 #'
 
 call.data <- function(id.indicator, language.en = TRUE, notes = FALSE) {
