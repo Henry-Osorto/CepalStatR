@@ -14,7 +14,9 @@ call.data(id.indicator, language.en = TRUE, notes = FALSE)
 \item{notes}{They are the methodological notes that an indicator may have. Select TRUE to be able to add the notes to the data frame.}
 }
 \description{
-Call Data Indicators CEPALSTAT
+call.data is a function that allows you to consult the CEPALSTAT API to obtain in
+a data frame with the values of the desired indicator, disaggregations, by year, countries
+and others that the indicator has.
 }
 \examples{
 data <- call.data(id.indicator = 1)

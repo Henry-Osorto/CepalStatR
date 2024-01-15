@@ -1,5 +1,12 @@
 #' Call Data Indicators CEPALSTAT
 #'
+#'@description
+#'call.data is a function that allows you to consult the CEPALSTAT API to obtain in
+#'a data frame with the values of the desired indicator, disaggregations, by year, countries
+#'and others that the indicator has.
+#'
+#'@usage call.data(id.indicator, language.en = TRUE, notes = FALSE)
+#'
 #' @param id.indicator
 #' You must determine the ID of the indicator or variable that you want to obtain.
 #' @param language.en
@@ -23,7 +30,9 @@
 #' @examples data <- call.data(id.indicator = 1)
 #'
 
-call.data <- function(id.indicator, language.en = TRUE, notes = FALSE) {
+call.data <- function(id.indicator,
+                      language.en = TRUE,
+                      notes = FALSE) {
 
   # Llamar datos dependiendo del lenguaje
 
