@@ -4,9 +4,8 @@
 \alias{pyramids}
 \title{Population pyramids}
 \usage{
-pyramids(country, years, language.en,
-               language.en = TRUE, color=c('#B20B27', '#0A1873'),
-               save=FALSE, height, width)
+pyramids(country, years, language.en, language.en = TRUE, color = c('#B20B27', '#0A1873'),
+         save = FALSE, height = 5, width = 7)
 }
 \arguments{
 \item{width}{}
