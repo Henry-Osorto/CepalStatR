@@ -7,12 +7,23 @@
 #'          save = FALSE, height = 5, width = 7)
 #'
 #' @param country
+#' Write the name of the country
 #' @param years
+#' It is a vector that contains values between 1 and 31. These values reflect the position of a vector of years in 5-year intervals.
+#' The starting year is 1950 (1) and the ending year is 2100 (31).
 #' @param language.en
+#' If true or omitted is selected, the default language will be English. Select False to choose the Spanish language.
 #' @param color
+#' Contains two RGB scale characters. However, you can use the conventional names (red, yellow, blue, green, etc.)
 #' @param save
+#' It is a logical parameter that allows saving the graph in png format in the setwd('~/') directory.
+#' By default the save option is FALSE. Select TRUE if you want to save the graph.
 #' @param height
+#' Determines the height of the graph. You can adjust the size by increasing or decreasing.
+#' By default the height is 5 units ("in", "cm", "mm", or "px", depending on the device).
 #' @param width
+#' Determines the width of the graph. You can adjust the size by increasing or decreasing.
+#' By default the width is 7 units ("in", "cm", "mm", or "px", depending on the device).
 #'
 #' @return
 #' @export
@@ -30,9 +41,13 @@
 #' @importFrom ggplot2 ggsave
 #' @importFrom gridExtra grid.arrange
 #'
-#'
-#'
 #' @examples
+#'# With the values of the years parameter the years 1950, 2000, 2025, 2050 and 2100 will be obtained.
+#' pyramids(country = "Latin America", years = c(1, 11, 16, 21, 25, 31))
+#'
+#'# To save the graph in setwd('~/') set save to TRUE
+#' pyramids(country = "Latin America", years = c(1, 11, 16, 21, 25, 31),
+#'          save = TRUE, height = 8, width = 10)
 
 
 pyramids <- function(country, years=1:31, language.en = TRUE, color = c('#B20B27', '#0A1873'),
