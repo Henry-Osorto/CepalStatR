@@ -12,7 +12,8 @@
 #' It is a vector that contains values between 1 and 31. These values reflect the position of a vector of years in 5-year intervals.
 #' The starting year is 1950 (1) and the ending year is 2100 (31).
 #' @param language.en
-#' If true or omitted is selected, the default language will be English. Select False to choose the Spanish language.
+#' If TRUE or omitted is selected, the default language will be English.
+#' Select FALSE to choose the Spanish language.
 #' @param color
 #' Contains two RGB scale characters. However, you can use the conventional names (red, yellow, blue, green, etc.)
 #' @param save

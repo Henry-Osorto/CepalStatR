@@ -32,6 +32,3 @@ countries <- function(language.en = TRUE) {
 
   return(country)
 }
-
-
-pais <- country.list(language.en = F)
