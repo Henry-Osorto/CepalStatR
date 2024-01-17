@@ -30,7 +30,10 @@ By default the width is 7 units ("in", "cm", "mm", or "px", depending on the dev
 A short description...
 }
 \examples{
-# With the values of the years parameter the years 1950, 2000, 2025, 2050 and 2100 will be obtained.
+pyramids(country = "Latin America", years = 16)
+
+# With the values of the years parameter the years 1950, 2000, 2025,
+# 2050 and 2100 will be obtained.
 pyramids(country = "Latin America", years = c(1, 11, 16, 21, 25, 31))
 
 # To save the graph in setwd('~/') set save to TRUE
