@@ -58,6 +58,7 @@ pyramids <- function(country, years=1:31, language.en = TRUE, color = c('#B20B27
                      save = FALSE, height=5, width=7) {
 
 
+suppressWarnings({
 
   if(language.en == TRUE) {
 
@@ -131,11 +132,7 @@ pyramids <- function(country, years=1:31, language.en = TRUE, color = c('#B20B27
 
     g <- do.call(gridExtra::grid.arrange, p)
 
-    if(save == FALSE) {
-
-      g }
-
-    else{
+    if(save == TRUE) {
 
       setwd('~/')
       ggplot2::ggsave('Population pyramids.png', plot = g, height = height, width = width)
@@ -217,11 +214,7 @@ pyramids <- function(country, years=1:31, language.en = TRUE, color = c('#B20B27
 
     g <- do.call(gridExtra::grid.arrange, p)
 
-    if(save == FALSE) {
-
-      g }
-
-    else{
+    if(save == TRUE)  {
 
       setwd('~/')
       ggplot2::ggsave('Pirámide Poblacional.png', plot = g, height = height, width = width)
@@ -231,7 +224,9 @@ pyramids <- function(country, years=1:31, language.en = TRUE, color = c('#B20B27
 
 
   }
-  }
+  })
+
+}
 
 
 
