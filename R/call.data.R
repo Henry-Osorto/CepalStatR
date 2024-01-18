@@ -72,8 +72,7 @@ call.data <- function(id.indicator,
         dplyr::select(member_id, name) %>%
         stats::setNames(n)
 
-      data <- data %>%
-        dplyr::left_join(d)
+      data <- suppressMessages(dplyr::left_join(data, d))
 
     }
 
@@ -120,8 +119,7 @@ call.data <- function(id.indicator,
 
         data[,notas.n[i]] <- as.numeric(data[,notas.n[i]])
 
-        data <- data %>%
-          dplyr::left_join(d)
+        data <- suppressMessages(dplyr::left_join(data, d))
 
       }
 
@@ -140,8 +138,10 @@ call.data <- function(id.indicator,
     labels.var$name <- gsub('__ESTANDAR', '', labels.var$name)
 
     nombre <- data.frame(label = names(data))
+
+    nombre <- suppressMessages(dplyr::left_join(nombre, labels.var))
+
     nombre <- nombre %>%
-      dplyr::left_join(labels.var) %>%
       dplyr::mutate(nombre = ifelse(is.na(name), label, name))
 
     nombre <- nombre$nombre
@@ -191,8 +191,7 @@ call.data <- function(id.indicator,
         dplyr::select(member_id, name) %>%
         stats::setNames(n)
 
-      data <- data %>%
-        dplyr::left_join(d)
+      data <- suppressMessages(dplyr::left_join(data, d))
 
     }
 
@@ -240,11 +239,7 @@ call.data <- function(id.indicator,
 
       data[,notas.n[i]] <- as.numeric(data[,notas.n[i]])
 
-      data <- data %>%
-        dplyr::left_join(d)
-
-
-
+      data <- suppressMessages(dplyr::left_join(data, d))
 
     }
 
@@ -264,8 +259,10 @@ call.data <- function(id.indicator,
     labels.var$name <- gsub('__ESTANDAR', '', labels.var$name)
 
     nombre <- data.frame(label = names(data))
+
+    nombre <- suppressMessages(dplyr::left_join(nombre, labels.var))
+
     nombre <- nombre %>%
-      dplyr::left_join(labels.var) %>%
       dplyr::mutate(nombre = ifelse(is.na(name), label, name))
 
     nombre <- nombre$nombre

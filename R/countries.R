@@ -1,6 +1,6 @@
-#' list of countries
-#'@description
+#' List of Countries
 #'A short description...
+#'@description
 #'
 #' @param language.en
 #' If TRUE or omitted is selected, the default language will be English.
@@ -11,6 +11,8 @@
 #'
 #' @examples
 #' data <- countries()
+#'
+#' data <- countries(language.en = FALSE)
 #'
 #'
 countries <- function(language.en = TRUE) {
@@ -28,7 +30,6 @@ countries <- function(language.en = TRUE) {
     country <- data.frame(Paises = unique(data$País))
 
   }
-
 
   return(country)
 }

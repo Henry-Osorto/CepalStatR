@@ -2,7 +2,8 @@
 % Please edit documentation in R/countries.R
 \name{countries}
 \alias{countries}
-\title{list of countries}
+\title{List of Countries
+A short description...}
 \usage{
 countries(language.en = TRUE)
 }
@@ -11,10 +12,13 @@ countries(language.en = TRUE)
 Select FALSE to choose the Spanish language.}
 }
 \description{
+List of Countries
 A short description...
 }
 \examples{
 data <- countries()
+
+data <- countries(language.en = FALSE)
 
 
 }
