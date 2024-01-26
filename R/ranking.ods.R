@@ -19,6 +19,10 @@
 #' @importFrom magrittr %>%
 #' @importFrom dplyr select
 #' @importFrom dplyr mutate
+#' @importFrom dplyr group_by
+#' @importFrom dplyr ungroup
+#' @importFrom dplyr arrange
+#' @importFrom dplyr summarise
 #' @importFrom stringr str_split
 #' @importFrom ggplot2 ggplot
 #' @importFrom ggplot2 geom_col
@@ -55,7 +59,7 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
 
     # 2. Advertencia de selección erronea de indicador ----
 
-    if(n == 0) {print(paste0('Warning: Select the indicator id of the Sustainable Development Goals (SDG) dimension'))}
+    if(n == 0) {cat(paste0('Warning: \nSelect the indicator id of the Sustainable Development Goals (SDG) dimension'))}
 
     # 3. Continuar con indicador correcto -----
     else{
@@ -82,6 +86,9 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
                       filtro = ifelse(Years == Maximo, 1, 0)) %>%
         dplyr::ungroup() %>%
         dplyr::filter(filtro == 1) %>%
+        dplyr::group_by(Years, Country) %>%
+        dplyr::summarise(value = mean(value, na.rm = T)) %>%
+        dplyr::ungroup() %>%
         dplyr::arrange(Years) %>%
         dplyr::mutate(filtro = ifelse(Country == 'Latin America and the Caribbean', 1, 0))
 
@@ -113,10 +120,23 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
                                       paste(cap[16:30], collapse = " "), '\n',
                                       paste(cap[31:l], collapse = " ")),
 
-             ifelse(l > 45, paste0('\n', paste(cap[1:15], collapse = " "),  '\n',
-                                   paste(cap[16:30], collapse = " "), '\n',
-                                   paste(cap[31:45], collapse = " "), '\n',
-                                   paste(cap[46:l], collapse = " "))))))
+             ifelse(l > 45 & l <= 60, paste0('\n', paste(cap[1:15], collapse = " "),  '\n',
+                                      paste(cap[16:30], collapse = " "), '\n',
+                                      paste(cap[31:45], collapse = " "), '\n',
+                                      paste(cap[46:l], collapse = " ")),
+
+            ifelse(l > 60 & l <= 75, paste0('\n', paste(cap[1:15], collapse = " "),  '\n',
+                                     paste(cap[16:30], collapse = " "), '\n',
+                                     paste(cap[31:45], collapse = " "), '\n',
+                                     paste(cap[46:60], collapse = " "), '\n',
+                                     paste(cap[61:l], collapse = " ")),
+
+           ifelse(l > 75,            paste0('\n', paste(cap[1:15], collapse = " "),  '\n',
+                                     paste(cap[16:30], collapse = " "), '\n',
+                                     paste(cap[31:45], collapse = " "), '\n',
+                                     paste(cap[46:60], collapse = " "), '\n',
+                                     paste(cap[61:75], collapse = " "), '\n',
+                                     paste(cap[76:l], collapse = " "))))))))
 
 
       # 7. Crear Gráficos dependiendo de si se encuentra ALC ----
@@ -249,9 +269,10 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
       }
 
       if(save == FALSE) { g } else {
-
+        print(g)
         setwd('~/')
         ggplot2::ggsave(paste0('Indicator achievement ', id.indicator, '.png'), g, width = width, height = height)
+        cat(paste0("Chart saved in setwd('~/')"))
       }
 
     }
@@ -280,7 +301,7 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
 
       # 2. Advertencia de selección erronea de indicador ----
 
-      if(n == 0) {print(paste0('Warning: Seleccione el id de indicadores de la dimensión de Objetivos de Desarrollo Sostenible (ODS)'))}
+      if(n == 0) {cat(paste0('Warning: \nSeleccione el id de indicadores de la dimensión de Objetivos de Desarrollo Sostenible (ODS)'))}
 
       # 3. Continuar con indicador correcto -----
       else{
@@ -307,6 +328,9 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
                         filtro = ifelse(Años == Maximo, 1, 0)) %>%
           dplyr::ungroup() %>%
           dplyr::filter(filtro == 1) %>%
+          dplyr::group_by(Años, País) %>%
+          dplyr::summarise(value = mean(value, na.rm = T)) %>%
+          dplyr::ungroup() %>%
           dplyr::arrange(Años) %>%
           dplyr::mutate(filtro = ifelse(País == 'América Latina y el Caribe', 1, 0))
 
@@ -476,6 +500,8 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
 
           setwd('~/')
           ggplot2::ggsave(paste0('Logro del indicador ', id.indicator, '.png'), g, width = width, height = height)
+          print(g)
+          cat(paste0("Gráfico guardado en setwd('~/')"))
         }
 
       }
