@@ -1,7 +1,40 @@
 
 
+#' Title
+#'
+#' @param id.indicator
+#' @param language.en
+#' @param save
+#' @param height
+#' @param width
+#' @param size.title
+#' @param title
+#' @param caption
+#' @param color
+#' @param color.alc
+#'
+#' @return
+#' @export
+#'
+#' @importFrom magrittr %>%
+#' @importFrom dplyr select
+#' @importFrom dplyr mutate
+#' @importFrom stringr str_split
+#' @importFrom ggplot2 ggplot
+#' @importFrom ggplot2 geom_col
+#' @importFrom ggplot2 theme
+#' @importFrom ggplot2 coord_flip
+#' @importFrom ggplot2 scale_fill_manual
+#' @importFrom ggplot2 labs
+#' @importFrom ggplot2 aes
+#' @importFrom ggplot2 element_text
+#' @importFrom ggplot2 ggsave
+#' @examples
+
+
+
 ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
-                        height=5, width=7, size.title=9, title=TRUE,
+                        height=5, width=9, size.title=10, title=TRUE,
                         caption=TRUE, color='#032B47', color.alc='#36B3FF') {
 
 # Si se selecciona idioma inglés
@@ -28,7 +61,7 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
     else{
 
     # 4. Ajustar nombre de indicador para el título ----
-      name.indicator <- str_split(name.indicator, pattern = '\\s+') %>% unlist()
+      name.indicator <- stringr::str_split(name.indicator, pattern = '\\s+') %>% unlist()
 
       l <- length(name.indicator)
 
@@ -67,7 +100,7 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
       cap <- do.call(cbind, cap.list) %>% array()
       cap <- paste0('Note: Latest data available, ', paste(cap, collapse = '; '))
 
-      cap <- str_split(cap, pattern = '\\s+') %>% unlist()
+      cap <- stringr::str_split(cap, pattern = '\\s+') %>% unlist()
 
       l <- length(cap)
 
@@ -95,24 +128,24 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
         if(length(alc) == 1) {
 
           g <- data %>%
-            ggplot(aes(x = fct_reorder(Country, value), y = value)) +
-            geom_col(fill = color) +
-            coord_flip() +
-            labs(title =  name.indicator.o, y = 'Indicator achievement',
+            ggplot2::ggplot(ggplot2::aes(x = reorder(Country, value), y = value)) +
+            ggplot2::geom_col(fill = color) +
+            ggplot2::coord_flip() +
+            ggplot2::labs(title =  name.indicator.o, y = 'Indicator achievement',
                  x = 'Country', caption = cap) +
-            theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
-                  plot.caption = element_text(hjust = 0))
+            ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0, size = size.title, face = "bold"),
+                  plot.caption = ggplot2::element_text(hjust = 0))
 
         } else {
           g <- data %>%
-            ggplot(aes(x = fct_reorder(Country, value), y = value, fill = as.character(filtro))) +
-            geom_col() +
-            coord_flip() +
-            labs(title =  name.indicator.o, y = 'Indicator achievement',
+            ggplot2::ggplot(ggplot2::aes(x = reorder(Country, value), y = value, fill = as.character(filtro))) +
+            ggplot2::geom_col() +
+            ggplot2::coord_flip() +
+            ggplot2::labs(title =  name.indicator.o, y = 'Indicator achievement',
                  x = 'Country', caption = cap) +
-            scale_fill_manual(values = c(color, color.alc)) +
-            theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
-                  plot.caption = element_text(hjust = 0),
+            ggplot2::scale_fill_manual(values = c(color, color.alc)) +
+            ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0, size = size.title, face = "bold"),
+                  plot.caption = ggplot2::element_text(hjust = 0),
                   legend.position = 'none')
             }
 
@@ -127,24 +160,24 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
         if(length(alc) == 1) {
 
           g <- data %>%
-            ggplot(aes(x = fct_reorder(Country, value), y = value)) +
-            geom_col(fill = color) +
-            coord_flip() +
-            labs(title =  name.indicator.o, y = 'Indicator achievement',
+            ggplot2::ggplot(ggplot2::aes(x = reorder(Country, value), y = value)) +
+            ggplot2::geom_col(fill = color) +
+            ggplot2::coord_flip() +
+            ggplot2::labs(title =  name.indicator.o, y = 'Indicator achievement',
                  x = 'Country') +
-            theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
-                  plot.caption = element_text(hjust = 0))
+            ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0, size = size.title, face = "bold"),
+                  plot.caption = ggplot2::element_text(hjust = 0))
 
         } else {
           g <- data %>%
-            ggplot(aes(x = fct_reorder(Country, value), y = value, fill = as.character(filtro))) +
-            geom_col() +
-            coord_flip() +
-            labs(title =  name.indicator.o, y = 'Indicator achievement',
+            ggplot2::ggplot(ggplot2::aes(x = reorder(Country, value), y = value, fill = as.character(filtro))) +
+            ggplot2::geom_col() +
+            ggplot2::coord_flip() +
+            ggplot2::labs(title =  name.indicator.o, y = 'Indicator achievement',
                  x = 'Country') +
-            scale_fill_manual(values = c(color, color.alc)) +
-            theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
-                  plot.caption = element_text(hjust = 0),
+            ggplot2::scale_fill_manual(values = c(color, color.alc)) +
+            ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0, size = size.title, face = "bold"),
+                  plot.caption = ggplot2::element_text(hjust = 0),
                   legend.position = 'none')
         }
 
@@ -158,24 +191,24 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
         if(length(alc) == 1) {
 
           g <- data %>%
-            ggplot(aes(x = fct_reorder(Country, value), y = value)) +
-            geom_col(fill = color) +
-            coord_flip() +
-            labs(y = 'Indicator achievement',
+            ggplot2::ggplot(ggplot2::aes(x = reorder(Country, value), y = value)) +
+            ggplot2::geom_col(fill = color) +
+            ggplot2::coord_flip() +
+            ggplot2::labs(y = 'Indicator achievement',
                  x = 'Country', caption = cap) +
-            theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
-                  plot.caption = element_text(hjust = 0))
+            ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0, size = size.title, face = "bold"),
+                  plot.caption = ggplot2::element_text(hjust = 0))
 
         } else {
           g <- data %>%
-            ggplot(aes(x = fct_reorder(Country, value), y = value, fill = as.character(filtro))) +
-            geom_col() +
-            coord_flip() +
-            labs(y = 'Indicator achievement',
+            ggplot2::ggplot(ggplot2::aes(x = reorder(Country, value), y = value, fill = as.character(filtro))) +
+            ggplot2::geom_col() +
+            ggplot2::coord_flip() +
+            ggplot2::labs(y = 'Indicator achievement',
                  x = 'Country', caption = cap) +
-            scale_fill_manual(values = c(color, color.alc)) +
-            theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
-                  plot.caption = element_text(hjust = 0),
+            ggplot2::scale_fill_manual(values = c(color, color.alc)) +
+            ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0, size = size.title, face = "bold"),
+                  plot.caption = ggplot2::element_text(hjust = 0),
                   legend.position = 'none')
         }
 
@@ -189,24 +222,24 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
         if(length(alc) == 1) {
 
           g <- data %>%
-            ggplot(aes(x = fct_reorder(Country, value), y = value)) +
-            geom_col(fill = color) +
-            coord_flip() +
-            labs(y = 'Indicator achievement',
+            ggplot2::ggplot(ggplot2::aes(x = reorder(Country, value), y = value)) +
+            ggplot2::geom_col(fill = color) +
+            ggplot2::coord_flip() +
+            ggplot2::labs(y = 'Indicator achievement',
                  x = 'Country') +
-            theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
-                  plot.caption = element_text(hjust = 0))
+            ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0, size = size.title, face = "bold"),
+                  plot.caption = ggplot2::element_text(hjust = 0))
 
         } else {
           g <- data %>%
-            ggplot(aes(x = fct_reorder(Country, value), y = value, fill = as.character(filtro))) +
-            geom_col() +
-            coord_flip() +
-            labs(y = 'Indicator achievement',
+            ggplot2::ggplot(ggplot2::aes(x = reorder(Country, value), y = value, fill = as.character(filtro))) +
+            ggplot2::geom_col() +
+            ggplot2::coord_flip() +
+            ggplot2::labs(y = 'Indicator achievement',
                  x = 'Country') +
-            scale_fill_manual(values = c(color, color.alc)) +
-            theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
-                  plot.caption = element_text(hjust = 0),
+            ggplot2::scale_fill_manual(values = c(color, color.alc)) +
+            ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0, size = size.title, face = "bold"),
+                  plot.caption = ggplot2::element_text(hjust = 0),
                   legend.position = 'none')
         }
 
@@ -218,7 +251,7 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
       if(save == FALSE) { g } else {
 
         setwd('~/')
-        ggsave(paste0('Indicator achievement ', id.indicator, '.png'), g, width = width, height = height)
+        ggplot2::ggsave(paste0('Indicator achievement ', id.indicator, '.png'), g, width = width, height = height)
       }
 
     }
@@ -253,7 +286,7 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
       else{
 
         # 4. Ajustar nombre de indicador para el título ----
-        name.indicator <- str_split(name.indicator, pattern = '\\s+') %>% unlist()
+        name.indicator <- stringr::str_split(name.indicator, pattern = '\\s+') %>% unlist()
 
         l <- length(name.indicator)
 
@@ -292,7 +325,7 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
         cap <- do.call(cbind, cap.list) %>% array()
         cap <- paste0('Nota: Último dato disponible, ', paste(cap, collapse = '; '))
 
-        cap <- str_split(cap, pattern = '\\s+') %>% unlist()
+        cap <- stringr::str_split(cap, pattern = '\\s+') %>% unlist()
 
         l <- length(cap)
 
@@ -319,24 +352,24 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
           if(length(alc) == 1) {
 
             g <- data %>%
-              ggplot(aes(x = fct_reorder(País, value), y = value)) +
-              geom_col(fill = color) +
-              coord_flip() +
-              labs(title =  name.indicator.o, y = 'Logro del indicador',
+              ggplot2::ggplot(ggplot2::aes(x = reorder(País, value), y = value)) +
+              ggplot2::geom_col(fill = color) +
+              ggplot2::coord_flip() +
+              ggplot2::labs(title =  name.indicator.o, y = 'Logro del indicador',
                    x = 'País', caption = cap) +
-              theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
-                    plot.caption = element_text(hjust = 0))
+              ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0, size = size.title, face = "bold"),
+                    plot.caption = ggplot2::element_text(hjust = 0))
 
           } else {
             g <- data %>%
-              ggplot(aes(x = fct_reorder(País, value), y = value, fill = as.character(filtro))) +
-              geom_col() +
-              coord_flip() +
-              labs(title =  name.indicator.o, y = 'Logro del indicador',
+              ggplot2::ggplot(ggplot2::aes(x = reorder(País, value), y = value, fill = as.character(filtro))) +
+              ggplot2::geom_col() +
+              ggplot2::coord_flip() +
+              ggplot2::labs(title =  name.indicator.o, y = 'Logro del indicador',
                    x = 'País', caption = cap) +
-              scale_fill_manual(values = c(color, color.alc)) +
-              theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
-                    plot.caption = element_text(hjust = 0),
+              ggplot2::scale_fill_manual(values = c(color, color.alc)) +
+              ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0, size = size.title, face = "bold"),
+                    plot.caption = ggplot2::element_text(hjust = 0),
                     legend.position = 'none')
           }
 
@@ -351,24 +384,24 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
           if(length(alc) == 1) {
 
             g <- data %>%
-              ggplot(aes(x = fct_reorder(País, value), y = value)) +
-              geom_col(fill = color) +
-              coord_flip() +
-              labs(title =  name.indicator.o, y = 'Logro del indicador',
+              ggplot2::ggplot(ggplot2::aes(x = reorder(País, value), y = value)) +
+              ggplot2::geom_col(fill = color) +
+              ggplot2::coord_flip() +
+              ggplot2::labs(title =  name.indicator.o, y = 'Logro del indicador',
                    x = 'País') +
-              theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
-                    plot.caption = element_text(hjust = 0))
+              ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0, size = size.title, face = "bold"),
+                    plot.caption = ggplot2::element_text(hjust = 0))
 
           } else {
             g <- data %>%
-              ggplot(aes(x = fct_reorder(País, value), y = value, fill = as.character(filtro))) +
-              geom_col() +
-              coord_flip() +
-              labs(title =  name.indicator.o, y = 'Logro del indicador',
+              ggplot2::ggplot(ggplot2::aes(x = reorder(País, value), y = value, fill = as.character(filtro))) +
+              ggplot2::geom_col() +
+              ggplot2::coord_flip() +
+              ggplot2::labs(title =  name.indicator.o, y = 'Logro del indicador',
                    x = 'País') +
-              scale_fill_manual(values = c(color, color.alc)) +
-              theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
-                    plot.caption = element_text(hjust = 0),
+              ggplot2::scale_fill_manual(values = c(color, color.alc)) +
+              ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0, size = size.title, face = "bold"),
+                    plot.caption = ggplot2::element_text(hjust = 0),
                     legend.position = 'none')
           }
 
@@ -382,24 +415,24 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
           if(length(alc) == 1) {
 
             g <- data %>%
-              ggplot(aes(x = fct_reorder(País, value), y = value)) +
-              geom_col(fill = color) +
-              coord_flip() +
-              labs(y = 'Logro del indicador',
+              ggplot2::ggplot(ggplot2::aes(x = reorder(País, value), y = value)) +
+              ggplot2::geom_col(fill = color) +
+              ggplot2::coord_flip() +
+              ggplot2::labs(y = 'Logro del indicador',
                    x = 'País', caption = cap) +
-              theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
-                    plot.caption = element_text(hjust = 0))
+              ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0, size = size.title, face = "bold"),
+                    plot.caption = ggplot2::element_text(hjust = 0))
 
           } else {
             g <- data %>%
-              ggplot(aes(x = fct_reorder(País, value), y = value, fill = as.character(filtro))) +
-              geom_col() +
-              coord_flip() +
-              labs(y = 'Logro del indicador',
+              ggplot2::ggplot(ggplot2::aes(x = reorder(País, value), y = value, fill = as.character(filtro))) +
+              ggplot2::geom_col() +
+              ggplot2::coord_flip() +
+              ggplot2::labs(y = 'Logro del indicador',
                    x = 'País', caption = cap) +
-              scale_fill_manual(values = c(color, color.alc)) +
-              theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
-                    plot.caption = element_text(hjust = 0),
+              ggplot2::scale_fill_manual(values = c(color, color.alc)) +
+              ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0, size = size.title, face = "bold"),
+                    plot.caption = ggplot2::element_text(hjust = 0),
                     legend.position = 'none')
           }
 
@@ -413,24 +446,24 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
           if(length(alc) == 1) {
 
             g <- data %>%
-              ggplot(aes(x = fct_reorder(País, value), y = value)) +
-              geom_col(fill = color) +
-              coord_flip() +
-              labs(y = 'Logro del indicador',
+              ggplot2::ggplot(ggplot2::aes(x = reorder(País, value), y = value)) +
+              ggplot2::geom_col(fill = color) +
+              ggplot2::coord_flip() +
+              ggplot2::labs(y = 'Logro del indicador',
                    x = 'País') +
-              theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
-                    plot.caption = element_text(hjust = 0))
+              ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0, size = size.title, face = "bold"),
+                    plot.caption = ggplot2::element_text(hjust = 0))
 
           } else {
             g <- data %>%
-              ggplot(aes(x = fct_reorder(País, value), y = value, fill = as.character(filtro))) +
-              geom_col() +
-              coord_flip() +
-              labs(y = 'Logro del indicador',
+              ggplot2::ggplot(ggplot2::aes(x = reorder(País, value), y = value, fill = as.character(filtro))) +
+              ggplot2::geom_col() +
+              ggplot2::coord_flip() +
+              ggplot2::labs(y = 'Logro del indicador',
                    x = 'País') +
-              scale_fill_manual(values = c(color, color.alc)) +
-              theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
-                    plot.caption = element_text(hjust = 0),
+              ggplot2::scale_fill_manual(values = c(color, color.alc)) +
+              ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0, size = size.title, face = "bold"),
+                    plot.caption = ggplot2::element_text(hjust = 0),
                     legend.position = 'none')
           }
 
@@ -442,7 +475,7 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
         if(save == FALSE) { g } else {
 
           setwd('~/')
-          ggsave(paste0('Logro del indicador ', id.indicator, '.png'), g, width = width, height = height)
+          ggplot2::ggsave(paste0('Logro del indicador ', id.indicator, '.png'), g, width = width, height = height)
         }
 
       }
