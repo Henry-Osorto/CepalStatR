@@ -2,9 +2,9 @@
 
 ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
                         height=5, width=7, size.title=9, title=TRUE,
-                        caption=FALSE) {
+                        caption=TRUE, color='#032B47', color.alc='#36B3FF') {
 
-
+# Si se selecciona idioma inglés
   if(language.en==TRUE) {
 
     # 1. Llamar y Filtrar indicadores ----
@@ -22,7 +22,7 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
 
     # 2. Advertencia de selección erronea de indicador ----
 
-    if(n == 0) {print(paste0('Warning \nSelect the indicator id of the Sustainable Development Goals (SDG) dimension'))}
+    if(n == 0) {print(paste0('Warning: Select the indicator id of the Sustainable Development Goals (SDG) dimension'))}
 
     # 3. Continuar con indicador correcto -----
     else{
@@ -86,26 +86,369 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
                                    paste(cap[46:l], collapse = " "))))))
 
 
-
-
       # 7. Crear Gráficos dependiendo de si se encuentra ALC ----
 
-      # Aparte de crear el grafico colocando un color distinto a ALC
-      # Hay que crear los gráficos dependiendo de si se va a colocar el título y la nota
-      # se deben de hacer tres condiciones: , if(titulo= F & nota = T), if (titulo= T & nota = F)
-      # else(titulo=T & nota=T)
+      alc <- unique(data$filtro)
 
-      g <- data %>%
-        ggplot(aes(x = fct_reorder(Country, value), y = value)) +
-        geom_col(fill = '#0A1873') +
-        coord_flip() +
-        labs(title =  name.indicator.o, y = 'Indicator achievement',
-             x = 'Country', caption = cap) +
-        theme(plot.title = element_text(hjust = 0, size = 9, face = "bold"),
-              plot.caption = element_text(hjust = 0))
+      if(title == TRUE & caption == TRUE) {
+
+        if(length(alc) == 1) {
+
+          g <- data %>%
+            ggplot(aes(x = fct_reorder(Country, value), y = value)) +
+            geom_col(fill = color) +
+            coord_flip() +
+            labs(title =  name.indicator.o, y = 'Indicator achievement',
+                 x = 'Country', caption = cap) +
+            theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
+                  plot.caption = element_text(hjust = 0))
+
+        } else {
+          g <- data %>%
+            ggplot(aes(x = fct_reorder(Country, value), y = value, fill = as.character(filtro))) +
+            geom_col() +
+            coord_flip() +
+            labs(title =  name.indicator.o, y = 'Indicator achievement',
+                 x = 'Country', caption = cap) +
+            scale_fill_manual(values = c(color, color.alc)) +
+            theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
+                  plot.caption = element_text(hjust = 0),
+                  legend.position = 'none')
+            }
+
+
+
+
+      }
+
+      if(title == TRUE & caption == FALSE) {
+
+
+        if(length(alc) == 1) {
+
+          g <- data %>%
+            ggplot(aes(x = fct_reorder(Country, value), y = value)) +
+            geom_col(fill = color) +
+            coord_flip() +
+            labs(title =  name.indicator.o, y = 'Indicator achievement',
+                 x = 'Country') +
+            theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
+                  plot.caption = element_text(hjust = 0))
+
+        } else {
+          g <- data %>%
+            ggplot(aes(x = fct_reorder(Country, value), y = value, fill = as.character(filtro))) +
+            geom_col() +
+            coord_flip() +
+            labs(title =  name.indicator.o, y = 'Indicator achievement',
+                 x = 'Country') +
+            scale_fill_manual(values = c(color, color.alc)) +
+            theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
+                  plot.caption = element_text(hjust = 0),
+                  legend.position = 'none')
+        }
+
+
+
+
+      }
+
+      if(title == FALSE & caption == TRUE) {
+
+        if(length(alc) == 1) {
+
+          g <- data %>%
+            ggplot(aes(x = fct_reorder(Country, value), y = value)) +
+            geom_col(fill = color) +
+            coord_flip() +
+            labs(y = 'Indicator achievement',
+                 x = 'Country', caption = cap) +
+            theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
+                  plot.caption = element_text(hjust = 0))
+
+        } else {
+          g <- data %>%
+            ggplot(aes(x = fct_reorder(Country, value), y = value, fill = as.character(filtro))) +
+            geom_col() +
+            coord_flip() +
+            labs(y = 'Indicator achievement',
+                 x = 'Country', caption = cap) +
+            scale_fill_manual(values = c(color, color.alc)) +
+            theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
+                  plot.caption = element_text(hjust = 0),
+                  legend.position = 'none')
+        }
+
+
+
+
+      }
+
+      if(title == FALSE & caption == FALSE) {
+
+        if(length(alc) == 1) {
+
+          g <- data %>%
+            ggplot(aes(x = fct_reorder(Country, value), y = value)) +
+            geom_col(fill = color) +
+            coord_flip() +
+            labs(y = 'Indicator achievement',
+                 x = 'Country') +
+            theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
+                  plot.caption = element_text(hjust = 0))
+
+        } else {
+          g <- data %>%
+            ggplot(aes(x = fct_reorder(Country, value), y = value, fill = as.character(filtro))) +
+            geom_col() +
+            coord_flip() +
+            labs(y = 'Indicator achievement',
+                 x = 'Country') +
+            scale_fill_manual(values = c(color, color.alc)) +
+            theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
+                  plot.caption = element_text(hjust = 0),
+                  legend.position = 'none')
+        }
+
+
+
+
+      }
+
+      if(save == FALSE) { g } else {
+
+        setwd('~/')
+        ggsave(paste0('Indicator achievement ', id.indicator, '.png'), g, width = width, height = height)
+      }
 
     }
 
+
+  }
+
+
+# Si se selecciona idioma español
+  else {
+
+    if(language.en==FALSE) {
+
+      # 1. Llamar y Filtrar indicadores ----
+      indicadores <- call.indicators(language.en = FALSE)
+
+      indicadores <- indicadores %>%
+        dplyr::filter(Dimensión == 'Objetivos de Desarrollo Sostenible (ODS)') %>%
+        dplyr::mutate(name = ifelse((Indicador.3 =="" & Indicador.2 == ""), Indicador.1,
+                                    ifelse(Indicador.3 =="", Indicador.2, Indicador.3))) %>%
+        dplyr::filter(`Id del Indicador` == id.indicator)
+
+      name.indicator <- indicadores$name
+
+      n <- length(name.indicator)
+
+      # 2. Advertencia de selección erronea de indicador ----
+
+      if(n == 0) {print(paste0('Warning: Seleccione el id de indicadores de la dimensión de Objetivos de Desarrollo Sostenible (ODS)'))}
+
+      # 3. Continuar con indicador correcto -----
+      else{
+
+        # 4. Ajustar nombre de indicador para el título ----
+        name.indicator <- str_split(name.indicator, pattern = '\\s+') %>% unlist()
+
+        l <- length(name.indicator)
+
+
+        name.indicator.o <- ifelse(l <= 10, paste(name.indicator, collapse = " "),
+                                   ifelse(l > 10 & l <= 20, paste0(paste(name.indicator[1:10], collapse = " "),  '\n',
+                                                                   paste(name.indicator[11:l], collapse = " ")),
+                                          ifelse(l > 20, paste0(paste(name.indicator[1:10], collapse = " "),  '\n',
+                                                                paste(name.indicator[11:20], collapse = " "), '\n',
+                                                                paste(name.indicator[21:l], collapse = " ")))))
+
+        # 5. Llamar y procesar los datos del indicador ----
+        data <- call.data(id.indicator = id.indicator, language.en = FALSE)
+
+        data <- data %>%
+          dplyr::group_by(País) %>%
+          dplyr::mutate(Maximo = max(Años),
+                        filtro = ifelse(Años == Maximo, 1, 0)) %>%
+          dplyr::ungroup() %>%
+          dplyr::filter(filtro == 1) %>%
+          dplyr::arrange(Años) %>%
+          dplyr::mutate(filtro = ifelse(País == 'América Latina y el Caribe', 1, 0))
+
+
+        # 6. Crear bucle para crear el vector de la nota -----
+        cap <- unique(data$Años)
+        cap.list <- list()
+        for(i in 1:length(cap)){
+
+          paises <- data$País[data$Años == cap[i]]
+          paises <- paste0(cap[i], ': ', paste(paises, collapse = ', '))
+          cap.list[[i]] <- paises
+
+        }
+
+        cap <- do.call(cbind, cap.list) %>% array()
+        cap <- paste0('Nota: Último dato disponible, ', paste(cap, collapse = '; '))
+
+        cap <- str_split(cap, pattern = '\\s+') %>% unlist()
+
+        l <- length(cap)
+
+        cap <- ifelse(l <= 15, paste(cap, collapse = " "),
+
+                      ifelse(l > 15 & l <= 30, paste0('\n', paste(cap[1:15], collapse = " "),  '\n',
+                                                      paste(cap[16:l], collapse = " ")),
+
+                             ifelse(l > 30 & l <= 45, paste0('\n', paste(cap[1:15], collapse = " "),  '\n',
+                                                             paste(cap[16:30], collapse = " "), '\n',
+                                                             paste(cap[31:l], collapse = " ")),
+
+                                    ifelse(l > 45, paste0('\n', paste(cap[1:15], collapse = " "),  '\n',
+                                                          paste(cap[16:30], collapse = " "), '\n',
+                                                          paste(cap[31:45], collapse = " "), '\n',
+                                                          paste(cap[46:l], collapse = " "))))))
+
+        # 7. Crear Gráficos dependiendo de si se encuentra ALC ----
+
+        alc <- unique(data$filtro)
+
+        if(title == TRUE & caption == TRUE) {
+
+          if(length(alc) == 1) {
+
+            g <- data %>%
+              ggplot(aes(x = fct_reorder(País, value), y = value)) +
+              geom_col(fill = color) +
+              coord_flip() +
+              labs(title =  name.indicator.o, y = 'Logro del indicador',
+                   x = 'País', caption = cap) +
+              theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
+                    plot.caption = element_text(hjust = 0))
+
+          } else {
+            g <- data %>%
+              ggplot(aes(x = fct_reorder(País, value), y = value, fill = as.character(filtro))) +
+              geom_col() +
+              coord_flip() +
+              labs(title =  name.indicator.o, y = 'Logro del indicador',
+                   x = 'País', caption = cap) +
+              scale_fill_manual(values = c(color, color.alc)) +
+              theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
+                    plot.caption = element_text(hjust = 0),
+                    legend.position = 'none')
+          }
+
+
+
+
+        }
+
+        if(title == TRUE & caption == FALSE) {
+
+
+          if(length(alc) == 1) {
+
+            g <- data %>%
+              ggplot(aes(x = fct_reorder(País, value), y = value)) +
+              geom_col(fill = color) +
+              coord_flip() +
+              labs(title =  name.indicator.o, y = 'Logro del indicador',
+                   x = 'País') +
+              theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
+                    plot.caption = element_text(hjust = 0))
+
+          } else {
+            g <- data %>%
+              ggplot(aes(x = fct_reorder(País, value), y = value, fill = as.character(filtro))) +
+              geom_col() +
+              coord_flip() +
+              labs(title =  name.indicator.o, y = 'Logro del indicador',
+                   x = 'País') +
+              scale_fill_manual(values = c(color, color.alc)) +
+              theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
+                    plot.caption = element_text(hjust = 0),
+                    legend.position = 'none')
+          }
+
+
+
+
+        }
+
+        if(title == FALSE & caption == TRUE) {
+
+          if(length(alc) == 1) {
+
+            g <- data %>%
+              ggplot(aes(x = fct_reorder(País, value), y = value)) +
+              geom_col(fill = color) +
+              coord_flip() +
+              labs(y = 'Logro del indicador',
+                   x = 'País', caption = cap) +
+              theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
+                    plot.caption = element_text(hjust = 0))
+
+          } else {
+            g <- data %>%
+              ggplot(aes(x = fct_reorder(País, value), y = value, fill = as.character(filtro))) +
+              geom_col() +
+              coord_flip() +
+              labs(y = 'Logro del indicador',
+                   x = 'País', caption = cap) +
+              scale_fill_manual(values = c(color, color.alc)) +
+              theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
+                    plot.caption = element_text(hjust = 0),
+                    legend.position = 'none')
+          }
+
+
+
+
+        }
+
+        if(title == FALSE & caption == FALSE) {
+
+          if(length(alc) == 1) {
+
+            g <- data %>%
+              ggplot(aes(x = fct_reorder(País, value), y = value)) +
+              geom_col(fill = color) +
+              coord_flip() +
+              labs(y = 'Logro del indicador',
+                   x = 'País') +
+              theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
+                    plot.caption = element_text(hjust = 0))
+
+          } else {
+            g <- data %>%
+              ggplot(aes(x = fct_reorder(País, value), y = value, fill = as.character(filtro))) +
+              geom_col() +
+              coord_flip() +
+              labs(y = 'Logro del indicador',
+                   x = 'País') +
+              scale_fill_manual(values = c(color, color.alc)) +
+              theme(plot.title = element_text(hjust = 0, size = size.title, face = "bold"),
+                    plot.caption = element_text(hjust = 0),
+                    legend.position = 'none')
+          }
+
+
+
+
+        }
+
+        if(save == FALSE) { g } else {
+
+          setwd('~/')
+          ggsave(paste0('Logro del indicador ', id.indicator, '.png'), g, width = width, height = height)
+        }
+
+      }
+
+
+    }
 
   }
 
