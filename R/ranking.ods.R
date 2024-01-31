@@ -54,7 +54,7 @@
 
 
 
-ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
+ranking.sdg <- function(id.indicator, language.en=TRUE, save = FALSE,
                         height=5, width=9, size.title=10, title=TRUE,
                         caption=TRUE, color='#032B47', color.gc='#36B3FF') {
 
