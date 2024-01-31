@@ -3,7 +3,7 @@
 #' @description
 #' A short description...
 #'
-#'@usage pyramids(country, years, language.en, language.en = TRUE, color = c('#B20B27', '#0A1873'),
+#' @usage pyramids(country, years, language.en, language.en = TRUE, color = c('#B20B27', '#0A1873'),
 #'          save = FALSE, height = 5, width = 7)
 #'
 #' @param country
@@ -15,7 +15,8 @@
 #' If TRUE or omitted is selected, the default language will be English.
 #' Select FALSE to choose the Spanish language.
 #' @param color
-#' Contains two RGB scale characters. However, you can use the conventional names (red, yellow, blue, green, etc.)
+#' It is a vector that provides two colored characters in RGB scale: c('#B20B27', '#0A1873').
+#' However, you can modify the colors using the conventional names (red, yellow, blue, green, etc.).
 #' @param save
 #' It is a logical parameter that allows saving the graph in png format in the setwd('~/') directory.
 #' By default the save option is FALSE. Select TRUE if you want to save the graph.

@@ -1,17 +1,34 @@
-
-
-#' Title
+#' Sustainable Development Goals Ranking
+#'
+#' @description
 #'
 #' @param id.indicator
+#' You must determine the ID of the indicator or variable that you want to obtain.
 #' @param language.en
+#' If true or omitted is selected, the default language will be English. Select False to choose the Spanish language.
 #' @param save
+#' It is a logical parameter that allows saving the graph in png format in the setwd('~/') directory.
+#' By default the save option is FALSE. Select TRUE if you want to save the graph.
 #' @param height
+#' Determines the height of the graph. You can adjust the size by increasing or decreasing.
+#' By default the height is 5 units ("in", "cm", "mm", or "px", depending on the device).
 #' @param width
+#' Determines the width of the graph. You can adjust the size by increasing or decreasing.
+#' By default the width is 9 units ("in", "cm", "mm", or "px", depending on the device).
 #' @param size.title
 #' @param title
+#' It is a logical parameter that allows you to activate or deactivate the display of the graph title.
+#' By default the title display option is TRUE. Select FALSE if you do not want the title to be displayed.
 #' @param caption
+#' It is a logical parameter that allows you to activate or deactivate the display of the graph note.
+#' The grade determines the last year in which the indicator was obtained.
+#' By default the option to view the note is TRUE. Select FALSE if you do not want the note to be displayed.
 #' @param color
-#' @param color.alc
+#' It is a character that contains the color that all countries within the graph will have.
+#' By default, the RGB scale code is used: '#032B47'. However, you can modify the color using the conventional names.
+#' @param color.gc
+#' It is a character that is activated when groups of countries are available in the graph: Latin America and the Caribbean, Central America, South America, etc.
+#' By default, the RGB scale code is used: '#36B3FF'. However, you can modify the color using the conventional names.
 #'
 #' @return
 #' @export
@@ -39,7 +56,7 @@
 
 ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
                         height=5, width=9, size.title=10, title=TRUE,
-                        caption=TRUE, color='#032B47', color.alc='#36B3FF') {
+                        caption=TRUE, color='#032B47', color.gc='#36B3FF') {
 
 # Si se selecciona idioma inglés
   if(language.en==TRUE) {
@@ -51,11 +68,19 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
       dplyr::filter(Dimension == 'Sustainable Development Goals (SDG)') %>%
       dplyr::mutate(name = ifelse((Indicador.3 =="" & Indicador.2 == ""), Indicador.1,
                            ifelse(Indicador.3 =="", Indicador.2, Indicador.3))) %>%
-      dplyr::filter(`Indicator ID` == id.indicator)
+      dplyr::filter(`Indicator ID` == id.indicator) %>%
+      dplyr::slice(1)
 
     name.indicator <- indicadores$name
 
     n <- length(name.indicator)
+
+    percent <- c(grepl('Proportion', name.indicator),
+                 grepl('(%)', name.indicator),
+                 grepl('Percentage', name.indicator))
+
+
+
 
     # 2. Advertencia de selección erronea de indicador ----
 
@@ -80,6 +105,8 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
       # 5. Llamar y procesar los datos del indicador ----
       data <- call.data(id.indicator = id.indicator)
 
+      if(length(percent[percent==TRUE]) >= 1) {
+
       data <- data %>%
         dplyr::group_by(Country) %>%
         dplyr::mutate(Maximo = max(Years),
@@ -90,7 +117,27 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
         dplyr::summarise(value = mean(value, na.rm = T)) %>%
         dplyr::ungroup() %>%
         dplyr::arrange(Years) %>%
-        dplyr::mutate(filtro = ifelse(Country == 'Latin America and the Caribbean', 1, 0))
+        dplyr::mutate(filtro = ifelse(Country  %in% c('Latin America and the Caribbean', 'Latin America',
+                                                     'South America', 'Central America', 'Caribbean'), 1, 0)) }
+
+      else {
+        data <- data %>%
+          dplyr::group_by(Country) %>%
+          dplyr::mutate(Maximo = max(Years),
+                        filtro = ifelse(Years == Maximo, 1, 0)) %>%
+          dplyr::ungroup() %>%
+          dplyr::filter(filtro == 1) %>%
+          dplyr::group_by(Years, Country) %>%
+          dplyr::summarise(value = mean(value, na.rm = T)) %>%
+          dplyr::ungroup() %>%
+          dplyr::arrange(Years) %>%
+          dplyr::filter(!Country  %in% c('Latin America and the Caribbean', 'Latin America',
+                                        'South America', 'Central America', 'Caribbean')) %>%
+          dplyr::mutate(filtro = ifelse(Country
+                                  %in% c('Latin America and the Caribbean', 'Latin America',
+                                          'South America', 'Central America', 'Caribbean'), 1, 0))
+
+      }
 
 
       # 6. Crear bucle para crear el vector de la nota -----
@@ -131,12 +178,20 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
                                      paste(cap[46:60], collapse = " "), '\n',
                                      paste(cap[61:l], collapse = " ")),
 
-           ifelse(l > 75,            paste0('\n', paste(cap[1:15], collapse = " "),  '\n',
+           ifelse(l > 75 & l <= 90,  paste0('\n', paste(cap[1:15], collapse = " "),  '\n',
                                      paste(cap[16:30], collapse = " "), '\n',
                                      paste(cap[31:45], collapse = " "), '\n',
                                      paste(cap[46:60], collapse = " "), '\n',
                                      paste(cap[61:75], collapse = " "), '\n',
-                                     paste(cap[76:l], collapse = " "))))))))
+                                     paste(cap[76:l], collapse = " ")),
+
+           ifelse(l > 90,            paste0('\n', paste(cap[1:15], collapse = " "),  '\n',
+                                     paste(cap[16:30], collapse = " "), '\n',
+                                     paste(cap[31:45], collapse = " "), '\n',
+                                     paste(cap[46:60], collapse = " "), '\n',
+                                     paste(cap[61:75], collapse = " "), '\n',
+                                     paste(cap[76:90], collapse = " "), '\n',
+                                     paste(cap[91:l], collapse = " ")))))))))
 
 
       # 7. Crear Gráficos dependiendo de si se encuentra ALC ----
@@ -163,7 +218,7 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
             ggplot2::coord_flip() +
             ggplot2::labs(title =  name.indicator.o, y = 'Indicator achievement',
                  x = 'Country', caption = cap) +
-            ggplot2::scale_fill_manual(values = c(color, color.alc)) +
+            ggplot2::scale_fill_manual(values = c(color, color.gc)) +
             ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0, size = size.title, face = "bold"),
                   plot.caption = ggplot2::element_text(hjust = 0),
                   legend.position = 'none')
@@ -195,7 +250,7 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
             ggplot2::coord_flip() +
             ggplot2::labs(title =  name.indicator.o, y = 'Indicator achievement',
                  x = 'Country') +
-            ggplot2::scale_fill_manual(values = c(color, color.alc)) +
+            ggplot2::scale_fill_manual(values = c(color, color.gc)) +
             ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0, size = size.title, face = "bold"),
                   plot.caption = ggplot2::element_text(hjust = 0),
                   legend.position = 'none')
@@ -226,7 +281,7 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
             ggplot2::coord_flip() +
             ggplot2::labs(y = 'Indicator achievement',
                  x = 'Country', caption = cap) +
-            ggplot2::scale_fill_manual(values = c(color, color.alc)) +
+            ggplot2::scale_fill_manual(values = c(color, color.gc)) +
             ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0, size = size.title, face = "bold"),
                   plot.caption = ggplot2::element_text(hjust = 0),
                   legend.position = 'none')
@@ -257,7 +312,7 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
             ggplot2::coord_flip() +
             ggplot2::labs(y = 'Indicator achievement',
                  x = 'Country') +
-            ggplot2::scale_fill_manual(values = c(color, color.alc)) +
+            ggplot2::scale_fill_manual(values = c(color, color.gc)) +
             ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0, size = size.title, face = "bold"),
                   plot.caption = ggplot2::element_text(hjust = 0),
                   legend.position = 'none')
@@ -293,11 +348,16 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
         dplyr::filter(Dimensión == 'Objetivos de Desarrollo Sostenible (ODS)') %>%
         dplyr::mutate(name = ifelse((Indicador.3 =="" & Indicador.2 == ""), Indicador.1,
                                     ifelse(Indicador.3 =="", Indicador.2, Indicador.3))) %>%
-        dplyr::filter(`Id del Indicador` == id.indicator)
+        dplyr::filter(`Id del Indicador` == id.indicator) %>%
+        dplyr::slice(1)
 
       name.indicator <- indicadores$name
 
       n <- length(name.indicator)
+
+      percent <- c(grepl('Proporción', name.indicator),
+                   grepl('(en porcentajes)', name.indicator),
+                   grepl('Porcentaje', name.indicator))
 
       # 2. Advertencia de selección erronea de indicador ----
 
@@ -322,17 +382,39 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
         # 5. Llamar y procesar los datos del indicador ----
         data <- call.data(id.indicator = id.indicator, language.en = FALSE)
 
-        data <- data %>%
-          dplyr::group_by(País) %>%
-          dplyr::mutate(Maximo = max(Años),
-                        filtro = ifelse(Años == Maximo, 1, 0)) %>%
-          dplyr::ungroup() %>%
-          dplyr::filter(filtro == 1) %>%
-          dplyr::group_by(Años, País) %>%
-          dplyr::summarise(value = mean(value, na.rm = T)) %>%
-          dplyr::ungroup() %>%
-          dplyr::arrange(Años) %>%
-          dplyr::mutate(filtro = ifelse(País == 'América Latina y el Caribe', 1, 0))
+        if(length(percent[percent==TRUE]) >= 1) {
+
+          data <- data %>%
+            dplyr::group_by(País) %>%
+            dplyr::mutate(Maximo = max(Años),
+                          filtro = ifelse(Años == Maximo, 1, 0)) %>%
+            dplyr::ungroup() %>%
+            dplyr::filter(filtro == 1) %>%
+            dplyr::group_by(Años, País) %>%
+            dplyr::summarise(value = mean(value, na.rm = T)) %>%
+            dplyr::ungroup() %>%
+            dplyr::arrange(Años) %>%
+            dplyr::mutate(filtro = ifelse(País  %in% c('América Latina y el Caribe', 'América Latina',
+                                                          'América del Sur', 'América Central', 'El Caribe'), 1, 0)) }
+
+        else {
+          data <- data %>%
+            dplyr::group_by(País) %>%
+            dplyr::mutate(Maximo = max(Años),
+                          filtro = ifelse(Años == Maximo, 1, 0)) %>%
+            dplyr::ungroup() %>%
+            dplyr::filter(filtro == 1) %>%
+            dplyr::group_by(Años, País) %>%
+            dplyr::summarise(value = mean(value, na.rm = T)) %>%
+            dplyr::ungroup() %>%
+            dplyr::arrange(Años) %>%
+            dplyr::filter(!País  %in% c('América Latina y el Caribe', 'América Latina',
+                                           'América del Sur', 'América Central', 'El Caribe')) %>%
+            dplyr::mutate(filtro = ifelse(País
+                                          %in% c('América Latina y el Caribe', 'América Latina',
+                                                 'América del Sur', 'América Central', 'El Caribe'), 1, 0))
+
+        }
 
 
         # 6. Crear bucle para crear el vector de la nota -----
@@ -355,17 +437,38 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
 
         cap <- ifelse(l <= 15, paste(cap, collapse = " "),
 
-                      ifelse(l > 15 & l <= 30, paste0('\n', paste(cap[1:15], collapse = " "),  '\n',
-                                                      paste(cap[16:l], collapse = " ")),
+               ifelse(l > 15 & l <= 30, paste0('\n', paste(cap[1:15], collapse = " "),  '\n',
+                                        paste(cap[16:l], collapse = " ")),
 
-                             ifelse(l > 30 & l <= 45, paste0('\n', paste(cap[1:15], collapse = " "),  '\n',
-                                                             paste(cap[16:30], collapse = " "), '\n',
-                                                             paste(cap[31:l], collapse = " ")),
+               ifelse(l > 30 & l <= 45, paste0('\n', paste(cap[1:15], collapse = " "),  '\n',
+                                        paste(cap[16:30], collapse = " "), '\n',
+                                        paste(cap[31:l], collapse = " ")),
 
-                                    ifelse(l > 45, paste0('\n', paste(cap[1:15], collapse = " "),  '\n',
-                                                          paste(cap[16:30], collapse = " "), '\n',
-                                                          paste(cap[31:45], collapse = " "), '\n',
-                                                          paste(cap[46:l], collapse = " "))))))
+               ifelse(l > 45 & l <= 60, paste0('\n', paste(cap[1:15], collapse = " "),  '\n',
+                                        paste(cap[16:30], collapse = " "), '\n',
+                                        paste(cap[31:45], collapse = " "), '\n',
+                                        paste(cap[46:l], collapse = " ")),
+
+               ifelse(l > 60 & l <= 75, paste0('\n', paste(cap[1:15], collapse = " "),  '\n',
+                                        paste(cap[16:30], collapse = " "), '\n',
+                                        paste(cap[31:45], collapse = " "), '\n',
+                                        paste(cap[46:60], collapse = " "), '\n',
+                                        paste(cap[61:l], collapse = " ")),
+
+              ifelse(l > 75 & l <= 90,  paste0('\n', paste(cap[1:15], collapse = " "),  '\n',
+                                        paste(cap[16:30], collapse = " "), '\n',
+                                        paste(cap[31:45], collapse = " "), '\n',
+                                        paste(cap[46:60], collapse = " "), '\n',
+                                        paste(cap[61:75], collapse = " "), '\n',
+                                        paste(cap[76:l], collapse = " ")),
+
+               ifelse(l > 90,           paste0('\n', paste(cap[1:15], collapse = " "),  '\n',
+                                        paste(cap[16:30], collapse = " "), '\n',
+                                        paste(cap[31:45], collapse = " "), '\n',
+                                        paste(cap[46:60], collapse = " "), '\n',
+                                        paste(cap[61:75], collapse = " "), '\n',
+                                        paste(cap[76:90], collapse = " "), '\n',
+                                        paste(cap[91:l], collapse = " ")))))))))
 
         # 7. Crear Gráficos dependiendo de si se encuentra ALC ----
 
@@ -391,7 +494,7 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
               ggplot2::coord_flip() +
               ggplot2::labs(title =  name.indicator.o, y = 'Logro del indicador',
                    x = 'País', caption = cap) +
-              ggplot2::scale_fill_manual(values = c(color, color.alc)) +
+              ggplot2::scale_fill_manual(values = c(color, color.gc)) +
               ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0, size = size.title, face = "bold"),
                     plot.caption = ggplot2::element_text(hjust = 0),
                     legend.position = 'none')
@@ -423,7 +526,7 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
               ggplot2::coord_flip() +
               ggplot2::labs(title =  name.indicator.o, y = 'Logro del indicador',
                    x = 'País') +
-              ggplot2::scale_fill_manual(values = c(color, color.alc)) +
+              ggplot2::scale_fill_manual(values = c(color, color.gc)) +
               ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0, size = size.title, face = "bold"),
                     plot.caption = ggplot2::element_text(hjust = 0),
                     legend.position = 'none')
@@ -454,7 +557,7 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
               ggplot2::coord_flip() +
               ggplot2::labs(y = 'Logro del indicador',
                    x = 'País', caption = cap) +
-              ggplot2::scale_fill_manual(values = c(color, color.alc)) +
+              ggplot2::scale_fill_manual(values = c(color, color.gc)) +
               ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0, size = size.title, face = "bold"),
                     plot.caption = ggplot2::element_text(hjust = 0),
                     legend.position = 'none')
@@ -485,7 +588,7 @@ ranking.ods <- function(id.indicator, language.en=TRUE, save = FALSE,
               ggplot2::coord_flip() +
               ggplot2::labs(y = 'Logro del indicador',
                    x = 'País') +
-              ggplot2::scale_fill_manual(values = c(color, color.alc)) +
+              ggplot2::scale_fill_manual(values = c(color, color.gc)) +
               ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0, size = size.title, face = "bold"),
                     plot.caption = ggplot2::element_text(hjust = 0),
                     legend.position = 'none')
