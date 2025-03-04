@@ -1,1 +1,1 @@
-CepalStat: an R package for accessing CEPAL statistics
+CepalStatR: a package in R for access to ECLAC statistics

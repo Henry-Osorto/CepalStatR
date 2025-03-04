@@ -1,6 +1,6 @@
 Package: CepalStatR
 Type: Package
-Title: CepalStat: an R package for accessing CEPAL statistics
+Title: CepalStatR: a package in R for access to ECLAC statistics
 Version: 0.1.0
 Author: Henry Osorto
 Maintainer: The package maintainer <henryantonioosortoruiz@gmail.com>
@@ -23,3 +23,5 @@ RoxygenNote: 7.2.3
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+URL:10.18687/LACCEI2024.1.1.1473
+BugReports: https://github.com/Henry-Osorto/CepalStatR/issues
