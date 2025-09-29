@@ -7,12 +7,9 @@
 #'
 #'@usage call.data(id.indicator, language.en = TRUE, notes = FALSE)
 #'
-#' @param id.indicator
-#' You must determine the ID of the indicator or variable that you want to obtain.
-#' @param language.en
-#' If true or omitted is selected, the default language will be English. Select False to choose the Spanish language.
-#' @param notes
-#' They are the methodological notes that an indicator may have. Select TRUE to be able to add the notes to the data frame.
+#' @param id.indicator You must determine the ID of the indicator or variable that you want to obtain.
+#' @param language.en If true or omitted is selected, the default language will be English. Select False to choose the Spanish language.
+#' @param notes They are the methodological notes that an indicator may have. Select TRUE to be able to add the notes to the data frame.
 #'
 #' @return
 #' @export

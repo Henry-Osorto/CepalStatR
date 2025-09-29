@@ -4,16 +4,21 @@
 \name{CepalStatR-package}
 \alias{CepalStatR}
 \alias{CepalStatR-package}
-\title{CepalStatR: CepalStatR: a package in R for access to ECLAC statistics}
+\title{CepalStatR: Access to ECLAC (CEPALSTAT) Statistics via R}
 \description{
-More about what it does (maybe more than one line) Use four spaces when indenting paragraphs within the Description.
+Tools to explore metadata and retrieve indicators from CEPALSTAT Open Data/API, building tidy panels and basic visualizations.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \doi{10.18687/LACCEI2024.1.1.1473}
+  \item \url{https://github.com/Henry-Osorto/CepalStatR}
+  \item \url{https://henry-osorto.github.io/CepalStatR/}
   \item Report bugs at \url{https://github.com/Henry-Osorto/CepalStatR/issues}
 }
+
+}
+\author{
+\strong{Maintainer}: Henry Osorto \email{henry.osorto@unitec.edu.hn} (\href{https://orcid.org/0000-0002-4334-9179}{ORCID})
 
 }
 \keyword{internal}

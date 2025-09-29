@@ -37,7 +37,7 @@ call.indicators <- function(language.en = TRUE) {
     # 2. Importar datos en csv ----
     data <- read.csv(url.indicators)
 
-    # 3. Crear Subconjuntos de datos por áreas e indicadores ----
+    # 3. Crear Subconjuntos de datos por \u00e1reas e indicadores ----
 
     n.1 <- data %>%
       dplyr::filter(indentation == 6)
@@ -99,7 +99,7 @@ call.indicators <- function(language.en = TRUE) {
     # 2. Importar datos en csv ----
     data <- read.csv(url.indicators)
 
-    # 3. Crear Subconjuntos de datos por áreas e indicadores ----
+    # 3. Crear Subconjuntos de datos por \u00e1reas e indicadores ----
 
     n.1 <- data %>%
       dplyr::filter(indentation == 6)
