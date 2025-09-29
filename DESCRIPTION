@@ -1,8 +1,7 @@
 Package: CepalStatR
 Title: Access to ECLAC (CEPALSTAT) Statistics via R
 Version: 0.9.0
-Authors@R: c(
-  person("Henry", "Osorto", email = "henry.osorto@unah.edu.hn",
+Authors@R: c(person("Henry", "Osorto", email = "henry.osorto@unah.edu.hn",
          role = c("aut","cre"), comment = c(ORCID = "0000-0002-4334-9179")))
 Description: Tools to explore metadata and retrieve indicators from CEPALSTAT
     Open Data/API, building tidy panels and basic visualizations.
