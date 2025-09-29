@@ -16,6 +16,7 @@
 #' Determines the width of the graph. You can adjust the size by increasing or decreasing.
 #' By default the width is 9 units ("in", "cm", "mm", or "px", depending on the device).
 #' @param size.title
+#' Title size in display
 #' @param title
 #' It is a logical parameter that allows you to activate or deactivate the display of the graph title.
 #' By default the title display option is TRUE. Select FALSE if you do not want the title to be displayed.
@@ -52,7 +53,7 @@
 #' @importFrom ggplot2 ggsave
 #' @examples
 
-
+utils::globalVariables(c("Years", "Country", "value", "id", "name"))
 
 ranking.sdg <- function(id.indicator, language.en=TRUE, save = FALSE,
                         height=5, width=9, size.title=10, title=TRUE,

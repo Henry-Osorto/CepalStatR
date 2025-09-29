@@ -1,10 +1,10 @@
 #' Population pyramids
 #'
 #' @description
-#' A short description...
 #'
-#' @usage pyramids(country, years, language.en, language.en = TRUE, color = c('#B20B27', '#0A1873'),
-#'          save = FALSE, height = 5, width = 7)
+#'#' @usage
+#'pyramids(country, years, language.en, language.en = TRUE, color = c('#B20B27', '#0A1873'),
+#'         'save = FALSE, height = 5, width = 7)
 #'
 #' @param country
 #' Write the name of the country
@@ -54,6 +54,7 @@
 #' pyramids(country = "Latin America", years = c(1, 11, 16, 21, 25, 31),
 #'          save = TRUE, height = 8, width = 10)
 
+utils::globalVariables(c("Years", "Country", "value", "id", "name"))
 
 pyramids <- function(country, years=1:31, language.en = TRUE, color = c('#B20B27', '#0A1873'),
                      save = FALSE, height=5, width=7) {

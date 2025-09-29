@@ -30,6 +30,8 @@
 #' @examples data <- call.data(id.indicator = 1)
 #'
 
+utils::globalVariables(c("Years", "Country", "value", "id", "name"))
+
 call.data <- function(id.indicator,
                       language.en = TRUE,
                       notes = FALSE) {

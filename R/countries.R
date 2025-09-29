@@ -15,6 +15,9 @@
 #' data <- countries(language.en = FALSE)
 #'
 #'
+
+utils::globalVariables(c("Years", "Country", "value", "id", "name"))
+
 countries <- function(language.en = TRUE) {
 
   if(language.en == TRUE){

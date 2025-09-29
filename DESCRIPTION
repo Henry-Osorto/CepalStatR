@@ -1,27 +1,18 @@
 Package: CepalStatR
-Type: Package
-Title: CepalStatR: a package in R for access to ECLAC statistics
-Version: 0.1.0
-Author: Osorto, Henry
-Maintainer: The package maintainer <henryantonioosortoruiz@gmail.com>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: GPL-3
-Encoding: UTF-8
-LazyData: true
-Imports: 
-    dplyr,
-    ggplot2,
-    gridExtra,
-    gt,
-    jsonlite,
-    magrittr,
-    stats,
-    stringr,
-    tidyr
-RoxygenNote: 7.2.3
-Suggests: 
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3
-URL:10.18687/LACCEI2024.1.1.1473
+Title: Access to ECLAC (CEPALSTAT) Statistics via R
+Version: 0.9.0
+Authors@R: c(
+  person("Henry", "Osorto", email = "henry.osorto@unah.edu.hn",
+         role = c("aut","cre"), comment = c(ORCID = "0000-0002-4334-9179")))
+Description: Tools to explore metadata and retrieve indicators from CEPALSTAT
+    Open Data/API, building tidy panels and basic visualizations.
+License: MIT + file LICENSE
+URL: https://github.com/Henry-Osorto/CepalStatR, https://henry-osorto.github.io/CepalStatR/
 BugReports: https://github.com/Henry-Osorto/CepalStatR/issues
+Encoding: UTF-8
+Depends: R (>= 4.1)
+Imports: httr2, jsonlite, tibble, dplyr, tidyr, stringr, cli, rlang
+Suggests: ggplot2, gt, testthat (>= 3.0.0), vcr, webmockr, knitr, rmarkdown, memoise, cachem
+VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2

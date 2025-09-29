@@ -20,8 +20,11 @@
 #'
 #' @examples
 #' data.indicators <- call.indicators()
-#' data.indicators <- call.indicators(language.en = FALSE) # To obtain the indicators in Spanish language
+#'# To obtain the indicators in Spanish language
+#' data.indicators <- call.indicators(language.en = FALSE)
+#'
 
+utils::globalVariables(c("Years", "Country", "value", "id", "name"))
 
 call.indicators <- function(language.en = TRUE) {
 

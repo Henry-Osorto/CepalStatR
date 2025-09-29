@@ -23,7 +23,7 @@
 #' viewer.indicators()
 #' viewer.indicators(language.en = FALSE) # To obtain the indicators in Spanish language
 
-
+utils::globalVariables(c("Years", "Country", "value", "id", "name"))
 
 viewer.indicators <- function(language.en = TRUE) {
 
