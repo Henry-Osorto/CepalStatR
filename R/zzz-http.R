@@ -45,34 +45,3 @@ cepal_get <- function(url, format = c("json", "csv"), timeout_sec = 60) {
   )
 }
 
-
-
-# Helper name indicator
-#' Get indicator name from indicator ID
-#' @keywords internal
-get_indicator_name <- function(id.indicator, language.en = TRUE) {
-  ind_tbl <- call.indicators(language.en = language.en)
-
-  if (isTRUE(language.en)) {
-    id_col <- "Indicator ID"
-    name_cols <- c("Indicator.3", "Indicator.2", "Indicator.1")
-  } else {
-    id_col <- "Id del Indicador"
-    name_cols <- c("Indicador.3", "Indicador.2", "Indicador.1")
-  }
-
-  row_ind <- ind_tbl[ind_tbl[[id_col]] == as.numeric(id.indicator), , drop = FALSE]
-
-  if (nrow(row_ind) == 0) {
-    return(NA_character_)
-  }
-
-  vals <- unlist(row_ind[1, name_cols], use.names = FALSE)
-  vals <- vals[!is.na(vals) & vals != ""]
-
-  if (length(vals) == 0) {
-    return(NA_character_)
-  }
-
-  vals[length(vals)]
-}
