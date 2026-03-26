@@ -15,5 +15,5 @@ Useful links:
 
 ## Author
 
-**Maintainer**: Henry Osorto <henry.osorto@unitec.edu.hn>
+**Maintainer**: Henry Osorto <henry.osorto@unah.edu.hn>
 ([ORCID](https://orcid.org/0000-0002-4334-9179))
