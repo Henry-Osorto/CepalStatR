@@ -71,38 +71,41 @@ call.data <- function(id.indicator,
       return(NA_character_)
     }
 
-    if (isTRUE(language.en)) {
-      id_col <- "Indicator ID"
-      name_cols <- c("Indicator.3", "Indicator.2", "Indicator.1")
-    } else {
-      id_col <- "Id del Indicador"
-      name_cols <- c("Indicador.3", "Indicador.2", "Indicador.1")
-    }
+    # detectar columna del ID de forma robusta
+    id_candidates <- c("Indicator ID", "Id del Indicador")
+    id_col <- id_candidates[id_candidates %in% names(ind_tbl)][1]
 
-    if (!id_col %in% names(ind_tbl)) {
+    if (is.na(id_col) || length(id_col) == 0) {
       return(NA_character_)
     }
 
-    idx <- which(as.character(ind_tbl[[id_col]]) == as.character(id.indicator))
+    idx <- which(trimws(as.character(ind_tbl[[id_col]])) == trimws(as.character(id.indicator)))
 
     if (length(idx) == 0) {
       return(NA_character_)
     }
 
     row_ind <- ind_tbl[idx[1], , drop = FALSE]
-    name_cols <- name_cols[name_cols %in% names(row_ind)]
+
+    # buscar columnas posibles del nombre, en inglés y español
+    name_candidates <- c("Indicator.3", "Indicator.2", "Indicator.1",
+                         "Indicador.3", "Indicador.2", "Indicador.1")
+
+    name_cols <- name_candidates[name_candidates %in% names(row_ind)]
 
     if (length(name_cols) == 0) {
       return(NA_character_)
     }
 
     vals <- unlist(row_ind[1, name_cols], use.names = FALSE)
-    vals <- vals[!is.na(vals) & vals != ""]
+    vals <- trimws(as.character(vals))
+    vals <- vals[!is.na(vals) & vals != "" & vals != "NA"]
 
     if (length(vals) == 0) {
       return(NA_character_)
     }
 
+    # tomar la última columna no vacía
     vals[length(vals)]
   }
 
