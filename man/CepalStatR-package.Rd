@@ -18,7 +18,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Henry Osorto \email{henry.osorto@unitec.edu.hn} (\href{https://orcid.org/0000-0002-4334-9179}{ORCID})
+\strong{Maintainer}: Henry Osorto \email{henry.osorto@unah.edu.hn} (\href{https://orcid.org/0000-0002-4334-9179}{ORCID})
 
 }
 \keyword{internal}
