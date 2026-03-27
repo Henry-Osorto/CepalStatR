@@ -250,15 +250,28 @@ call.data <- function(id.indicator,
 
   # 8. Agregar ID y nombre del indicador ----
   if (isTRUE(add.indicator.name)) {
-    data$indicator_id <- as.numeric(id.indicator)
-    data$indicator_name <- indicator_name
+    if (isTRUE(language.en)) {
+      data$indicator_id <- as.numeric(id.indicator)
+      data$indicator_name <- indicator_name
+    } else {
+      data$id_indicador <- as.numeric(id.indicator)
+      data$nombre_indicador <- indicator_name
+    }
   }
 
   if (progress) {
-    if (!is.na(indicator_name)) {
-      message("Finished download: ", indicator_name)
+    if (isTRUE(language.en)) {
+      if (!is.na(indicator_name)) {
+        message("Finished download: ", indicator_name)
+      } else {
+        message("Finished download for indicator ID: ", id.indicator)
+      }
     } else {
-      message("Finished download for indicator ID: ", id.indicator)
+      if (!is.na(indicator_name)) {
+        message("Descarga finalizada: ", indicator_name)
+      } else {
+        message("Descarga finalizada para el indicador ID: ", id.indicator)
+      }
     }
   }
 
