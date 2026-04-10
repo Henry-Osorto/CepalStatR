@@ -7,23 +7,22 @@
 call.indicators(language.en = TRUE, progress = TRUE)
 }
 \arguments{
-\item{language.en}{Logical. If \code{TRUE} (default), results are returned with
-English labels. If \code{FALSE}, results are returned with Spanish labels.}
+\item{language.en}{Logical. If \code{TRUE} (default), labels are returned in English.
+If \code{FALSE}, labels are returned in Spanish.}
 
-\item{progress}{Logical. If \code{TRUE}, status messages are displayed during
-download and processing.}
+\item{progress}{Logical. If \code{TRUE} (default), progress messages are displayed.}
 }
 \value{
-A data frame containing the hierarchical thematic structure of
-CEPALSTAT indicators and their final indicator IDs.
+A data frame with the hierarchical thematic structure of CEPALSTAT
+indicators and the corresponding indicator ID.
 }
 \description{
-Retrieves the CEPALSTAT thematic tree and returns a data frame with the
-hierarchical structure of areas, dimensions, subdimensions, indicators,
-and final indicator IDs.
+Retrieves the thematic tree from the CEPALSTAT API in JSON format and
+returns a data frame with the hierarchical structure of indicators.
 }
 \examples{
+\dontrun{
 data.indicators <- call.indicators()
 data.indicators <- call.indicators(language.en = FALSE)
-
+}
 }
