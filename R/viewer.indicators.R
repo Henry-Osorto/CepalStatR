@@ -14,7 +14,8 @@
 #' @param highlight Logical. If `TRUE`, highlights rows on hover.
 #' @param full_width Logical. If `TRUE`, table uses full available width.
 #' @param page_size Integer. Number of rows to show per page.
-#' @param output Character. One of `"viewer"` or `"html"`.
+#' @param open.browser Logical. If `TRUE`, the generated HTML is saved to a
+#' temporary file and opened in the default web browser. Defaults to `FALSE`.
 #'
 #' @return A browsable HTML object containing the header and interactive table.
 #' @export
@@ -23,6 +24,7 @@
 #' \dontrun{
 #' viewer.indicators()
 #' viewer.indicators(language.en = FALSE)
+#' viewer.indicators(open.browser = TRUE)
 #' }
 viewer.indicators <- function(language.en = TRUE,
                               progress = TRUE,
@@ -33,10 +35,7 @@ viewer.indicators <- function(language.en = TRUE,
                               highlight = TRUE,
                               full_width = TRUE,
                               page_size = 15,
-                              open.browser = TRUE,
-                              output = c("viewer", "html")) {
-
-  output <- match.arg(output)
+                              open.browser = FALSE) {
 
   if (!is.logical(language.en) || length(language.en) != 1 || is.na(language.en)) {
     stop("language.en must be TRUE or FALSE.", call. = FALSE)
@@ -76,24 +75,6 @@ viewer.indicators <- function(language.en = TRUE,
 
   if (!is.logical(open.browser) || length(open.browser) != 1 || is.na(open.browser)) {
     stop("open.browser must be TRUE or FALSE.", call. = FALSE)
-  }
-
-  img_to_data_uri <- function(path) {
-    if (!nzchar(path) || !file.exists(path)) {
-      return(NULL)
-    }
-
-    ext <- tolower(tools::file_ext(path))
-    mime <- switch(
-      ext,
-      png = "image/png",
-      jpg = "image/jpeg",
-      jpeg = "image/jpeg",
-      svg = "image/svg+xml",
-      "application/octet-stream"
-    )
-
-    base64enc::dataURI(file = path, mime = mime)
   }
 
   if (progress) {
@@ -148,7 +129,7 @@ viewer.indicators <- function(language.en = TRUE,
   }
 
   package_desc <- if (isTRUE(language.en)) {
-    "R interface for accessing, exploring and visualizing CEPALSTAT indicators"
+    "R interface to access, explore and visualize CEPALSTAT indicators"
   } else {
     "Interfaz en R para acceder, explorar y visualizar indicadores de CEPALSTAT"
   }
@@ -180,8 +161,8 @@ viewer.indicators <- function(language.en = TRUE,
   col_names <- names(df)
 
   fixed_cols <- col_names[col_names %in% c(
-    "Area", "Dimension", "Subdimension",
-    "Área", "Dimensión", "Subdimensión"
+    "Area", "Dimension", "Subdimension", "Group",
+    "Área", "Dimensión", "Subdimensión", "Grupo"
   )]
 
   id_col <- col_names[col_names %in% c("Indicator ID", "Id del Indicador", "ID Indicador")]
@@ -278,161 +259,11 @@ viewer.indicators <- function(language.en = TRUE,
     )
   }
 
-  responsive_style <- htmltools::tags$style(
-    paste(
-      ".cepal-header {",
-      "  display: flex;",
-      "  justify-content: space-between;",
-      "  align-items: flex-start;",
-      "  gap: 28px;",
-      "  padding: 18px 24px 16px 24px;",
-      "  border-top: 4px solid #0C4A61;",
-      "  border-bottom: 3px solid #34B0AA;",
-      "  background: #FFFFFF;",
-      "}",
-
-      ".cepal-left,",
-      ".cepal-right {",
-      "  display: flex;",
-      "  flex-direction: column;",
-      "}",
-
-      ".cepal-left {",
-      "  min-width: 320px;",
-      "  max-width: 40%;",
-      "  align-items: flex-start;",
-      "}",
-
-      ".cepal-right {",
-      "  min-width: 500px;",
-      "  max-width: 52%;",
-      "  align-items: flex-end;",
-      "  text-align: right;",
-      "}",
-
-      ".cepal-right-top {",
-      "  display: flex;",
-      "  align-items: center;",
-      "  justify-content: flex-end;",
-      "  gap: 18px;",
-      "}",
-
-      ".cepal-pkg-logo {",
-      "  max-height: 100px;",
-      "  width: auto;",
-      "  display: block;",
-      "}",
-
-      ".cepal-inst-logo {",
-      "  max-height: 120px;",
-      "  width: auto;",
-      "  display: block;",
-      "}",
-
-      ".cepal-pkg-count {",
-      "  margin-top: 8px;",
-      "  font-size: 15px;",
-      "  color: #6B7280;",
-      "  font-weight: 500;",
-      "  text-align: left;",
-      "}",
-
-      ".cepal-pkg-text {",
-      "  margin-top: 8px;",
-      "  font-family: Inter, 'Segoe UI', Arial, sans-serif;",
-      "  font-size: 14px;",
-      "  font-weight: 500;",
-      "  color: #0C4A61;",
-      "  line-height: 1.35;",
-      "  text-align: left;",
-      "}",
-
-      ".cepal-main-title {",
-      "  font-family: 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;",
-      "  font-size: 60px;",
-      "  font-weight: 700;",
-      "  color: #0C4A61;",
-      "  line-height: 1.0;",
-      "  text-align: left;",
-      "}",
-
-      ".cepal-subtitle {",
-      "  margin-top: 12px;",
-      "  font-size: 20px;",
-      "  font-weight: 400;",
-      "  color: #34B0AA;",
-      "  line-height: 1.2;",
-      "  text-align: left;",
-      "}",
-
-      ".cepal-meta {",
-      "  margin-top: 2px;",
-      "  font-size: 11.5px;",
-      "  color: #6B7280;",
-      "  line-height: 1.4;",
-      "  text-align: right;",
-      "}",
-
-      ".cepal-meta a {",
-      "  color: #0C4A61;",
-      "  text-decoration: none;",
-      "}",
-
-      ".cepal-meta a:hover {",
-      "  text-decoration: underline;",
-      "}",
-
-      "@media (max-width: 1100px) {",
-      "  .cepal-header {",
-      "    flex-direction: column;",
-      "    align-items: center;",
-      "    gap: 18px;",
-      "  }",
-
-      "  .cepal-left,",
-      "  .cepal-right {",
-      "    min-width: 100%;",
-      "    max-width: 100%;",
-      "    align-items: center;",
-      "    text-align: center;",
-      "  }",
-
-      "  .cepal-right-top {",
-      "    justify-content: center;",
-      "  }",
-
-      "  .cepal-main-title,",
-      "  .cepal-subtitle,",
-      "  .cepal-pkg-text,",
-      "  .cepal-meta,",
-      "  .cepal-pkg-count {",
-      "    text-align: center;",
-      "  }",
-
-      "  .cepal-pkg-logo {",
-      "    max-height: 90px;",
-      "  }",
-
-      "  .cepal-inst-logo {",
-      "    max-height: 86px;",
-      "  }",
-
-      "  .cepal-main-title {",
-      "    font-size: 34px;",
-      "  }",
-
-      "  .cepal-subtitle {",
-      "    font-size: 15px;",
-      "  }",
-      "}",
-      sep = "\n"
-    )
-  )
+  responsive_style <- viewer_indicators_style()
 
   header_block <- htmltools::tags$div(
     class = "cepal-header",
 
-    # Left block: package logo + available indicators
     htmltools::tags$div(
       class = "cepal-left",
       htmltools::tags$img(
@@ -449,24 +280,8 @@ viewer.indicators <- function(language.en = TRUE,
       )
     ),
 
-    # Center block: package description
-    #htmltools::tags$div(
-    #  style = paste0(
-    #    "flex:1;",
-    #    "text-align:center;",
-    #   "padding:0 16px;",
-    #   "align-self:center;"
-    # ),
-    # htmltools::tags$div(
-    #   package_desc,
-    #   class = "cepal-pkg-text"
-    # )
-    # ),
-
-    # Right block: eclac logo + CEPALSTAT + subtitle + url
     htmltools::tags$div(
       class = "cepal-right",
-
       htmltools::tags$div(
         class = "cepal-right-top",
         htmltools::tags$img(
@@ -484,7 +299,6 @@ viewer.indicators <- function(language.en = TRUE,
           )
         )
       ),
-
       htmltools::tags$div(
         if (isTRUE(language.en)) {
           htmltools::HTML(
@@ -620,9 +434,5 @@ viewer.indicators <- function(language.en = TRUE,
     utils::browseURL(tmp)
   }
 
-  if (output == "viewer") {
-    return(out)
-  }
-
-  out
+  return(out)
 }
