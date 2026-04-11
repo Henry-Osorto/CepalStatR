@@ -14,8 +14,7 @@ viewer.indicators(
   highlight = TRUE,
   full_width = TRUE,
   page_size = 15,
-  open.browser = TRUE,
-  output = c("viewer", "html")
+  open.browser = FALSE
 )
 }
 \arguments{
@@ -38,7 +37,8 @@ If \code{FALSE}, Spanish labels are used.}
 
 \item{page_size}{Integer. Number of rows to show per page.}
 
-\item{output}{Character. One of \code{"viewer"} or \code{"html"}.}
+\item{open.browser}{Logical. If \code{TRUE}, the generated HTML is saved to a
+temporary file and opened in the default web browser. Defaults to \code{FALSE}.}
 }
 \value{
 A browsable HTML object containing the header and interactive table.
@@ -51,5 +51,6 @@ of CEPALSTAT indicators using \code{call.indicators()} as backend.
 \dontrun{
 viewer.indicators()
 viewer.indicators(language.en = FALSE)
+viewer.indicators(open.browser = TRUE)
 }
 }

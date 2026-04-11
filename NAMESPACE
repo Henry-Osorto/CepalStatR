@@ -1,4 +1,5 @@
 export(call.data)
 export(call.indicators)
 export(viewer.indicators)
+export(countries)
 importFrom(magrittr,"%>%")
