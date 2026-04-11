@@ -1,38 +1,64 @@
-#' List of Countries
-#'A short description...
-#'@description
+#' List of countries available in CEPALSTAT
 #'
-#' @param language.en
-#' If TRUE or omitted is selected, the default language will be English.
-#' Select FALSE to choose the Spanish language.
+#' @description
+#' Retrieves the list of countries available in CEPALSTAT using the
+#' dimensions endpoint of a reference indicator. This approach avoids
+#' downloading full datasets and ensures consistency with the API structure.
 #'
-#' @return
+#' @param language.en Logical. If TRUE (default), returns country names in English.
+#' If FALSE, returns names in Spanish.
+#'
+#' @return A data frame containing the list of countries.
+#'
+#' @details
+#' The function extracts the "Country" (or "País") dimension from the
+#' CEPALSTAT API using a JSON-based request. This method is more efficient
+#' than retrieving full indicator datasets.
+#'
 #' @export
 #'
 #' @examples
-#' data <- countries()
-#'
-#' data <- countries(language.en = FALSE)
-#'
-#'
-
-utils::globalVariables(c("Years", "Country", "value", "id", "name"))
-
+#' countries()
+#' countries(language.en = FALSE)
 countries <- function(language.en = TRUE) {
 
-  if(language.en == TRUE){
-
-    data <- call.data(id.indicator = 1, language.en = TRUE)
-
-    country <- data.frame(Countries = unique(data$Country))
+  # ---- Validación ----
+  if (!is.logical(language.en) || length(language.en) != 1 || is.na(language.en)) {
+    stop("language.en must be TRUE or FALSE.", call. = FALSE)
   }
 
-  else {
-    data <- call.data(id.indicator = 1, language.en = FALSE)
+  lang <- if (isTRUE(language.en)) "en" else "es"
 
-    country <- data.frame(Paises = unique(data$País))
+  # ---- Llamado a dimensiones ----
+  json <- get_cepal_dimensions(id.indicator = 1, lang = lang)
 
+  dims <- json$body$dimensions
+
+  if (is.null(dims) || length(dims) == 0) {
+    stop("No dimensions found in CEPALSTAT response.", call. = FALSE)
   }
 
-  return(country)
+  # ---- Identificar dimensión de países ----
+  country_dim <- dims[
+    sapply(dims, function(x) grepl("pais|country", tolower(x$name)))
+  ]
+
+  if (length(country_dim) == 0) {
+    stop("Country dimension not found.", call. = FALSE)
+  }
+
+  members <- country_dim[[1]]$members
+
+  if (is.null(members) || nrow(members) == 0) {
+    stop("No country members found.", call. = FALSE)
+  }
+
+  countries_vec <- sort(unique(members$name))
+
+  # ---- Salida ----
+  if (isTRUE(language.en)) {
+    return(data.frame(Countries = countries_vec, stringsAsFactors = FALSE))
+  } else {
+    return(data.frame(Paises = countries_vec, stringsAsFactors = FALSE))
+  }
 }
