@@ -194,7 +194,7 @@ viewer.indicators <- function(language.en = TRUE,
   }
 
   if (length(id_col) == 1) {
-    df[[id_col]] <- suppressWarnings(as.character(df[[id_col]]))
+    df[[id_col]] <- suppressWarnings(as.numeric(df[[id_col]]))
   }
 
   default_coldef <- reactable::colDef(
