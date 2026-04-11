@@ -1,9 +1,6 @@
 exportPattern("^[[:alpha:]]+")
 importFrom(magrittr, "%>%")
-importFrom(magrittr, "|>")
 importFrom("stats", "reorder")
 importFrom("utils", "read.csv")
 importFrom("utils", "de")
 export("%>%")
-export("|>")
-
