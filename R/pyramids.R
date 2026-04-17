@@ -13,16 +13,47 @@
 #' @param save Logical. If `TRUE`, saves the resulting figure.
 #' @param file Character. Output filename when `save = TRUE`. If `NULL`, a default
 #' filename is used.
+#' @param format Character. Output format when `save = TRUE`. One of `"png"`
+#' (default), `"pdf"` or `"svg"`.
 #' @param height Numeric. Height of saved figure.
 #' @param width Numeric. Width of saved figure.
+#' @param caption Logical. If `TRUE`, adds a caption with source information.
 #'
-#' @return A grob object created by `gridExtra::grid.arrange()`.
+#' @return Invisibly returns a grob object created by `gridExtra::arrangeGrob()`.
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' pyramids(country = "Latin America", years = 16)
-#' pyramids(country = "Latin America", years = c(1, 11, 16, 21, 25, 31))
+#' # Single year
+#' pyramids(country = "Honduras", years = 16)
+#'
+#' # Multiple years
+#' pyramids(country = "Honduras", years = c(1, 5, 10, 15))
+#'
+#' # Save as PNG
+#' pyramids(
+#'   country = "Honduras",
+#'   years = c(1, 5, 10, 15),
+#'   save = TRUE
+#' )
+#'
+#' # Save as PDF
+#' pyramids(
+#'   country = "Honduras",
+#'   years = c(1, 5, 10, 15),
+#'   save = TRUE,
+#'   format = "pdf",
+#'   file = "pyramids.pdf"
+#' )
+#'
+#' # Save as SVG
+#' pyramids(
+#'   country = "Honduras",
+#'   years = c(1, 5, 10, 15),
+#'   save = TRUE,
+#'   format = "svg",
+#'   file = "pyramids.svg"
+#' )
 #' }
 pyramids <- function(country,
                      years = 1:31,
@@ -30,11 +61,15 @@ pyramids <- function(country,
                      color = c("#0C4A61", "#34B0AA"),
                      save = FALSE,
                      file = NULL,
+                     format = c("png", "pdf", "svg"),
                      height = 5,
-                     width = 7) {
+                     width = 7,
+                     caption = TRUE) {
 
-  if (!is.character(country) || length(country) < 1) {
-    stop("country must be a character vector.", call. = FALSE)
+  format <- match.arg(format)
+
+  if (!is.character(country) || length(country) < 1 || anyNA(country)) {
+    stop("country must be a non-missing character vector.", call. = FALSE)
   }
 
   if (!is.numeric(years) || any(is.na(years)) || any(years < 1) || any(years > 31)) {
@@ -45,7 +80,7 @@ pyramids <- function(country,
     stop("language.en must be TRUE or FALSE.", call. = FALSE)
   }
 
-  if (!is.character(color) || length(color) != 2) {
+  if (!is.character(color) || length(color) != 2 || anyNA(color)) {
     stop("color must be a character vector of length 2.", call. = FALSE)
   }
 
@@ -53,8 +88,8 @@ pyramids <- function(country,
     stop("save must be TRUE or FALSE.", call. = FALSE)
   }
 
-  if (!is.null(file) && (!is.character(file) || length(file) != 1)) {
-    stop("file must be NULL or a character string.", call. = FALSE)
+  if (!is.null(file) && (!is.character(file) || length(file) != 1 || is.na(file))) {
+    stop("file must be NULL or a single character string.", call. = FALSE)
   }
 
   if (!is.numeric(height) || length(height) != 1 || is.na(height) || height <= 0) {
@@ -63,6 +98,10 @@ pyramids <- function(country,
 
   if (!is.numeric(width) || length(width) != 1 || is.na(width) || width <= 0) {
     stop("width must be a positive number.", call. = FALSE)
+  }
+
+  if (!is.logical(caption) || length(caption) != 1 || is.na(caption)) {
+    stop("caption must be TRUE or FALSE.", call. = FALSE)
   }
 
   df <- call.data(id.indicator = 31, language.en = language.en, progress = FALSE)
@@ -98,7 +137,11 @@ pyramids <- function(country,
     subtitle_prefix <- "Year: "
     xlab <- "Thousands of people"
     ylab <- "Age"
-    default_file <- "Population pyramids.png"
+    caption_text <- paste(
+      "Source: CEPALSTAT (ECLAC).",
+      "Estimates and projections by five-year age groups of the population for 1950-2100."
+    )
+    default_file <- paste0("Population_pyramids.", format)
   } else {
     value_col <- "Valor"
     country_col <- "País"
@@ -128,7 +171,11 @@ pyramids <- function(country,
     subtitle_prefix <- "Año: "
     xlab <- "Miles de personas"
     ylab <- "Edad"
-    default_file <- "Piramides poblacionales.png"
+    caption_text <- paste(
+      "Fuente: CEPALSTAT (CEPAL).",
+      "Estimaciones y proyecciones de población por grupos quinquenales de edad de la población para el 1950–2100."
+    )
+    default_file <- paste0("Piramides_poblacionales.", format)
   }
 
   required_cols <- c(country_col, year_col, sex_col, age_col, value_col)
@@ -196,14 +243,47 @@ pyramids <- function(country,
     stop("No plots could be created for the selected years.", call. = FALSE)
   }
 
-  g <- do.call(gridExtra::grid.arrange, plots)
+  bottom_grob <- if (isTRUE(caption)) {
+    grid::textGrob(
+      caption_text,
+      x = 0,
+      hjust = 0,
+      gp = grid::gpar(fontsize = 9, col='darkgray')
+    )
+  } else {
+    NULL
+  }
+
+  g <- gridExtra::arrangeGrob(
+    grobs = plots,
+    bottom = bottom_grob
+  )
+
+  grid::grid.newpage()
+  grid::grid.draw(g)
 
   if (isTRUE(save)) {
     if (is.null(file)) {
       file <- default_file
     }
-    ggplot2::ggsave(filename = file, plot = g, height = height, width = width)
+
+    if (identical(format, "svg")) {
+      if (!requireNamespace("svglite", quietly = TRUE)) {
+        stop("Package 'svglite' is required for SVG output.", call. = FALSE)
+      }
+      svglite::svglite(filename = file, width = width, height = height)
+      grid::grid.draw(g)
+      grDevices::dev.off()
+    } else {
+      ggplot2::ggsave(
+        filename = file,
+        plot = g,
+        width = width,
+        height = height,
+        device = format
+      )
+    }
   }
 
-  return(g)
+  return(invisible(g))
 }
