@@ -11,8 +11,10 @@ pyramids(
   color = c("#0C4A61", "#34B0AA"),
   save = FALSE,
   file = NULL,
+  format = c("png", "pdf", "svg"),
   height = 5,
-  width = 7
+  width = 7,
+  caption = TRUE
 )
 }
 \arguments{
@@ -31,12 +33,17 @@ If \code{FALSE}, Spanish labels are used.}
 \item{file}{Character. Output filename when \code{save = TRUE}. If \code{NULL}, a default
 filename is used.}
 
+\item{format}{Character. Output format when \code{save = TRUE}. One of \code{"png"}
+(default), \code{"pdf"} or \code{"svg"}.}
+
 \item{height}{Numeric. Height of saved figure.}
 
 \item{width}{Numeric. Width of saved figure.}
+
+\item{caption}{Logical. If \code{TRUE}, adds a caption with source information.}
 }
 \value{
-A grob object created by \code{gridExtra::grid.arrange()}.
+Invisibly returns a grob object created by \code{gridExtra::arrangeGrob()}.
 }
 \description{
 Creates one or multiple population pyramids for a selected country and years
@@ -44,7 +51,35 @@ using CEPALSTAT population-by-age-and-sex data.
 }
 \examples{
 \dontrun{
-pyramids(country = "Latin America", years = 16)
-pyramids(country = "Latin America", years = c(1, 11, 16, 21, 25, 31))
+# Single year
+pyramids(country = "Honduras", years = 16)
+
+# Multiple years
+pyramids(country = "Honduras", years = c(1, 5, 10, 15))
+
+# Save as PNG
+pyramids(
+  country = "Honduras",
+  years = c(1, 5, 10, 15),
+  save = TRUE
+)
+
+# Save as PDF
+pyramids(
+  country = "Honduras",
+  years = c(1, 5, 10, 15),
+  save = TRUE,
+  format = "pdf",
+  file = "pyramids.pdf"
+)
+
+# Save as SVG
+pyramids(
+  country = "Honduras",
+  years = c(1, 5, 10, 15),
+  save = TRUE,
+  format = "svg",
+  file = "pyramids.svg"
+)
 }
 }
