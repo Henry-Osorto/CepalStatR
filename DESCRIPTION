@@ -31,6 +31,7 @@ Suggests:
     gt,
     knitr,
     rmarkdown,
+    svglite
     testthat (>= 3.0.0),
     vcr,
     webmockr
