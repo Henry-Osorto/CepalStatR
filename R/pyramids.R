@@ -247,7 +247,7 @@ pyramids <- function(country,
     grid::textGrob(
       caption_text,
       x = 0,
-      hjust = 0,
+      hjust = 1,
       gp = grid::gpar(fontsize = 9, col='darkgray')
     )
   } else {
