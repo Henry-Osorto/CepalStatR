@@ -67,7 +67,7 @@ cepal_topic_map <- function(language.en = TRUE,
   # ===============================
   pkg_path <- system.file("CEPALSTAT_images", package = "CepalStatR")
 
-  logo_pkg <- img_to_data_uri(file.path(pkg_path, "logo_cepalstatr.png"))
+  logo_pkg <- img_to_data_uri(file.path(pkg_path, "CepalStatR_icon.png"))
 
   logo_eclac <- if (isTRUE(language.en)) {
     img_to_data_uri(file.path(pkg_path, "eclac_logo_en.png"))
