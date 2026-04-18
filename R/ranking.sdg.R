@@ -59,8 +59,8 @@ ranking.sdg <- function(id.indicator,
                         size.title = 10,
                         title = TRUE,
                         caption = TRUE,
-                        color = "#032B47",
-                        color.gc = "#36B3FF") {
+                        color = "#0C4A61",
+                        color.gc = "#34B0AA") {
 
   format <- match.arg(format)
 
