@@ -8,6 +8,8 @@
   : Call indicators from CEPALSTAT
 - [`cepal_dimensions()`](https://henry-osorto.github.io/CepalStatR/reference/cepal_dimensions.md)
   : Retrieve CEPALSTAT dimensions for an indicator
+- [`cepal_topic_map()`](https://henry-osorto.github.io/CepalStatR/reference/cepal_topic_map.md)
+  : CEPALSTAT Thematic Map (Interactive Tree)
 - [`countries()`](https://henry-osorto.github.io/CepalStatR/reference/countries.md)
   : List of countries available in CEPALSTAT
 - [`pyramids()`](https://henry-osorto.github.io/CepalStatR/reference/pyramids.md)
