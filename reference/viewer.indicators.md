@@ -18,8 +18,7 @@ viewer.indicators(
   highlight = TRUE,
   full_width = TRUE,
   page_size = 15,
-  open.browser = TRUE,
-  output = c("viewer", "html")
+  open.browser = FALSE
 )
 ```
 
@@ -62,9 +61,10 @@ viewer.indicators(
 
   Integer. Number of rows to show per page.
 
-- output:
+- open.browser:
 
-  Character. One of `"viewer"` or `"html"`.
+  Logical. If `TRUE`, the generated HTML is saved to a temporary file
+  and opened in the default web browser. Defaults to `FALSE`.
 
 ## Value
 
@@ -76,5 +76,6 @@ A browsable HTML object containing the header and interactive table.
 if (FALSE) { # \dontrun{
 viewer.indicators()
 viewer.indicators(language.en = FALSE)
+viewer.indicators(open.browser = TRUE)
 } # }
 ```

@@ -1,7 +1,9 @@
 # CepalStatR: Access to ECLAC (CEPALSTAT) Statistics via R
 
-Tools to explore metadata and retrieve indicators from CEPALSTAT Open
-Data/API, building tidy panels and basic visualizations.
+Tools to explore metadata and retrieve indicators from the CEPALSTAT API
+of the Economic Commission for Latin America and the Caribbean (ECLAC),
+with support for tidy outputs, hierarchical indicator browsing, and
+basic visualizations.
 
 ## See also
 
