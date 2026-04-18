@@ -1,12 +1,6 @@
 Package: CepalStatR
 Title: Access to ECLAC (CEPALSTAT) Statistics via R
 Version: 0.9.0
-<<<<<<< HEAD
-Authors@R: c(person("Henry", "Osorto",
-        email = "henry.osorto@unah.edu.hn",
-        role = c("aut", "cre"),
-        comment = c(ORCID = "0000-0002-4334-9179")))
-=======
 Authors@R: c(
     person(
         "Henry", "Osorto",
@@ -15,7 +9,6 @@ Authors@R: c(
         comment = c(ORCID = "0000-0002-4334-9179")
     )
 )
->>>>>>> 1f15341ccdfe58e8e276c727c6f255c4c90ff22a
 Description: Tools to explore metadata and retrieve indicators from the
     CEPALSTAT API of the Economic Commission for Latin America and the
     Caribbean (ECLAC), with support for tidy outputs, hierarchical indicator
