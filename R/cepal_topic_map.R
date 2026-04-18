@@ -12,6 +12,9 @@
 cepal_topic_map <- function(language.en = TRUE,
                             open.browser = FALSE) {
 
+  # ===============================
+  # 0. VALIDATION
+  # ===============================
   if (!requireNamespace("collapsibleTree", quietly = TRUE)) {
     stop("Package 'collapsibleTree' is required.", call. = FALSE)
   }
@@ -20,8 +23,16 @@ cepal_topic_map <- function(language.en = TRUE,
     stop("Package 'htmltools' is required.", call. = FALSE)
   }
 
+  if (!is.logical(language.en) || length(language.en) != 1 || is.na(language.en)) {
+    stop("language.en must be TRUE or FALSE.", call. = FALSE)
+  }
+
+  if (!is.logical(open.browser) || length(open.browser) != 1 || is.na(open.browser)) {
+    stop("open.browser must be TRUE or FALSE.", call. = FALSE)
+  }
+
   # ===============================
-  # 1. DATA
+  # 1. LOAD DATA
   # ===============================
   df <- call.indicators(language.en = language.en, progress = FALSE)
 
@@ -38,7 +49,7 @@ cepal_topic_map <- function(language.en = TRUE,
 
     subtitle <- "Statistical Data Portal and Publications"
     footer_text <- "Interactive thematic map of indicators"
-    url_text <- "For more information visit:"
+    available_label <- "Number of indicators"
   } else {
     area_col <- "Área"
     dim_col  <- "Dimensión"
@@ -49,7 +60,17 @@ cepal_topic_map <- function(language.en = TRUE,
 
     subtitle <- "Portal de Datos y Publicaciones Estadísticas"
     footer_text <- "Mapa temático interactivo de indicadores"
-    url_text <- "Para más información visita:"
+    available_label <- "Cantidad de indicadores"
+  }
+
+  required_cols <- c(area_col, dim_col, sub_col, grp_col, name_col, id_col)
+  missing_cols <- setdiff(required_cols, names(df))
+
+  if (length(missing_cols) > 0) {
+    stop(
+      paste0("Missing required columns: ", paste(missing_cols, collapse = ", ")),
+      call. = FALSE
+    )
   }
 
   # ===============================
@@ -63,78 +84,89 @@ cepal_topic_map <- function(language.en = TRUE,
   total_indicators <- length(unique(df[[id_col]]))
 
   # ===============================
-  # 4. LOAD IMAGES (helpers)
+  # 4. LOAD IMAGES (CORRECTED)
   # ===============================
-  pkg_path <- system.file("CEPALSTAT_images", package = "CepalStatR")
+  pkg_logo_path <- system.file(
+    "CEPALSTAT_images",
+    "CepalStatR_icon.png",
+    package = "CepalStatR"
+  )
 
-  logo_pkg <- img_to_data_uri(file.path(pkg_path, "CepalStatR_icon.png"))
-
-  logo_eclac <- if (isTRUE(language.en)) {
-    img_to_data_uri(file.path(pkg_path, "eclac_logo_en.png"))
+  inst_logo_path <- if (isTRUE(language.en)) {
+    system.file("CEPALSTAT_images", "eclac_logo_en.png", package = "CepalStatR")
   } else {
-    img_to_data_uri(file.path(pkg_path, "eclac_logo_es.png"))
+    system.file("CEPALSTAT_images", "eclac_logo_es.png", package = "CepalStatR")
   }
 
-  # ===============================
-  # 5. HEADER (igual viewer)
-  # ===============================
-  header <- htmltools::tags$div(
-    style = "
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      flex-wrap:wrap;
-      margin-bottom:15px;
-    ",
+  if (!nzchar(pkg_logo_path)) {
+    stop("Package logo not found in inst/CEPALSTAT_images.", call. = FALSE)
+  }
 
-    # LEFT
+  if (!nzchar(inst_logo_path)) {
+    stop("Institutional logo not found in inst/CEPALSTAT_images.", call. = FALSE)
+  }
+
+  pkg_logo <- img_to_data_uri(pkg_logo_path)
+  inst_logo <- img_to_data_uri(inst_logo_path)
+
+  # ===============================
+  # 5. CSS (REUSED)
+  # ===============================
+  responsive_style <- viewer_indicators_style()
+
+  # ===============================
+  # 6. HEADER (MATCH viewer.indicators)
+  # ===============================
+  header_block <- htmltools::tags$div(
+    class = "cepal-header",
+
     htmltools::tags$div(
-      style = "display:flex; flex-direction:column; align-items:flex-start;",
+      class = "cepal-left",
 
       htmltools::tags$img(
-        src = logo_pkg,
-        style = "height:45px; margin-bottom:5px;"
-      ),
-
-      htmltools::tags$span(
-        style = "font-size:12px; color:#374151;",
-        paste0(
-          if (isTRUE(language.en))
-            "Number of indicators: "
-          else
-            "Cantidad de indicadores: ",
-          format(total_indicators, big.mark = ",")
-        )
-      )
-    ),
-
-    # RIGHT
-    htmltools::tags$div(
-      style = "display:flex; align-items:center; gap:10px;",
-
-      htmltools::tags$img(
-        src = logo_eclac,
-        style = "height:55px;"
+        src = pkg_logo,
+        class = "cepal-pkg-logo"
       ),
 
       htmltools::tags$div(
-        style = "text-align:left;",
+        "CepalStatR",
+        class = "cepal-pkg-text"
+      ),
 
-        htmltools::tags$div(
-          style = "font-size:16px; font-weight:bold;",
-          "CEPALSTAT"
+      htmltools::tags$div(
+        paste0(available_label, ": ", format(total_indicators, big.mark = ",")),
+        class = "cepal-pkg-count"
+      )
+    ),
+
+    htmltools::tags$div(
+      class = "cepal-right",
+
+      htmltools::tags$div(
+        class = "cepal-right-top",
+
+        htmltools::tags$img(
+          src = inst_logo,
+          class = "cepal-inst-logo"
         ),
 
         htmltools::tags$div(
-          style = "font-size:12px;",
-          subtitle
+          htmltools::tags$div(
+            "CEPALSTAT",
+            class = "cepal-main-title"
+          ),
+
+          htmltools::tags$div(
+            subtitle,
+            class = "cepal-subtitle"
+          )
         )
       )
     )
   )
 
   # ===============================
-  # 6. TREE
+  # 7. TREE
   # ===============================
   tree <- collapsibleTree::collapsibleTree(
     df,
@@ -145,53 +177,43 @@ cepal_topic_map <- function(language.en = TRUE,
   )
 
   # ===============================
-  # 7. FOOTER (igual viewer + extra)
+  # 8. FOOTER (MATCH viewer + EXTRA)
   # ===============================
-  footer <- htmltools::tags$div(
-    style = "
-      display:flex;
-      justify-content:space-between;
-      flex-wrap:wrap;
-      margin-top:15px;
-      font-size:12px;
-      color:#4B5563;
-    ",
+  footer_block <- htmltools::tags$div(
+    style = paste0(
+      "padding:10px 22px 16px 22px;",
+      "font-size:11.5px;",
+      "color:#6B7280;",
+      "background:#FFFFFF;"
+    ),
 
-    # LEFT vacío (puedes usarlo luego)
-    htmltools::tags$div(),
+    htmltools::tags$div(footer_text),
 
-    # RIGHT
-    htmltools::tags$div(
-      style = "text-align:right;",
-
-      htmltools::tags$div(footer_text),
-
-      htmltools::tags$div(
-        paste0(
-          url_text, " ",
-          htmltools::tags$a(
-            href = "https://statistics.cepal.org/portal/cepalstat/",
-            "https://statistics.cepal.org/portal/cepalstat/",
-            target = "_blank"
-          )
-        )
+    if (isTRUE(language.en)) {
+      htmltools::HTML(
+        'For more information about CEPALSTAT, visit <a href="https://statistics.cepal.org/portal/cepalstat/" target="_blank">https://statistics.cepal.org/portal/cepalstat/</a>'
       )
-    )
+    } else {
+      htmltools::HTML(
+        'Para más información de CEPALSTAT accede a <a href="https://statistics.cepal.org/portal/cepalstat/" target="_blank">https://statistics.cepal.org/portal/cepalstat/</a>'
+      )
+    }
   )
 
   # ===============================
-  # 8. COMBINE
+  # 9. COMBINE
   # ===============================
   out <- htmltools::browsable(
     htmltools::tagList(
-      header,
+      responsive_style,
+      header_block,
       tree,
-      footer
+      footer_block
     )
   )
 
   # ===============================
-  # 9. OPEN BROWSER
+  # 10. OPEN BROWSER
   # ===============================
   if (isTRUE(open.browser)) {
     tmp <- tempfile(fileext = ".html")
