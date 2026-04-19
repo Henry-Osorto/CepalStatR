@@ -170,7 +170,7 @@ cepal_topic_map <- function(language.en = TRUE,
   # ===============================
   tree <- collapsibleTree::collapsibleTree(
     df,
-    hierarchy = c(area_col, dim_col, sub_col, grp_col, "Indicator_label"),
+    hierarchy = c(area_col, dim_col, sub_col, grp_col, name_col, id_col),
     root = "CEPALSTAT",
     collapsed = TRUE,
     zoomable = TRUE
