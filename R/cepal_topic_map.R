@@ -221,5 +221,5 @@ cepal_topic_map <- function(language.en = TRUE,
     utils::browseURL(tmp)
   }
 
-  return(invisible(out))
+  return(out)
 }
