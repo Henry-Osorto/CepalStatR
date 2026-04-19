@@ -1,8 +1,0 @@
-export(call.data)
-export(call.indicators)
-export(viewer.indicators)
-export(countries)
-export(pyramids)
-export(ranking.sdg)
-export(cepal_topic_map)
-importFrom(magrittr,"%>%")
