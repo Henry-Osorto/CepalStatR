@@ -125,7 +125,7 @@ viewer.indicators <- function(language.en = TRUE,
   subtitle <- if (isTRUE(language.en)) {
     "Statistical Data Portal and Publications"
   } else {
-    "Portal de Datos y Publicaciones Estad<c3><ad>sticas"
+    "Portal de Datos y Publicaciones Estad\u00edsticas"
   }
 
   package_desc <- if (isTRUE(language.en)) {
@@ -162,7 +162,7 @@ viewer.indicators <- function(language.en = TRUE,
 
   fixed_cols <- col_names[col_names %in% c(
     "Area", "Dimension", "Subdimension", "Group",
-    "<c3><81>rea", "Dimensi<c3><b3>n", "Subdimensi<c3><b3>n", "Grupo"
+    "\u00c1rea", "Dimensi\u00f3n", "Subdimensi\u00f3n", "Grupo"
   )]
 
   id_col <- col_names[col_names %in% c("Indicator ID", "Id del Indicador", "ID Indicador")]
@@ -306,7 +306,7 @@ viewer.indicators <- function(language.en = TRUE,
           )
         } else {
           htmltools::HTML(
-            'Para m<c3><a1>s informaci<c3><b3>n de CEPALSTAT accede a <a href="https://statistics.cepal.org/portal/cepalstat/" target="_blank">https://statistics.cepal.org/portal/cepalstat/</a>'
+            'Para m\u00e1s informaci\u00f3n de CEPALSTAT accede a <a href="https://statistics.cepal.org/portal/cepalstat/" target="_blank">https://statistics.cepal.org/portal/cepalstat/</a>'
           )
         },
         class = "cepal-meta"
@@ -386,10 +386,10 @@ viewer.indicators <- function(language.en = TRUE,
       pageNumbers = page_numbers_text,
       pageInfo = page_info_text,
       pageSizeOptions = page_size_text,
-      pageNextLabel = if (isTRUE(language.en)) "Next page" else "P<c3><a1>gina siguiente",
-      pagePreviousLabel = if (isTRUE(language.en)) "Previous page" else "P<c3><a1>gina anterior",
-      pageJumpLabel = if (isTRUE(language.en)) "Go to page" else "Ir a la p<c3><a1>gina",
-      pageSizeOptionsLabel = if (isTRUE(language.en)) "Rows per page" else "Filas por p<c3><a1>gina"
+      pageNextLabel = if (isTRUE(language.en)) "Next page" else "P\u00e1gina siguiente",
+      pagePreviousLabel = if (isTRUE(language.en)) "Previous page" else "P\u00e1gina anterior",
+      pageJumpLabel = if (isTRUE(language.en)) "Go to page" else "Ir a la p\u00e1gina",
+      pageSizeOptionsLabel = if (isTRUE(language.en)) "Rows per page" else "Filas por p\u00e1gina"
     )
   )
 
