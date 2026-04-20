@@ -83,5 +83,54 @@ countries()
 #> 48                            Uruguay
 #> 49 Venezuela (Bolivarian Republic of)
 countries(language.en = FALSE)
-#> Error: No country members found.
+#>                                    Paises
+#> 1                          América Latina
+#> 2              América Latina y el Caribe
+#> 3                                 Anguila
+#> 4                       Antigua y Barbuda
+#> 5                               Argentina
+#> 6                                   Aruba
+#> 7                                 Bahamas
+#> 8                                Barbados
+#> 9                                  Belice
+#> 10      Bolivia (Estado Plurinacional de)
+#> 11                                 Brasil
+#> 12                      Caribe neerlandés
+#> 13                                  Chile
+#> 14                               Colombia
+#> 15                             Costa Rica
+#> 16                                   Cuba
+#> 17                                Curaçao
+#> 18                               Dominica
+#> 19                                Ecuador
+#> 20                              El Caribe
+#> 21                            El Salvador
+#> 22                                Granada
+#> 23                              Guadalupe
+#> 24                              Guatemala
+#> 25                                 Guyana
+#> 26                                  Haití
+#> 27                               Honduras
+#> 28                           Islas Caimán
+#> 29                  Islas Turcas y Caicos
+#> 30              Islas Vírgenes Británicas
+#> 31   Islas Vírgenes de los Estados Unidos
+#> 32                                Jamaica
+#> 33                              Martinica
+#> 34                             Montserrat
+#> 35                                 México
+#> 36                              Nicaragua
+#> 37                                 Panamá
+#> 38                               Paraguay
+#> 39                                   Perú
+#> 40                            Puerto Rico
+#> 41                   República Dominicana
+#> 42                    Saint Kitts y Nevis
+#> 43 San Martín (parte de los Países Bajos)
+#> 44           San Vicente y las Granadinas
+#> 45                            Santa Lucía
+#> 46                               Suriname
+#> 47                      Trinidad y Tabago
+#> 48                                Uruguay
+#> 49   Venezuela (República Bolivariana de)
 ```
