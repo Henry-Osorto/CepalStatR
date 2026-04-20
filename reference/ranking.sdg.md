@@ -19,7 +19,8 @@ ranking.sdg(
   title = TRUE,
   caption = TRUE,
   color = "#0C4A61",
-  color.gc = "#34B0AA"
+  color.gc = "#34B0AA",
+  progress = TRUE
 )
 ```
 
@@ -76,6 +77,10 @@ ranking.sdg(
 - color.gc:
 
   Character. Color for regional aggregates if present.
+
+- progress:
+
+  Logical. If `TRUE`, shows progress messages during execution.
 
 ## Value
 

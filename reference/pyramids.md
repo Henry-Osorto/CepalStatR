@@ -16,7 +16,8 @@ pyramids(
   format = c("png", "pdf", "svg"),
   height = 5,
   width = 7,
-  caption = TRUE
+  caption = TRUE,
+  progress = TRUE
 )
 ```
 
@@ -65,6 +66,10 @@ pyramids(
 - caption:
 
   Logical. If `TRUE`, adds a caption with source information.
+
+- progress:
+
+  Logical. If `TRUE`, progress messages are shown.
 
 ## Value
 
