@@ -176,7 +176,7 @@ ranking.sdg <- function(id.indicator,
       add.indicator.name = TRUE
     )
 
-    dim_col <- "Dimensi\u00f3n"
+    dim_col <- "Dimensión"
     id_col <- "ID Indicador"
     if (!id_col %in% names(indicators_df)) {
       id_col <- "Id del Indicador"
