@@ -361,7 +361,7 @@ call.data <- function(id.indicator,
   data <- data |>
     dplyr::mutate(
       dplyr::across(
-        where(is.character),
+        tidyselect::where(is.character),
         ~ trimws(.x)
       )
     )
