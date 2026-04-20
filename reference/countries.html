@@ -74,9 +74,107 @@ than retrieving full indicator datasets.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">countries</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in x$name:</span> $ operator is invalid for atomic vectors</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             Countries</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                            Anguilla</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                 Antigua and Barbuda</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                           Argentina</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                               Aruba</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                             Bahamas</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                            Barbados</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7                              Belize</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8    Bolivia (Plurinational State of)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9                              Brazil</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10             British Virgin Islands</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11                          Caribbean</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12              Caribbean Netherlands</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13                     Cayman Islands</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14                              Chile</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15                           Colombia</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16                         Costa Rica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17                               Cuba</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18                            Curaçao</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19                           Dominica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20                 Dominican Republic</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21                            Ecuador</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22                        El Salvador</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23                            Grenada</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24                         Guadeloupe</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25                          Guatemala</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26                             Guyana</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27                              Haiti</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28                           Honduras</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29                            Jamaica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30                      Latin America</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31    Latin America and the Caribbean</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32                         Martinique</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33                             Mexico</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34                         Montserrat</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35                          Nicaragua</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36                             Panama</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37                           Paraguay</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38                               Peru</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39                        Puerto Rico</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40              Saint Kitts and Nevis</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41                        Saint Lucia</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42   Saint Vincent and the Grenadines</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43          Sint Maarten (Dutch part)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44                           Suriname</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45                Trinidad and Tobago</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46           Turks and Caicos Islands</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47       United States Virgin Islands</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48                            Uruguay</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49 Venezuela (Bolivarian Republic of)</span>
 <span class="r-in"><span><span class="fu">countries</span><span class="op">(</span>language.en <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in x$name:</span> $ operator is invalid for atomic vectors</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                    Paises</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                          América Latina</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2              América Latina y el Caribe</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                 Anguila</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                       Antigua y Barbuda</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                               Argentina</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                                   Aruba</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7                                 Bahamas</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8                                Barbados</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9                                  Belice</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10      Bolivia (Estado Plurinacional de)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11                                 Brasil</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12                      Caribe neerlandés</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13                                  Chile</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14                               Colombia</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15                             Costa Rica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16                                   Cuba</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17                                Curaçao</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18                               Dominica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19                                Ecuador</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20                              El Caribe</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21                            El Salvador</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22                                Granada</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23                              Guadalupe</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24                              Guatemala</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25                                 Guyana</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26                                  Haití</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27                               Honduras</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28                           Islas Caimán</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29                  Islas Turcas y Caicos</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30              Islas Vírgenes Británicas</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31   Islas Vírgenes de los Estados Unidos</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32                                Jamaica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33                              Martinica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34                             Montserrat</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35                                 México</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36                              Nicaragua</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37                                 Panamá</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38                               Paraguay</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39                                   Perú</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40                            Puerto Rico</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41                   República Dominicana</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42                    Saint Kitts y Nevis</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43 San Martín (parte de los Países Bajos)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44           San Vicente y las Granadinas</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45                            Santa Lucía</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46                               Suriname</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47                      Trinidad y Tabago</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48                                Uruguay</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49   Venezuela (República Bolivariana de)</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
