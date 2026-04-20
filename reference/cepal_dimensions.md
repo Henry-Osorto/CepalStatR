@@ -34,7 +34,6 @@ A list of dimensions. Each element contains:
 
 ``` r
 dims <- cepal_dimensions(1)
-#> Error in d$members: $ operator is invalid for atomic vectors
 names(dims)
-#> Error: object 'dims' not found
+#> [1] ""
 ```
