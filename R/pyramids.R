@@ -18,6 +18,7 @@
 #' @param height Numeric. Height of saved figure.
 #' @param width Numeric. Width of saved figure.
 #' @param caption Logical. If `TRUE`, adds a caption with source information.
+#' @param progress Logical. If `TRUE`, progress messages are shown.
 #'
 #' @return Invisibly returns a grob object created by `gridExtra::arrangeGrob()`.
 #' @export
@@ -58,13 +59,14 @@
 pyramids <- function(country,
                      years = 1:31,
                      language.en = TRUE,
-                     color = c("#0C4A61", "#34B0AA"),
+                     color = c("#B20B27", "#0A1873"),
                      save = FALSE,
                      file = NULL,
                      format = c("png", "pdf", "svg"),
                      height = 5,
                      width = 7,
-                     caption = TRUE) {
+                     caption = TRUE,
+                     progress = TRUE) {
 
   format <- match.arg(format)
 
@@ -104,12 +106,27 @@ pyramids <- function(country,
     stop("caption must be TRUE or FALSE.", call. = FALSE)
   }
 
-  df <- call.data(id.indicator = 31, language.en = language.en, progress = FALSE)
+  if (!is.logical(progress) || length(progress) != 1 || is.na(progress)) {
+    stop("progress must be TRUE or FALSE.", call. = FALSE)
+  }
+
+  if (progress) {
+    if (isTRUE(language.en)) {
+      message("Preparing population pyramids...")
+    } else {
+      message("Preparando pirámides poblacionales...")
+    }
+  }
+
+  df <- call.data(
+    id.indicator = 31,
+    language.en = language.en,
+    progress = progress
+  )
 
   years_filter <- seq(1950, 2100, 5)[years]
 
   if (isTRUE(language.en)) {
-    value_col <- "Value"
     country_col <- "Country"
     year_col <- "Years"
     sex_col <- "Sex"
@@ -139,11 +156,10 @@ pyramids <- function(country,
     ylab <- "Age"
     caption_text <- paste(
       "Source: CEPALSTAT (ECLAC).",
-      "Estimates and projections by five-year age groups of the population for 1950-2100."
+      "Population estimates and projections by five-year age groups, 1950–2100."
     )
     default_file <- paste0("Population_pyramids.", format)
   } else {
-    value_col <- "Valor"
     country_col <- "País"
     year_col <- "Años"
     sex_col <- "Sexo"
@@ -173,18 +189,26 @@ pyramids <- function(country,
     ylab <- "Edad"
     caption_text <- paste(
       "Fuente: CEPALSTAT (CEPAL).",
-      "Estimaciones y proyecciones de población por grupos quinquenales de edad de la población para el 1950–2100."
+      "Estimaciones y proyecciones de población por grupos quinquenales de edad, 1950–2100."
     )
     default_file <- paste0("Piramides_poblacionales.", format)
   }
 
-  required_cols <- c(country_col, year_col, sex_col, age_col, value_col)
+  required_cols <- c(country_col, year_col, sex_col, age_col, "value")
   missing_cols <- setdiff(required_cols, names(df))
   if (length(missing_cols) > 0) {
     stop(
       paste0("Missing required columns: ", paste(missing_cols, collapse = ", ")),
       call. = FALSE
     )
+  }
+
+  if (progress) {
+    if (isTRUE(language.en)) {
+      message("Filtering and transforming data...")
+    } else {
+      message("Filtrando y transformando datos...")
+    }
   }
 
   df <- df |>
@@ -198,12 +222,19 @@ pyramids <- function(country,
       Edad_num = unname(age_map[.data[[age_col]]]),
       Edad = factor(Edad_num, levels = 1:21, labels = ages_labels),
       Sex_plot = ifelse(.data[[sex_col]] == male_value, male_label, female_label),
-      value = as.numeric(.data[[value_col]]),
       value = ifelse(.data[[sex_col]] == male_value, -1 * value, value)
     )
 
   if (nrow(df) == 0) {
     stop("No data available for the selected country and years.", call. = FALSE)
+  }
+
+  if (progress) {
+    if (isTRUE(language.en)) {
+      message("Creating plots...")
+    } else {
+      message("Creando gráficos...")
+    }
   }
 
   plots <- vector("list", length(years_filter))
@@ -248,7 +279,7 @@ pyramids <- function(country,
       caption_text,
       x = 0,
       hjust = 0,
-      gp = grid::gpar(fontsize = 9, col='darkgray')
+      gp = grid::gpar(fontsize = 9)
     )
   } else {
     NULL
@@ -263,6 +294,14 @@ pyramids <- function(country,
   grid::grid.draw(g)
 
   if (isTRUE(save)) {
+    if (progress) {
+      if (isTRUE(language.en)) {
+        message("Saving output...")
+      } else {
+        message("Guardando salida...")
+      }
+    }
+
     if (is.null(file)) {
       file <- default_file
     }
