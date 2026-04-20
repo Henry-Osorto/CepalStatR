@@ -16,5 +16,7 @@
   : Population pyramids
 - [`ranking.sdg()`](https://henry-osorto.github.io/CepalStatR/reference/ranking.sdg.md)
   : Sustainable Development Goals ranking
+- [`topic_map()`](https://henry-osorto.github.io/CepalStatR/reference/topic_map.md)
+  : CEPALSTAT thematic map of indicators
 - [`viewer.indicators()`](https://henry-osorto.github.io/CepalStatR/reference/viewer.indicators.md)
   : Viewer for CEPALSTAT indicators
