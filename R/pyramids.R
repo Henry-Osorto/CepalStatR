@@ -114,7 +114,7 @@ pyramids <- function(country,
     if (isTRUE(language.en)) {
       message("Preparing population pyramids...")
     } else {
-      message("Preparando pir<c3><a1>mides poblacionales...")
+      message("Preparando pir\u00e1mides poblacionales...")
     }
   }
 
@@ -159,9 +159,9 @@ pyramids <- function(country,
   } else {
     value_col <- "Valor"
     country_col <- "Pa<c3><ad>s"
-    year_col <- "A<c3><b1>os"
+    year_col <- "A\u00f1os"
     sex_col <- "Sexo"
-    age_col <- "Edad__Grupos de edad (cada 5 a<c3><b1>os) (0_100 mas)"
+    age_col <- "Edad__Grupos de edad (cada 5 a\u00f1os) (0_100 mas)"
     total_age <- "Total edades"
     both_sexes <- "Ambos sexos"
     male_value <- "Hombres"
@@ -180,9 +180,9 @@ pyramids <- function(country,
       "25_29" = 6, "30_34" = 7, "35_39" = 8, "40_44" = 9, "45_49" = 10,
       "50_54" = 11, "55_59" = 12, "60_64" = 13, "65_69" = 14, "70_74" = 15,
       "75_79" = 16, "80_84" = 17, "85_89" = 18, "90_94" = 19, "95_99" = 20,
-      "100 y m<c3><a1>s" = 21
+      "100 y m\u00e1s" = 21
     )
-    subtitle_prefix <- "A<c3><b1>o: "
+    subtitle_prefix <- "A\u00f1o: "
     xlab <- "Miles de personas"
     ylab <- "Edad"
     caption_text <- paste(
@@ -232,7 +232,7 @@ pyramids <- function(country,
     if (isTRUE(language.en)) {
       message("Creating plots...")
     } else {
-      message("Creando gr<c3><a1>ficos...")
+      message("Creando gr\u00e1ficos...")
     }
   }
 
