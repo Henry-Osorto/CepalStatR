@@ -32,22 +32,22 @@ countries <- function(language.en = TRUE) {
   # ---- Llamado a dimensiones ----
   json <- get_cepal_dimensions(id.indicator = 1, lang = lang)
 
-  dims <- json$body$dimensions
+  dims <- json$body$dimensions %||% list()
 
   if (is.null(dims) || length(dims) == 0) {
     stop("No dimensions found in CEPALSTAT response.", call. = FALSE)
   }
 
   # ---- Identificar dimensión de países ----
-  country_dim <- dims[
-    sapply(dims, function(x) grepl("pais|country", tolower(x$name)))
-  ]
+
+  country_dim <- dims[grepl("País__ESTANDAR|Country__ESTANDAR", dims$name),]
+
 
   if (length(country_dim) == 0) {
     stop("Country dimension not found.", call. = FALSE)
   }
 
-  members <- country_dim[[1]]$members
+  members <- do.call(rbind, country_dim$members)
 
   if (is.null(members) || nrow(members) == 0) {
     stop("No country members found.", call. = FALSE)
