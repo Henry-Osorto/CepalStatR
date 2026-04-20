@@ -159,7 +159,7 @@ call.indicators <- function(language.en = TRUE, progress = TRUE) {
     dplyr::mutate(
       indicator_id = suppressWarnings(as.numeric(indicator_id)),
       dplyr::across(
-        .cols = where(is.character),
+        .cols = tidyselect::where(is.character),
         .fns = ~ trimws(.x)
       )
     )
