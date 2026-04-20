@@ -184,7 +184,7 @@ ranking.sdg <- function(id.indicator,
     indicator_name_col <- "Nombre Indicador"
 
     country_col <- "Pa\u00eds"
-    year_col <- "A<c3><b1>os"
+    year_col <- "A\u00f1os"
     value_col <- "Valor"
 
     target_dimension <- "Objetivos de Desarrollo Sostenible (ODS)"
