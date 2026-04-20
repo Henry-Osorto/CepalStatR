@@ -59,7 +59,7 @@
 pyramids <- function(country,
                      years = 1:31,
                      language.en = TRUE,
-                     color = c("#B20B27", "#0A1873"),
+                     color = c("#0C4A61", "#34B0AA"),
                      save = FALSE,
                      file = NULL,
                      format = c("png", "pdf", "svg"),
