@@ -23,6 +23,8 @@ Imports:
     magrittr,
     reactable,
     stringr,
+    tidyselect,
+    rlang,
     collapsibleTree,
     gridExtra,
     htmlwidgets
