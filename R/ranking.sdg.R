@@ -21,6 +21,7 @@
 #' available year by country.
 #' @param color Character. Color for countries in the ranking.
 #' @param color.gc Character. Color for regional aggregates if present.
+#' @param progress Logical. If `TRUE`, shows progress messages during execution.
 #'
 #' @return Invisibly returns a `ggplot` object.
 #' @export
@@ -60,11 +61,20 @@ ranking.sdg <- function(id.indicator,
                         title = TRUE,
                         caption = TRUE,
                         color = "#0C4A61",
-                        color.gc = "#34B0AA") {
+                        color.gc = "#34B0AA",
+                        progress = TRUE) {
 
   format <- match.arg(format)
 
   # ---- Validation ----
+  if (!is.logical(progress) || length(progress) != 1 || is.na(progress)) {
+    stop("progress must be TRUE or FALSE.", call. = FALSE)
+  }
+
+  if (progress) {
+    message(if (language.en) "Preparing SDG ranking..." else "Preparando ranking ODS...")
+  }
+
   if ((!is.numeric(id.indicator) && !is.character(id.indicator)) ||
       length(id.indicator) != 1 || is.na(id.indicator)) {
     stop("id.indicator must be a single numeric or character value.", call. = FALSE)
@@ -112,11 +122,17 @@ ranking.sdg <- function(id.indicator,
 
   # ---- Language-specific settings ----
   if (isTRUE(language.en)) {
-    indicators_df <- call.indicators(language.en = TRUE, progress = FALSE)
+
+    if (progress) message("Loading indicators metadata...")
+
+    indicators_df <- call.indicators(language.en = TRUE, progress = progress)
+
+    if (progress) message("Downloading indicator data...")
+
     data <- call.data(
       id.indicator = id.indicator,
       language.en = TRUE,
-      progress = FALSE,
+      progress = progress,
       add.indicator.name = TRUE
     )
 
@@ -146,11 +162,17 @@ ranking.sdg <- function(id.indicator,
     percent_patterns <- c("Proportion", "(%)", "Percentage")
     warning_msg <- "Select the indicator ID from the Sustainable Development Goals (SDG) dimension."
   } else {
-    indicators_df <- call.indicators(language.en = FALSE, progress = FALSE)
+
+    if (progress) message("Cargando metadatos de indicadores...")
+
+    indicators_df <- call.indicators(language.en = FALSE, progress = progress)
+
+    if (progress) message("Descargando datos del indicador...")
+
     data <- call.data(
       id.indicator = id.indicator,
       language.en = FALSE,
-      progress = FALSE,
+      progress = progress,
       add.indicator.name = TRUE
     )
 
@@ -184,32 +206,11 @@ ranking.sdg <- function(id.indicator,
     warning_msg <- "Seleccione el ID de indicadores de la dimensión de Objetivos de Desarrollo Sostenible (ODS)."
   }
 
-  # ---- Validate required columns ----
-  required_indicator_cols <- c(dim_col, id_col, indicator_name_col)
-  missing_indicator_cols <- setdiff(required_indicator_cols, names(indicators_df))
-  if (length(missing_indicator_cols) > 0) {
-    stop(
-      paste0(
-        "Missing required columns in call.indicators(): ",
-        paste(missing_indicator_cols, collapse = ", ")
-      ),
-      call. = FALSE
-    )
+  # ---- Processing ----
+  if (progress) {
+    message(if (language.en) "Processing data..." else "Procesando datos...")
   }
 
-  required_data_cols <- c(country_col, year_col, value_col)
-  missing_data_cols <- setdiff(required_data_cols, names(data))
-  if (length(missing_data_cols) > 0) {
-    stop(
-      paste0(
-        "Missing required columns in call.data(): ",
-        paste(missing_data_cols, collapse = ", ")
-      ),
-      call. = FALSE
-    )
-  }
-
-  # ---- Find indicator in SDG/ODS dimension ----
   indicators_df <- indicators_df |>
     dplyr::filter(.data[[dim_col]] == target_dimension) |>
     dplyr::filter(as.character(.data[[id_col]]) == as.character(id.indicator))
@@ -222,29 +223,22 @@ ranking.sdg <- function(id.indicator,
   indicator_row <- indicators_df[1, , drop = FALSE]
   name.indicator <- as.character(indicator_row[[indicator_name_col]][1])
 
-  # ---- Helper to wrap long text ----
   wrap_text <- function(x, width_words = 10) {
     words <- stringr::str_split(x, pattern = "\\s+")[[1]]
     n <- length(words)
-
-    if (n <= width_words) {
-      return(paste(words, collapse = " "))
-    }
-
+    if (n <= width_words) return(paste(words, collapse = " "))
     groups <- split(words, ceiling(seq_along(words) / width_words))
     paste(vapply(groups, paste, collapse = " ", FUN.VALUE = character(1)), collapse = "\n")
   }
 
   name.indicator.o <- wrap_text(name.indicator, width_words = 10)
 
-  # ---- Detect percentage/proportion-like indicator ----
   percent <- any(vapply(
     percent_patterns,
     function(p) grepl(p, name.indicator, fixed = TRUE),
     logical(1)
   ))
 
-  # ---- Process data with new call.data structure ----
   data <- data |>
     dplyr::group_by(.data[[country_col]]) |>
     dplyr::mutate(
@@ -277,7 +271,6 @@ ranking.sdg <- function(id.indicator,
     stop("No data available after processing the selected indicator.", call. = FALSE)
   }
 
-  # ---- Build caption ----
   cap_years <- unique(data[[year_col]])
   cap.list <- vector("list", length(cap_years))
 
@@ -289,7 +282,10 @@ ranking.sdg <- function(id.indicator,
   cap <- paste0(note_prefix, paste(cap.list, collapse = "; "))
   cap <- wrap_text(cap, width_words = 15)
 
-  # ---- Plot ----
+  if (progress) {
+    message(if (language.en) "Rendering plot..." else "Generando gráfico...")
+  }
+
   alc <- unique(data$filtro)
 
   if (length(alc) == 1) {
@@ -336,8 +332,12 @@ ranking.sdg <- function(id.indicator,
 
   print(g)
 
-  # ---- Save if requested ----
   if (isTRUE(save)) {
+
+    if (progress) {
+      message(if (language.en) "Saving file..." else "Guardando archivo...")
+    }
+
     if (is.null(file)) {
       file <- file_default
     }
