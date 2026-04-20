@@ -114,7 +114,7 @@ pyramids <- function(country,
     if (isTRUE(language.en)) {
       message("Preparing population pyramids...")
     } else {
-      message("Preparando pirámides poblacionales...")
+      message("Preparando pir<c3><a1>mides poblacionales...")
     }
   }
 
@@ -158,10 +158,10 @@ pyramids <- function(country,
     default_file <- paste0("Population_pyramids.", format)
   } else {
     value_col <- "Valor"
-    country_col <- "País"
-    year_col <- "Años"
+    country_col <- "Pa<c3><ad>s"
+    year_col <- "A<c3><b1>os"
     sex_col <- "Sexo"
-    age_col <- "Edad__Grupos de edad (cada 5 años) (0_100 mas)"
+    age_col <- "Edad__Grupos de edad (cada 5 a<c3><b1>os) (0_100 mas)"
     total_age <- "Total edades"
     both_sexes <- "Ambos sexos"
     male_value <- "Hombres"
@@ -180,14 +180,14 @@ pyramids <- function(country,
       "25_29" = 6, "30_34" = 7, "35_39" = 8, "40_44" = 9, "45_49" = 10,
       "50_54" = 11, "55_59" = 12, "60_64" = 13, "65_69" = 14, "70_74" = 15,
       "75_79" = 16, "80_84" = 17, "85_89" = 18, "90_94" = 19, "95_99" = 20,
-      "100 y más" = 21
+      "100 y m<c3><a1>s" = 21
     )
-    subtitle_prefix <- "Año: "
+    subtitle_prefix <- "A<c3><b1>o: "
     xlab <- "Miles de personas"
     ylab <- "Edad"
     caption_text <- paste(
       "Fuente: CEPALSTAT (CEPAL).",
-      "Estimaciones y proyecciones por grupos quinquenales de edad de la población para el 1950-2100."
+      "Estimaciones y proyecciones por grupos quinquenales de edad de la poblaci<c3><b3>n para el 1950-2100."
     )
     default_file <- paste0("Piramides_poblacionales.", format)
   }
@@ -232,7 +232,7 @@ pyramids <- function(country,
     if (isTRUE(language.en)) {
       message("Creating plots...")
     } else {
-      message("Creando gráficos...")
+      message("Creando gr<c3><a1>ficos...")
     }
   }
 
