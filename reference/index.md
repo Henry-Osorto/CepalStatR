@@ -6,8 +6,6 @@
   : Call Data Indicators CEPALSTAT
 - [`call.indicators()`](https://henry-osorto.github.io/CepalStatR/reference/call.indicators.md)
   : Call indicators from CEPALSTAT
-- [`cepal_dimensions()`](https://henry-osorto.github.io/CepalStatR/reference/cepal_dimensions.md)
-  : Retrieve CEPALSTAT dimensions for an indicator
 - [`countries()`](https://henry-osorto.github.io/CepalStatR/reference/countries.md)
   : List of countries available in CEPALSTAT
 - [`pyramids()`](https://henry-osorto.github.io/CepalStatR/reference/pyramids.md)
