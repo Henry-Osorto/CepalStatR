@@ -23,8 +23,9 @@ Imports:
     magrittr,
     reactable,
     stringr,
-    tibble,
-    tidyr
+    collapsibleTree,
+    gridExtra,
+    htmlwidgets
 Suggests:
     ggplot2,
     gt,
