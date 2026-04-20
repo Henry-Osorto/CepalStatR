@@ -158,7 +158,7 @@ pyramids <- function(country,
     default_file <- paste0("Population_pyramids.", format)
   } else {
     value_col <- "Valor"
-    country_col <- "Pa<c3><ad>s"
+    country_col <- "Pa\u00eds"
     year_col <- "A\u00f1os"
     sex_col <- "Sexo"
     age_col <- "Edad__Grupos de edad (cada 5 a\u00f1os) (0_100 mas)"
