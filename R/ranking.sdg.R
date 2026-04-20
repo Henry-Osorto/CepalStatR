@@ -176,34 +176,34 @@ ranking.sdg <- function(id.indicator,
       add.indicator.name = TRUE
     )
 
-    dim_col <- "Dimensi<c3><b3>n"
+    dim_col <- "Dimensi\u00f3n"
     id_col <- "ID Indicador"
     if (!id_col %in% names(indicators_df)) {
       id_col <- "Id del Indicador"
     }
     indicator_name_col <- "Nombre Indicador"
 
-    country_col <- "Pa<c3><ad>s"
+    country_col <- "Pa\u00eds"
     year_col <- "A<c3><b1>os"
     value_col <- "Valor"
 
     target_dimension <- "Objetivos de Desarrollo Sostenible (ODS)"
 
     region_values <- c(
-      "Am<c3><a9>rica Latina y el Caribe",
-      "Am<c3><a9>rica Latina",
-      "Am<c3><a9>rica del Sur",
-      "Am<c3><a9>rica Central",
+      "Am\u00e9rica Latina y el Caribe",
+      "Am\u00e9rica Latina",
+      "Am\u00e9rica del Sur",
+      "Am\u00e9rica Central",
       "El Caribe"
     )
 
     y_lab <- "Logro del indicador"
-    x_lab <- "Pa<c3><ad>s"
+    x_lab <- "Pa\u00eds"
     note_prefix <- "Nota: <c3><9a>ltimo dato disponible, "
     file_default <- paste0("Logro_del_indicador_", id.indicator, ".", format)
 
-    percent_patterns <- c("Proporci<c3><b3>n", "(en porcentajes)", "Porcentaje")
-    warning_msg <- "Seleccione el ID de indicadores de la dimensi<c3><b3>n de Objetivos de Desarrollo Sostenible (ODS)."
+    percent_patterns <- c("Proporci\u00f3n", "(en porcentajes)", "Porcentaje")
+    warning_msg <- "Seleccione el ID de indicadores de la dimensi\u00f3n de Objetivos de Desarrollo Sostenible (ODS)."
   }
 
   # ---- Processing ----
@@ -283,7 +283,7 @@ ranking.sdg <- function(id.indicator,
   cap <- wrap_text(cap, width_words = 15)
 
   if (progress) {
-    message(if (language.en) "Rendering plot..." else "Generando gr<c3><a1>fico...")
+    message(if (language.en) "Rendering plot..." else "Generando gr\u00e1fico...")
   }
 
   alc <- unique(data$filtro)
