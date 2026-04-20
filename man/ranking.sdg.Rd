@@ -16,7 +16,8 @@ ranking.sdg(
   title = TRUE,
   caption = TRUE,
   color = "#0C4A61",
-  color.gc = "#34B0AA"
+  color.gc = "#34B0AA",
+  progress = TRUE
 )
 }
 \arguments{
@@ -47,6 +48,8 @@ available year by country.}
 \item{color}{Character. Color for countries in the ranking.}
 
 \item{color.gc}{Character. Color for regional aggregates if present.}
+
+\item{progress}{Logical. If \code{TRUE}, shows progress messages during execution.}
 }
 \value{
 Invisibly returns a \code{ggplot} object.
