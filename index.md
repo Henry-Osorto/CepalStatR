@@ -48,10 +48,11 @@ Install the development version from GitHub:
 ``` r
 # install.packages("devtools")
 devtools::install_github("Henry-Osorto/CepalStatR")
+```
 
 ## Quick start
 
-```r
+``` r
 library(CepalStatR)
 
 # Interactive indicator browser
