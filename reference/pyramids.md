@@ -73,7 +73,8 @@ pyramids(
 
 ## Value
 
-Invisibly returns a grob object created by `gridExtra::arrangeGrob()`.
+Invisibly returns a grob object created by
+[`gridExtra::arrangeGrob()`](https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html).
 
 ## Examples
 
