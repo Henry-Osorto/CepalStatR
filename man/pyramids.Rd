@@ -14,7 +14,8 @@ pyramids(
   format = c("png", "pdf", "svg"),
   height = 5,
   width = 7,
-  caption = TRUE
+  caption = TRUE,
+  progress = TRUE
 )
 }
 \arguments{
@@ -41,6 +42,8 @@ filename is used.}
 \item{width}{Numeric. Width of saved figure.}
 
 \item{caption}{Logical. If \code{TRUE}, adds a caption with source information.}
+
+\item{progress}{Logical. If \code{TRUE}, progress messages are shown.}
 }
 \value{
 Invisibly returns a grob object created by \code{gridExtra::arrangeGrob()}.
