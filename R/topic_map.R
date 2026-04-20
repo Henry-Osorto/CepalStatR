@@ -53,7 +53,7 @@ topic_map <- function(language.en = TRUE,
     if (isTRUE(language.en)) {
       message("Preparing thematic map...")
     } else {
-      message("Preparando mapa tem<c3><a1>tico...")
+      message("Preparando mapa tem\u00e1tico...")
     }
   }
 
@@ -78,17 +78,17 @@ topic_map <- function(language.en = TRUE,
     available_label <- "Available indicators"
     footer_extra <- "Interactive thematic map of indicators"
   } else {
-    area_col <- "<c3><81>rea"
-    dim_col  <- "Dimensi<c3><b3>n"
-    sub_col  <- "Subdimensi<c3><b3>n"
+    area_col <- "\u00c1rea"
+    dim_col  <- "Dimensi\u00f3n"
+    sub_col  <- "Subdimensi\u00f3n"
     grp_col  <- "Grupo"
     name_col <- "Nombre Indicador"
     id_col   <- "ID Indicador"
 
-    subtitle <- "Portal de Datos y Publicaciones Estad<c3><ad>sticas"
+    subtitle <- "Portal de Datos y Publicaciones Estad\u00edsticas"
     package_desc <- "Interfaz en R para acceder, explorar y visualizar indicadores de CEPALSTAT"
     available_label <- "Indicadores disponibles"
-    footer_extra <- "Mapa tem<c3><a1>tico interactivo de indicadores"
+    footer_extra <- "Mapa tem\u00e1tico interactivo de indicadores"
   }
 
   required_cols <- c(area_col, dim_col, sub_col, grp_col, name_col, id_col)
@@ -185,7 +185,7 @@ topic_map <- function(language.en = TRUE,
           )
         } else {
           htmltools::HTML(
-            'Para m<c3><a1>s informaci<c3><b3>n de CEPALSTAT accede a <a href="https://statistics.cepal.org/portal/cepalstat/" target="_blank">https://statistics.cepal.org/portal/cepalstat/</a>'
+            'Para m\u00e1s informaci\u00f3n de CEPALSTAT accede a <a href="https://statistics.cepal.org/portal/cepalstat/" target="_blank">https://statistics.cepal.org/portal/cepalstat/</a>'
           )
         },
         class = "cepal-meta"
@@ -239,7 +239,7 @@ topic_map <- function(language.en = TRUE,
     if (isTRUE(language.en)) {
       message("Building interactive tree...")
     } else {
-      message("Construyendo <c3><a1>rbol interactivo...")
+      message("Construyendo \u00e1rbol interactivo...")
     }
   }
 
