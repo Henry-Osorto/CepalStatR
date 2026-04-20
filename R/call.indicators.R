@@ -49,7 +49,7 @@ call.indicators <- function(language.en = TRUE, progress = TRUE) {
   )
 
   names.es <- c(
-    "Área", "Dimensión", "Subdimensión", "Grupo",
+    "<c3><81>rea", "Dimensi<c3><b3>n", "Subdimensi<c3><b3>n", "Grupo",
     "Sub Grupo Nivel 1", "Sub Grupo Nivel 2",
     "Nombre Indicador", "ID Indicador"
   )
@@ -64,7 +64,7 @@ call.indicators <- function(language.en = TRUE, progress = TRUE) {
     if (isTRUE(language.en)) {
       message("Downloading thematic tree from CEPALSTAT...")
     } else {
-      message("Descargando árbol temático desde CEPALSTAT...")
+      message("Descargando <c3><a1>rbol tem<c3><a1>tico desde CEPALSTAT...")
     }
   }
 
@@ -92,7 +92,7 @@ call.indicators <- function(language.en = TRUE, progress = TRUE) {
     if (isTRUE(language.en)) {
       message("Parsing indicator hierarchy...")
     } else {
-      message("Procesando jerarquía de indicadores...")
+      message("Procesando jerarqu<c3><ad>a de indicadores...")
     }
   }
 
