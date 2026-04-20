@@ -17,8 +17,8 @@ cepal_dimensions(id.indicator, language.en = TRUE)
 
 - language.en:
 
-  Logical. If TRUE (default), English labels are used. If FALSE, Spanish
-  labels are returned.
+  Logical. If `TRUE` (default), English labels are used. If `FALSE`,
+  Spanish labels are used.
 
 ## Value
 
