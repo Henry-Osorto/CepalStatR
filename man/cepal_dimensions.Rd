@@ -9,8 +9,8 @@ cepal_dimensions(id.indicator, language.en = TRUE)
 \arguments{
 \item{id.indicator}{Numeric or character. Indicator ID.}
 
-\item{language.en}{Logical. If TRUE (default), English labels are used.
-If FALSE, Spanish labels are returned.}
+\item{language.en}{Logical. If \code{TRUE} (default), English labels are used.
+If \code{FALSE}, Spanish labels are used.}
 }
 \value{
 A list of dimensions. Each element contains:
