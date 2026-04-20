@@ -40,7 +40,7 @@ countries <- function(language.en = TRUE) {
 
   # ---- Identificar dimensi<c3><b3>n de pa<c3><ad>ses ----
 
-  country_dim <- dims[grepl("País__ESTANDAR|Country__ESTANDAR", dims$name),]
+  country_dim <- dims[grepl("Pa\u00eds__ESTANDAR|Country__ESTANDAR", dims$name),]
 
 
   if (length(country_dim) == 0) {
