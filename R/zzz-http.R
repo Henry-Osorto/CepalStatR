@@ -30,7 +30,7 @@ cepal_get <- function(url, format = c("json", "csv"), timeout_sec = 60) {
 
   if (status >= 400) {
     rlang::abort(
-      paste0("La API de CEPALSTAT devolvió un error HTTP ", status, "."),
+      paste0("La API de CEPALSTAT devolvi<c3><b3> un error HTTP ", status, "."),
       class = "cepal_error"
     )
   }
