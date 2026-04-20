@@ -11,7 +11,7 @@
 #' @return A data frame containing the list of countries.
 #'
 #' @details
-#' The function extracts the "Country" (or "País") dimension from the
+#' The function extracts the "Country" (or "Pa<c3><ad>s") dimension from the
 #' CEPALSTAT API using a JSON-based request. This method is more efficient
 #' than retrieving full indicator datasets.
 #'
@@ -22,7 +22,7 @@
 #' countries(language.en = FALSE)
 countries <- function(language.en = TRUE) {
 
-  # ---- Validación ----
+  # ---- Validaci<c3><b3>n ----
   if (!is.logical(language.en) || length(language.en) != 1 || is.na(language.en)) {
     stop("language.en must be TRUE or FALSE.", call. = FALSE)
   }
@@ -38,9 +38,9 @@ countries <- function(language.en = TRUE) {
     stop("No dimensions found in CEPALSTAT response.", call. = FALSE)
   }
 
-  # ---- Identificar dimensión de países ----
+  # ---- Identificar dimensi<c3><b3>n de pa<c3><ad>ses ----
 
-  country_dim <- dims[grepl("País__ESTANDAR|Country__ESTANDAR", dims$name),]
+  country_dim <- dims[grepl("Pa<c3><ad>s__ESTANDAR|Country__ESTANDAR", dims$name),]
 
 
   if (length(country_dim) == 0) {
