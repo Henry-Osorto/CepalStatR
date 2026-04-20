@@ -3,7 +3,6 @@
 export("%>%")
 export(call.data)
 export(call.indicators)
-export(cepal_dimensions)
 export(countries)
 export(pyramids)
 export(ranking.sdg)
