@@ -54,166 +54,49 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="cepalstatr">CepalStatR<a class="anchor" aria-label="anchor" href="#cepalstatr"></a>
 </h1></div>
+<!-- badges: start -->
+
 <p align="center">
 <img src="inst/CEPALSTAT_images/CepalStatR_icon.png" alt="CepalStatR logo" width="700"></p>
 <p align="center">
-<strong>Access, explore, and visualize CEPALSTAT statistics from R</strong>
+<strong>R interface to access, explore and visualize CEPALSTAT indicators</strong>
 </p>
 <p align="center">
-<a href="https://github.com/Henry-Osorto/CepalStatR" class="external-link">GitHub</a> · <a href="https://statistics.cepal.org/portal/cepalstat/" class="external-link">CEPALSTAT</a> · <a href="https://doi.org/10.18687/LACCEI2024.1.1.1473" class="external-link">Paper</a>
+<a href="https://statistics.cepal.org/portal/cepalstat/" class="external-link">CEPALSTAT Portal</a> · <a href="https://doi.org/10.18687/LACCEI2024.1.1.1473" class="external-link">Paper (LACCEI 2024)</a> · <a href="https://github.com/Henry-Osorto/CepalStatR/issues" class="external-link">Report Issue</a>
 </p>
+<hr>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p><strong>CepalStatR</strong> is an R package designed to provide reproducible access to <strong>CEPALSTAT</strong>, the statistical portal of the Economic Commission for Latin America and the Caribbean (<strong>ECLAC/CEPAL</strong>). The package streamlines the retrieval of indicator metadata and data from the CEPALSTAT API and offers built-in tools for interactive exploration and visualization.</p>
-<p>The package is especially useful for researchers, analysts, lecturers, and students working with Latin American and Caribbean statistics who need a workflow that is fully integrated into R.</p>
+<p><strong>CepalStatR</strong> is an R package that provides a reproducible and user-friendly interface to access data and metadata from <strong>CEPALSTAT</strong>, the statistical portal of the Economic Commission for Latin America and the Caribbean (<strong>ECLAC/CEPAL</strong>).</p>
+<p>The package is designed to simplify the interaction with the CEPALSTAT API, allowing users to:</p>
+<ul>
+<li>explore the hierarchical structure of indicators,</li>
+<li>download data in tidy formats,</li>
+<li>and generate both static and interactive visualizations.</li>
+</ul>
+<p>It is particularly useful for <strong>researchers, analysts, and students</strong> working with Latin American and Caribbean statistics.</p>
+<hr>
 </div>
 <div class="section level2">
-<h2 id="main-features">Main features<a class="anchor" aria-label="anchor" href="#main-features"></a>
+<h2 id="main-features">Main Features<a class="anchor" aria-label="anchor" href="#main-features"></a>
 </h2>
 <ul>
 <li>Access CEPALSTAT indicators directly from R</li>
-<li>Explore the hierarchical thematic structure of indicators</li>
-<li>Retrieve indicator data in analysis-ready tables</li>
-<li>List countries available in CEPALSTAT dimensions</li>
-<li>Generate demographic visualizations such as population pyramids</li>
-<li>Produce rankings for indicators associated with the Sustainable Development Goals</li>
-<li>Visualize the thematic hierarchy of indicators through an interactive map</li>
+<li>Retrieve metadata and hierarchical structures</li>
+<li>Download indicator data in tidy format</li>
+<li>List countries available in CEPALSTAT</li>
+<li>Generate demographic visualizations (population pyramids)</li>
+<li>Create SDG indicator rankings</li>
+<li>Explore indicators via interactive tables and thematic maps</li>
 </ul>
+<hr>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>Install the development version from GitHub:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"Henry-Osorto/CepalStatR"</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="quick-start">Quick start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
-</h2>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Henry-Osorto/CepalStatR" class="external-link">CepalStatR</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Interactive indicator browser</span></span>
-<span><span class="fu"><a href="reference/viewer.indicators.html">viewer.indicators</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Download the indicator hierarchy as a data frame</span></span>
-<span><span class="va">indicators</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/call.indicators.html">call.indicators</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Download indicator data</span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/call.data.html">call.data</a></span><span class="op">(</span>id.indicator <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Available countries</span></span>
-<span><span class="fu"><a href="reference/countries.html">countries</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Population pyramids</span></span>
-<span><span class="fu"><a href="reference/pyramids.html">pyramids</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Honduras"</span>, years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># SDG ranking</span></span>
-<span><span class="fu"><a href="reference/ranking.sdg.html">ranking.sdg</a></span><span class="op">(</span>id.indicator <span class="op">=</span> <span class="fl">3682</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Interactive thematic map</span></span>
-<span><span class="fu">cepal_topic_map</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="core-functions">Core functions<a class="anchor" aria-label="anchor" href="#core-functions"></a>
-</h2>
-<div class="section level3">
-<h3 id="metadata-and-exploration">Metadata and exploration<a class="anchor" aria-label="anchor" href="#metadata-and-exploration"></a>
-</h3>
-<ul>
-<li>
-<code><a href="reference/call.indicators.html">call.indicators()</a></code> — downloads the thematic structure of CEPALSTAT indicators</li>
-<li>
-<code><a href="reference/viewer.indicators.html">viewer.indicators()</a></code> — displays the indicator hierarchy in an interactive HTML table</li>
-<li>
-<code>cepal_topic_map()</code> — creates an interactive thematic tree of indicators</li>
-<li>
-<code><a href="reference/countries.html">countries()</a></code> — returns the list of available countries from CEPALSTAT dimensions</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="data-retrieval">Data retrieval<a class="anchor" aria-label="anchor" href="#data-retrieval"></a>
-</h3>
-<ul>
-<li>
-<code><a href="reference/call.data.html">call.data()</a></code> — downloads indicator data and returns an analysis-ready data frame</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="visualization">Visualization<a class="anchor" aria-label="anchor" href="#visualization"></a>
-</h3>
-<ul>
-<li>
-<code><a href="reference/pyramids.html">pyramids()</a></code> — generates population pyramids using CEPALSTAT demographic indicators</li>
-<li>
-<code><a href="reference/ranking.sdg.html">ranking.sdg()</a></code> — creates ranking plots for indicators associated with the Sustainable Development Goals</li>
-</ul>
-</div>
-</div>
-<div class="section level2">
-<h2 id="screenshots">Screenshots<a class="anchor" aria-label="anchor" href="#screenshots"></a>
-</h2>
-<div class="section level3">
-<h3 id="interactive-indicator-viewer">Interactive indicator viewer<a class="anchor" aria-label="anchor" href="#interactive-indicator-viewer"></a>
-</h3>
-<p align="center">
-<img src="inst/CEPALSTAT_images/viewer.indicators.png" alt="viewer.indicators screenshot" width="1100"></p>
-</div>
-<div class="section level3">
-<h3 id="interactive-thematic-map">Interactive thematic map<a class="anchor" aria-label="anchor" href="#interactive-thematic-map"></a>
-</h3>
-<p align="center">
-<img src="inst/CEPALSTAT_images/topic_map.png" alt="cepal_topic_map screenshot" width="1100"></p>
-</div>
-</div>
-<div class="section level2">
-<h2 id="data-source">Data source<a class="anchor" aria-label="anchor" href="#data-source"></a>
-</h2>
-<p>All data and metadata are obtained from <strong>CEPALSTAT</strong>:</p>
-<p><a href="https://statistics.cepal.org/portal/cepalstat/" class="external-link uri">https://statistics.cepal.org/portal/cepalstat/</a></p>
-</div>
-<div class="section level2">
-<h2 id="why-use-cepalstatr">Why use CepalStatR?<a class="anchor" aria-label="anchor" href="#why-use-cepalstatr"></a>
-</h2>
-<p>CEPALSTAT provides a rich statistical infrastructure for Latin America and the Caribbean, but direct use of its API may be cumbersome for many users. <strong>CepalStatR</strong> simplifies that process by offering a consistent R interface for metadata discovery, reproducible data acquisition, tidy outputs, and built-in visual tools for exploratory and applied analysis.</p>
-<p>This makes the package especially suitable for:</p>
-<ul>
-<li>empirical research</li>
-<li>policy analysis</li>
-<li>reproducible workflows</li>
-<li>academic teaching</li>
-<li>exploratory analysis of regional statistics</li>
-</ul>
-</div>
-<div class="section level2">
-<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
-</h2>
-<p>If you use <strong>CepalStatR</strong> in academic work, please cite the conference paper that documents the package:</p>
-<p>Osorto, H. (2024). <em>CepalStatR: a package in R for access to ECLAC statistics</em>. 22nd LACCEI International Multi-Conference for Engineering, Education, and Technology. <a href="https://doi.org/10.18687/LACCEI2024.1.1.1473" class="external-link uri">https://doi.org/10.18687/LACCEI2024.1.1.1473</a></p>
-<div class="section level3">
-<h3 id="bibtex">BibTeX<a class="anchor" aria-label="anchor" href="#bibtex"></a>
-</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bibtex"><code class="sourceCode bibtex"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="va">@inproceedings</span>{<span class="ot">Osorto2024CepalStatR</span>,</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>  <span class="dt">author</span>    = {Henry Osorto},</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  <span class="dt">title</span>     = {CepalStatR: a package in R for access to ECLAC statistics},</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>  <span class="dt">booktitle</span> = {22nd LACCEI International Multi-Conference for Engineering, Education, and Technology},</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>  <span class="dt">year</span>      = {2024},</span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>  <span class="dt">doi</span>       = {10.18687/LACCEI2024.1.1.1473}</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>}</span></code></pre></div>
-</div>
-</div>
-<div class="section level2">
-<h2 id="project-status">Project status<a class="anchor" aria-label="anchor" href="#project-status"></a>
-</h2>
-<p>The package currently includes a CRAN-ready structure, interactive exploration tools, indicator retrieval functions, and built-in visualization features. Future development may extend the package with additional metadata utilities, thematic graphics, and analytical workflows.</p>
-</div>
-<div class="section level2">
-<h2 id="reporting-issues">Reporting issues<a class="anchor" aria-label="anchor" href="#reporting-issues"></a>
-</h2>
-<p>Bug reports, suggestions, and feature requests are welcome through the GitHub issue tracker:</p>
-<p><a href="https://github.com/Henry-Osorto/CepalStatR/issues" class="external-link uri">https://github.com/Henry-Osorto/CepalStatR/issues</a></p>
+<p>```r # install.packages(“devtools”) devtools::install_github(“Henry-Osorto/CepalStatR”)</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -247,7 +130,13 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/Henry-Osorto/CepalStatR/actions" class="external-link"><img src="https://github.com/Henry-Osorto/CepalStatR/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>
