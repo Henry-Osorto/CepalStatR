@@ -21,3 +21,8 @@ CepalStatR: a package in R for access to ECLAC statistics
 - [`viewer.indicators()`](https://henry-osorto.github.io/CepalStatR/reference/viewer.indicators.md)
   : Viewer for CEPALSTAT indicators
 
+# Articles
+
+### All vignettes
+
+- [getting-started](https://henry-osorto.github.io/CepalStatR/articles/getting-started.md):
