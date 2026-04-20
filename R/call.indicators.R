@@ -49,7 +49,7 @@ call.indicators <- function(language.en = TRUE, progress = TRUE) {
   )
 
   names.es <- c(
-    "<c3><81>rea", "Dimensi<c3><b3>n", "Subdimensi<c3><b3>n", "Grupo",
+    "\u00c1rea", "Dimensi\u00f3n", "Subdimensi\u00f3n", "Grupo",
     "Sub Grupo Nivel 1", "Sub Grupo Nivel 2",
     "Nombre Indicador", "ID Indicador"
   )
