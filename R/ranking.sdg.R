@@ -199,7 +199,7 @@ ranking.sdg <- function(id.indicator,
 
     y_lab <- "Logro del indicador"
     x_lab <- "Pa\u00eds"
-    note_prefix <- "Nota: <c3><9a>ltimo dato disponible, "
+    note_prefix <- "Nota: \u00faltimo dato disponible, "
     file_default <- paste0("Logro_del_indicador_", id.indicator, ".", format)
 
     percent_patterns <- c("Proporci\u00f3n", "(en porcentajes)", "Porcentaje")
