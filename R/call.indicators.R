@@ -64,7 +64,7 @@ call.indicators <- function(language.en = TRUE, progress = TRUE) {
     if (isTRUE(language.en)) {
       message("Downloading thematic tree from CEPALSTAT...")
     } else {
-      message("Descargando <c3><a1>rbol tem<c3><a1>tico desde CEPALSTAT...")
+      message("Descargando \u00e1rbol tem\u00e1tico desde CEPALSTAT...")
     }
   }
 
@@ -92,7 +92,7 @@ call.indicators <- function(language.en = TRUE, progress = TRUE) {
     if (isTRUE(language.en)) {
       message("Parsing indicator hierarchy...")
     } else {
-      message("Procesando jerarqu<c3><ad>a de indicadores...")
+      message("Procesando jerarqu\u00eda de indicadores...")
     }
   }
 
