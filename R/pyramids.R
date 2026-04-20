@@ -118,15 +118,12 @@ pyramids <- function(country,
     }
   }
 
-  df <- call.data(
-    id.indicator = 31,
-    language.en = language.en,
-    progress = progress
-  )
+  df <- call.data(id.indicator = 31, language.en = language.en, progress = progress)
 
   years_filter <- seq(1950, 2100, 5)[years]
 
   if (isTRUE(language.en)) {
+    value_col <- "Value"
     country_col <- "Country"
     year_col <- "Years"
     sex_col <- "Sex"
@@ -160,6 +157,7 @@ pyramids <- function(country,
     )
     default_file <- paste0("Population_pyramids.", format)
   } else {
+    value_col <- "Valor"
     country_col <- "País"
     year_col <- "Años"
     sex_col <- "Sexo"
@@ -194,7 +192,7 @@ pyramids <- function(country,
     default_file <- paste0("Piramides_poblacionales.", format)
   }
 
-  required_cols <- c(country_col, year_col, sex_col, age_col, "value")
+  required_cols <- c(country_col, year_col, sex_col, age_col, value_col)
   missing_cols <- setdiff(required_cols, names(df))
   if (length(missing_cols) > 0) {
     stop(
@@ -222,6 +220,7 @@ pyramids <- function(country,
       Edad_num = unname(age_map[.data[[age_col]]]),
       Edad = factor(Edad_num, levels = 1:21, labels = ages_labels),
       Sex_plot = ifelse(.data[[sex_col]] == male_value, male_label, female_label),
+      value = as.numeric(.data[[value_col]]),
       value = ifelse(.data[[sex_col]] == male_value, -1 * value, value)
     )
 
