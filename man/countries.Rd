@@ -19,7 +19,7 @@ dimensions endpoint of a reference indicator. This approach avoids
 downloading full datasets and ensures consistency with the API structure.
 }
 \details{
-The function extracts the "Country" (or "Pa\if{html}{\out{<c3>}}\if{html}{\out{<ad>}}s") dimension from the
+The function extracts the "Country" (or "Pa\u00eds") dimension from the
 CEPALSTAT API using a JSON-based request. This method is more efficient
 than retrieving full indicator datasets.
 }
