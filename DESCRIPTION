@@ -1,13 +1,14 @@
 Package: CepalStatR
-Title: Access to ECLAC (CEPALSTAT) Statistics via R
+Title: R Interface to the ECLAC Statistical API
 Version: 0.9.0
 Authors@R: c(person("Henry", "Osorto", email = "henry.osorto@unah.edu.hn",
         role = c("aut", "cre"),
         comment = c(ORCID = "0000-0002-4334-9179")))
-Description: Tools to explore metadata and retrieve indicators from the
-    CEPALSTAT API of the Economic Commission for Latin America and the
-    Caribbean (ECLAC), with support for tidy outputs, hierarchical indicator
-    browsing, and basic visualizations.
+Description: Tools to explore metadata and retrieve indicators from the statistical
+portal of the Economic Commission for Latin America and the Caribbean.
+Provides a reproducible interface to access the CEPALSTAT API, organize
+data into tidy formats, and generate both static and interactive
+visualizations in R..
 License: MIT + file LICENSE
 URL: https://github.com/Henry-Osorto/CepalStatR,
     https://henry-osorto.github.io/CepalStatR/
