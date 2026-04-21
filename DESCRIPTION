@@ -8,7 +8,7 @@ Description: Tools to explore metadata and retrieve indicators from the statisti
 portal of the Economic Commission for Latin America and the Caribbean.
 Provides a reproducible interface to access the CEPALSTAT API, organize
 data into tidy formats, and generate both static and interactive
-visualizations in R..
+visualizations in R.
 License: MIT + file LICENSE
 URL: https://github.com/Henry-Osorto/CepalStatR,
     https://henry-osorto.github.io/CepalStatR/
