@@ -22,7 +22,7 @@
 #' countries(language.en = FALSE)
 countries <- function(language.en = TRUE) {
 
-  # ---- Validaci<c3><b3>n ----
+  # ---- Validaci\u00f3n ----
   if (!is.logical(language.en) || length(language.en) != 1 || is.na(language.en)) {
     stop("language.en must be TRUE or FALSE.", call. = FALSE)
   }
