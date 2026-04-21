@@ -80,7 +80,7 @@ pyramids(country = "Honduras", years = c(1, 5, 10, 15))
 ranking.sdg(id.indicator = 3682)
 
 # Interactive thematic map
-cepal_topic_map()
+topic_map()
 ```
 
 ## Core functions
@@ -89,7 +89,7 @@ cepal_topic_map()
 
 - `call.indicators()` — downloads the thematic structure of CEPALSTAT indicators
 - `viewer.indicators()` — displays the indicator hierarchy in an interactive HTML table
-- `cepal_topic_map()` — creates an interactive thematic tree of indicators
+- `topic_map()` — creates an interactive thematic tree of indicators
 - `countries()` — returns the list of available countries from CEPALSTAT dimensions
 
 ### Data retrieval
@@ -112,7 +112,7 @@ cepal_topic_map()
 ### Interactive thematic map
 
 <p align="center">
-  <img src="inst/CEPALSTAT_images/topic_map.png" alt="cepal_topic_map screenshot" width="1100">
+  <img src="inst/CEPALSTAT_images/topic_map.png" alt="topic_map screenshot" width="1100">
 </p>
 
 ## Data source
