@@ -11,7 +11,7 @@
 #' @return A data frame containing the list of countries.
 #'
 #' @details
-#' The function extracts the "Country" (or "Pa\u00eds") dimension from the
+#' The function extracts the "Country" (or "Pa"\u00ed"s") dimension from the
 #' CEPALSTAT API using a JSON-based request. This method is more efficient
 #' than retrieving full indicator datasets.
 #'
