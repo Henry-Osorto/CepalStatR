@@ -18,11 +18,6 @@ Retrieves the list of countries available in CEPALSTAT using the
 dimensions endpoint of a reference indicator. This approach avoids
 downloading full datasets and ensures consistency with the API structure.
 }
-\details{
-The function extracts the "Country" (or "Pa"\u00ed"s") dimension from the
-CEPALSTAT API using a JSON-based request. This method is more efficient
-than retrieving full indicator datasets.
-}
 \examples{
 countries()
 countries(language.en = FALSE)
