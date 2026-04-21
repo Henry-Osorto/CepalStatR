@@ -38,7 +38,7 @@ countries <- function(language.en = TRUE) {
     stop("No dimensions found in CEPALSTAT response.", call. = FALSE)
   }
 
-  # ---- Identificar dimensi<c3><b3>n de pa<c3><ad>ses ----
+  # ---- Identificar dimensi\u00f3n de pa\u00edses ----
 
   country_dim <- dims[grepl("Pa\u00eds__ESTANDAR|Country__ESTANDAR", dims$name),]
 
