@@ -22,12 +22,6 @@ countries(language.en = TRUE)
 
 A data frame containing the list of countries.
 
-## Details
-
-The function extracts the "Country" (or "Pa""s") dimension from the
-CEPALSTAT API using a JSON-based request. This method is more efficient
-than retrieving full indicator datasets.
-
 ## Examples
 
 ``` r
