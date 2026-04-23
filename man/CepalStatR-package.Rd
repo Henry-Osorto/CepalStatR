@@ -6,7 +6,7 @@
 \alias{CepalStatR-package}
 \title{CepalStatR: R Interface to the ECLAC Statistical API}
 \description{
-Tools to explore metadata and retrieve indicators from the statistical portal of the Economic Commission for Latin America and the Caribbean. Provides a reproducible interface to access the CEPALSTAT API, organize data into tidy formats, and generate both static and interactive visualizations in R.
+Tools to explore metadata and retrieve indicators from the statistical portal of the Economic Commission for Latin America and the Caribbean. Provides a reproducible interface to access the 'CEPALSTAT API', organize data into tidy formats, and generate both static and interactive visualizations in R.
 }
 \seealso{
 Useful links:
