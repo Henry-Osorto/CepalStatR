@@ -12,7 +12,7 @@ Source:
 
 Osorto H (2024). *CepalStatR: a package in R for access to ECLAC
 statistics*.
-[doi:10.18687/LACCEI2024.1.1.1473](https://doi.org/10.18687/LACCEI2024.1.1.1473),
+[doi:10.18687/LACCEI2024.1.1.1473](https://doi.org/10.18687/LACCEI2024.1.1.1473).
 R package version 0.1.0.
 
     @Manual{CepalStatR,

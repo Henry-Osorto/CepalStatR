@@ -46,6 +46,7 @@ working with Latin American and Caribbean statistics.
 Install the development version from GitHub:
 
 ``` r
+
 # install.packages("devtools")
 devtools::install_github("Henry-Osorto/CepalStatR")
 ```
@@ -53,6 +54,7 @@ devtools::install_github("Henry-Osorto/CepalStatR")
 ## Quick start
 
 ``` r
+
 library(CepalStatR)
 
 # Interactive indicator browser
