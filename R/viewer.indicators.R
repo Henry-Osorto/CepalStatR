@@ -21,7 +21,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' viewer.indicators()
 #' viewer.indicators(language.en = FALSE)
 #' viewer.indicators(open.browser = TRUE)

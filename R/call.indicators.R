@@ -20,7 +20,7 @@
 #' @importFrom jsonlite fromJSON
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' data.indicators <- call.indicators()
 #' data.indicators <- call.indicators(language.en = FALSE)
 #' }

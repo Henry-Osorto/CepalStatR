@@ -26,7 +26,7 @@
 #' @importFrom stats setNames
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' data <- call.data(id.indicator = 4788)
 #' data <- call.data(id.indicator = 4788, language.en = FALSE)
 #' data <- call.data(id.indicator = 4788, notes = TRUE)

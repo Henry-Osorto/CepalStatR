@@ -24,7 +24,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Single year
 #' pyramids(country = "Honduras", years = 16)
 #'

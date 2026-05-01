@@ -27,7 +27,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ranking.sdg(id.indicator = 3682)
 #' ranking.sdg(id.indicator = 3682, language.en = FALSE)
 #'

@@ -15,7 +15,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' cepal_topic_map()
 #' cepal_topic_map(language.en = FALSE)
 #' cepal_topic_map(open.browser = TRUE)
