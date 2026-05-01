@@ -1,5 +1,5 @@
 Package: CepalStatR
-Title: R Interface to the ECLAC Statistical API
+Title: Access to the 'CEPALSTAT API'
 Version: 0.9.0
 Authors@R: c(person("Henry", "Osorto", email = "henry.osorto@unah.edu.hn",
         role = c("aut", "cre"),
