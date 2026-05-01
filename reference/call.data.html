@@ -81,11 +81,27 @@ If <code>FALSE</code>, Spanish labels are used when applicable.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">call.data</span><span class="op">(</span>id.indicator <span class="op">=</span> <span class="fl">4788</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Downloading indicator data from CEPALSTAT...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Indicator: Total population, by sex (ID: 4788)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Assigning labels to dimension values...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Assigning variable names...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Finished download: Total population, by sex</span>
 <span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">call.data</span><span class="op">(</span>id.indicator <span class="op">=</span> <span class="fl">4788</span>, language.en <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Descargando datos del indicador desde CEPALSTAT...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Indicador: Población total, según sexo (ID: 4788)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Asignando etiquetas a los valores de las dimensiones...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Asignando nombres de variables...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Descarga finalizada: Población total, según sexo</span>
 <span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">call.data</span><span class="op">(</span>id.indicator <span class="op">=</span> <span class="fl">4788</span>, notes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Downloading indicator data from CEPALSTAT...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Indicator: Total population, by sex (ID: 4788)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Assigning labels to dimension values...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Assigning variable names...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding footnotes...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Finished download: Total population, by sex</span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

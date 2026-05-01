@@ -28,8 +28,14 @@ indicators and the corresponding indicator ID.
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
+# \donttest{
 data.indicators <- call.indicators()
+#> Downloading thematic tree from CEPALSTAT...
+#> Parsing indicator hierarchy...
+#> Finished downloading indicators.
 data.indicators <- call.indicators(language.en = FALSE)
-} # }
+#> Descargando árbol temático desde CEPALSTAT...
+#> Procesando jerarquía de indicadores...
+#> Descarga de indicadores finalizada.
+# }
 ```
