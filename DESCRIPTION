@@ -4,10 +4,8 @@ Version: 0.9.0
 Authors@R: c(person("Henry", "Osorto", email = "henry.osorto@unah.edu.hn",
         role = c("aut", "cre"),
         comment = c(ORCID = "0000-0002-4334-9179")))
-Description: Explore metadata and retrieve indicators from the statistical portal of the Economic Commission for Latin America and the Caribbean <[https://statistics.cepal.org/portal/cepalstat/]>.
-        Provides a reproducible interface to access the 'CEPALSTAT API', organize
-        data into tidy formats, and generate both static and interactive
-        visualizations.
+Description: Explore metadata and retrieve indicators from the statistical portal of the Economic Commission for Latin America and the Caribbean <https://statistics.cepal.org/portal/cepalstat/>.
+        Provides a reproducible interface to access the 'CEPALSTAT API', organize data into tidy formats, and generate both static and interactive visualizations.
 License: MIT + file LICENSE
 URL: https://github.com/Henry-Osorto/CepalStatR,
     https://henry-osorto.github.io/CepalStatR/
