@@ -28,8 +28,8 @@ If \code{FALSE}, Spanish labels are used.}
 
 \item{save}{Logical. If \code{TRUE}, saves the resulting figure.}
 
-\item{file}{Character. Output filename when \code{save = TRUE}. If \code{NULL}, a default
-filename is used.}
+\item{file}{Character. Output filename when \code{save = TRUE}. If \code{NULL},
+the file is saved to a temporary directory using \code{tempdir()}.}
 
 \item{format}{Character. Output format when \code{save = TRUE}. One of \code{"png"}
 (default), \code{"pdf"} or \code{"svg"}.}
@@ -60,27 +60,15 @@ Sustainable Development Goals (SDG/ODS) dimension, using the latest
 available data by country.
 }
 \examples{
-\dontrun{
+\donttest{
 ranking.sdg(id.indicator = 3682)
+
 ranking.sdg(id.indicator = 3682, language.en = FALSE)
 
-ranking.sdg(
-  id.indicator = 3682,
-  save = TRUE
-)
+ranking.sdg(id.indicator = 3682, save = TRUE, file = file.path(tempdir(), "ranking_sdg.png"))
 
-ranking.sdg(
-  id.indicator = 3682,
-  save = TRUE,
-  format = "pdf",
-  file = "ranking_sdg.pdf"
-)
+ranking.sdg(id.indicator = 3682, save = TRUE, format = "pdf", file = file.path(tempdir(), "ranking_sdg.pdf"))
 
-ranking.sdg(
-  id.indicator = 3682,
-  save = TRUE,
-  format = "svg",
-  file = "ranking_sdg.svg"
-)
+ranking.sdg(id.indicator = 3682, save = TRUE, format = "svg", file = file.path(tempdir(), "ranking_sdg.svg"))
 }
 }

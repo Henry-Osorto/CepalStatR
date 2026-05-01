@@ -21,7 +21,7 @@ Retrieves the thematic tree from the CEPALSTAT API in JSON format and
 returns a data frame with the hierarchical structure of indicators.
 }
 \examples{
-\dontrun{
+\donttest{
 data.indicators <- call.indicators()
 data.indicators <- call.indicators(language.en = FALSE)
 }

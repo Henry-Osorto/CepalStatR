@@ -48,7 +48,7 @@ Displays an interactive HTML table for browsing the hierarchical structure
 of CEPALSTAT indicators using \code{call.indicators()} as backend.
 }
 \examples{
-\dontrun{
+\donttest{
 viewer.indicators()
 viewer.indicators(language.en = FALSE)
 viewer.indicators(open.browser = TRUE)

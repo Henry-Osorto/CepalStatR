@@ -31,8 +31,8 @@ If \code{FALSE}, Spanish labels are used.}
 
 \item{save}{Logical. If \code{TRUE}, saves the resulting figure.}
 
-\item{file}{Character. Output filename when \code{save = TRUE}. If \code{NULL}, a default
-filename is used.}
+\item{file}{Character. Output filename when \code{save = TRUE}. If \code{NULL},
+the file is saved to a temporary directory using \code{tempdir()}.}
 
 \item{format}{Character. Output format when \code{save = TRUE}. One of \code{"png"}
 (default), \code{"pdf"} or \code{"svg"}.}
@@ -53,36 +53,20 @@ Creates one or multiple population pyramids for a selected country and years
 using CEPALSTAT population-by-age-and-sex data.
 }
 \examples{
-\dontrun{
+\donttest{
 # Single year
 pyramids(country = "Honduras", years = 16)
 
 # Multiple years
 pyramids(country = "Honduras", years = c(1, 5, 10, 15))
 
-# Save as PNG
-pyramids(
-  country = "Honduras",
-  years = c(1, 5, 10, 15),
-  save = TRUE
-)
+#' # Save as PNG
+pyramids(country = "Honduras", years = c(1, 5, 10, 15), save = TRUE, file = file.path(tempdir(), "pyramids.png"))
 
 # Save as PDF
-pyramids(
-  country = "Honduras",
-  years = c(1, 5, 10, 15),
-  save = TRUE,
-  format = "pdf",
-  file = "pyramids.pdf"
-)
+pyramids(country = "Honduras", years = c(1, 5, 10, 15), save = TRUE, format = "pdf", file = file.path(tempdir(), "pyramids.pdf"))
 
 # Save as SVG
-pyramids(
-  country = "Honduras",
-  years = c(1, 5, 10, 15),
-  save = TRUE,
-  format = "svg",
-  file = "pyramids.svg"
-)
+pyramids(country = "Honduras", years = c(1, 5, 10, 15), save = TRUE, format = "svg", file = file.path(tempdir(), "pyramids.svg"))
 }
 }

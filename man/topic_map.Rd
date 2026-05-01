@@ -24,9 +24,9 @@ Creates an interactive thematic tree of CEPALSTAT indicators using
 \code{viewer.indicators()}.
 }
 \examples{
-\dontrun{
-cepal_topic_map()
-cepal_topic_map(language.en = FALSE)
-cepal_topic_map(open.browser = TRUE)
+\donttest{
+topic_map()
+
+topic_map(language.en = FALSE)
 }
 }
