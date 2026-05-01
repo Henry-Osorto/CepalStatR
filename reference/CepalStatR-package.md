@@ -1,10 +1,10 @@
 # CepalStatR: Access to the 'CEPALSTAT API'
 
-Tools to explore metadata and retrieve indicators from the statistical
-portal of the Economic Commission for Latin America and the Caribbean.
-Provides a reproducible interface to access the 'CEPALSTAT API',
-organize data into tidy formats, and generate both static and
-interactive visualizations in R.
+Explore metadata and retrieve indicators from the statistical portal of
+the Economic Commission for Latin America and the Caribbean
+\<\[https://statistics.cepal.org/portal/cepalstat/\]\>. Provides a
+reproducible interface to access the 'CEPALSTAT API', organize data into
+tidy formats, and generate both static and interactive visualizations.
 
 ## See also
 
