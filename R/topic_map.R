@@ -16,9 +16,9 @@
 #'
 #' @examples
 #' \donttest{
-#' cepal_topic_map()
-#' cepal_topic_map(language.en = FALSE)
-#' cepal_topic_map(open.browser = TRUE)
+#' topic_map()
+#'
+#' topic_map(language.en = FALSE)
 #' }
 topic_map <- function(language.en = TRUE,
                             progress = TRUE,

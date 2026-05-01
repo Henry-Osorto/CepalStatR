@@ -9,8 +9,8 @@
 #' @param language.en Logical. If `TRUE` (default), English labels are used.
 #' If `FALSE`, Spanish labels are used.
 #' @param save Logical. If `TRUE`, saves the resulting figure.
-#' @param file Character. Output filename when `save = TRUE`. If `NULL`, a default
-#' filename is used.
+#' @param file Character. Output filename when `save = TRUE`. If `NULL`,
+#' the file is saved to a temporary directory using `tempdir()`.
 #' @param format Character. Output format when `save = TRUE`. One of `"png"`
 #' (default), `"pdf"` or `"svg"`.
 #' @param height Numeric. Height of saved figure.
@@ -29,26 +29,14 @@
 #' @examples
 #' \donttest{
 #' ranking.sdg(id.indicator = 3682)
+#'
 #' ranking.sdg(id.indicator = 3682, language.en = FALSE)
 #'
-#' ranking.sdg(
-#'   id.indicator = 3682,
-#'   save = TRUE
-#' )
+#' ranking.sdg(id.indicator = 3682, save = TRUE, file = file.path(tempdir(), "ranking_sdg.png"))
 #'
-#' ranking.sdg(
-#'   id.indicator = 3682,
-#'   save = TRUE,
-#'   format = "pdf",
-#'   file = "ranking_sdg.pdf"
-#' )
+#' ranking.sdg(id.indicator = 3682, save = TRUE, format = "pdf", file = file.path(tempdir(), "ranking_sdg.pdf"))
 #'
-#' ranking.sdg(
-#'   id.indicator = 3682,
-#'   save = TRUE,
-#'   format = "svg",
-#'   file = "ranking_sdg.svg"
-#' )
+#' ranking.sdg(id.indicator = 3682, save = TRUE, format = "svg", file = file.path(tempdir(), "ranking_sdg.svg"))
 #' }
 ranking.sdg <- function(id.indicator,
                         language.en = TRUE,
@@ -339,7 +327,7 @@ ranking.sdg <- function(id.indicator,
     }
 
     if (is.null(file)) {
-      file <- file_default
+      file <- file.path(tempdir(), file_default)
     }
 
     if (identical(format, "svg")) {

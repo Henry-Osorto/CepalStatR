@@ -11,8 +11,8 @@
 #' If `FALSE`, Spanish labels are used.
 #' @param color Character vector of length 2 with colors for men and women.
 #' @param save Logical. If `TRUE`, saves the resulting figure.
-#' @param file Character. Output filename when `save = TRUE`. If `NULL`, a default
-#' filename is used.
+#' @param file Character. Output filename when `save = TRUE`. If `NULL`,
+#' the file is saved to a temporary directory using `tempdir()`.
 #' @param format Character. Output format when `save = TRUE`. One of `"png"`
 #' (default), `"pdf"` or `"svg"`.
 #' @param height Numeric. Height of saved figure.
@@ -31,30 +31,14 @@
 #' # Multiple years
 #' pyramids(country = "Honduras", years = c(1, 5, 10, 15))
 #'
-#' # Save as PNG
-#' pyramids(
-#'   country = "Honduras",
-#'   years = c(1, 5, 10, 15),
-#'   save = TRUE
-#' )
+#' #' # Save as PNG
+#' pyramids(country = "Honduras", years = c(1, 5, 10, 15), save = TRUE, file = file.path(tempdir(), "pyramids.png"))
 #'
 #' # Save as PDF
-#' pyramids(
-#'   country = "Honduras",
-#'   years = c(1, 5, 10, 15),
-#'   save = TRUE,
-#'   format = "pdf",
-#'   file = "pyramids.pdf"
-#' )
+#' pyramids(country = "Honduras", years = c(1, 5, 10, 15), save = TRUE, format = "pdf", file = file.path(tempdir(), "pyramids.pdf"))
 #'
 #' # Save as SVG
-#' pyramids(
-#'   country = "Honduras",
-#'   years = c(1, 5, 10, 15),
-#'   save = TRUE,
-#'   format = "svg",
-#'   file = "pyramids.svg"
-#' )
+#' pyramids(country = "Honduras", years = c(1, 5, 10, 15), save = TRUE, format = "svg", file = file.path(tempdir(), "pyramids.svg"))
 #' }
 pyramids <- function(country,
                      years = 1:31,
@@ -302,7 +286,7 @@ pyramids <- function(country,
     }
 
     if (is.null(file)) {
-      file <- default_file
+      file <- file.path(tempdir(), default_file)
     }
 
     if (identical(format, "svg")) {
