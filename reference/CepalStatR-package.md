@@ -1,4 +1,4 @@
-# CepalStatR: R Interface to the ECLAC Statistical API
+# CepalStatR: Access to the 'CEPALSTAT API'
 
 Tools to explore metadata and retrieve indicators from the statistical
 portal of the Economic Commission for Latin America and the Caribbean.
