@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>getting-started • CepalStatR</title>
+<title>Getting Started with CepalStatR • CepalStatR</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="getting-started">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Getting Started with CepalStatR">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -33,7 +33,7 @@
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/getting-started.html">getting-started</a></li>
+<li><a class="dropdown-item" href="../articles/getting-started.html">Getting Started with CepalStatR</a></li>
   </ul>
 </li>
       </ul>
@@ -55,7 +55,9 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>getting-started</h1>
+      <h1>Getting Started with CepalStatR</h1>
+                        <h4 data-toc-skip class="author">Henry
+Osorto</h4>
             
       
       <small class="dont-index">Source: <a href="https://github.com/Henry-Osorto/CepalStatR/blob/main/vignettes/getting-started.Rmd" class="external-link"><code>vignettes/getting-started.Rmd</code></a></small>
@@ -64,9 +66,134 @@
 
     
     
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
+<p><code>CepalStatR</code> provides functions to access, explore, and
+visualize data from the statistical data portal of the Economic
+Commission for Latin America and the Caribbean. The package is designed
+to support reproducible workflows in R by retrieving metadata and
+indicator data through a public statistical API.</p>
+</div>
+<div class="section level2">
+<h2 id="loading-the-package">Loading the package<a class="anchor" aria-label="anchor" href="#loading-the-package"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Henry-Osorto/CepalStatR" class="external-link">CepalStatR</a></span><span class="op">)</span></span></code></pre></div>
-  </main>
+</div>
+<div class="section level2">
+<h2 id="exploring-available-indicators">Exploring available indicators<a class="anchor" aria-label="anchor" href="#exploring-available-indicators"></a>
+</h2>
+<p>The function <code><a href="../reference/call.indicators.html">call.indicators()</a></code> retrieves the
+hierarchical structure of available indicators.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">indicators</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/call.indicators.html">call.indicators</a></span><span class="op">(</span>progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">indicators</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                     Area   Dimension Subdimension</span></span>
+<span><span class="co">#&gt; 1 Demographic and social Demographic   Population</span></span>
+<span><span class="co">#&gt; 2 Demographic and social Demographic   Population</span></span>
+<span><span class="co">#&gt; 3 Demographic and social Demographic   Population</span></span>
+<span><span class="co">#&gt; 4 Demographic and social Demographic   Population</span></span>
+<span><span class="co">#&gt; 5 Demographic and social Demographic   Population</span></span>
+<span><span class="co">#&gt; 6 Demographic and social Demographic    Fertility</span></span>
+<span><span class="co">#&gt;                                                       Group Sub Group Level 1</span></span>
+<span><span class="co">#&gt; 1                                  Total population, by sex              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2                          Population, by age group, by sex              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3 Demographic dependency ratio, by dependent groups and sex              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4    Structure of the total population by sex and age group              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5  Annual growth rate of the total population, by age group              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6                                          Crude birth rate              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;   Sub Group Level 2                                            Indicator Name</span></span>
+<span><span class="co">#&gt; 1              &lt;NA&gt;                                  Total population, by sex</span></span>
+<span><span class="co">#&gt; 2              &lt;NA&gt;                          Population, by age group, by sex</span></span>
+<span><span class="co">#&gt; 3              &lt;NA&gt; Demographic dependency ratio, by dependent groups and sex</span></span>
+<span><span class="co">#&gt; 4              &lt;NA&gt;    Structure of the total population by sex and age group</span></span>
+<span><span class="co">#&gt; 5              &lt;NA&gt;  Annual growth rate of the total population, by age group</span></span>
+<span><span class="co">#&gt; 6              &lt;NA&gt;                                          Crude birth rate</span></span>
+<span><span class="co">#&gt;   Indicator ID</span></span>
+<span><span class="co">#&gt; 1         4788</span></span>
+<span><span class="co">#&gt; 2         4789</span></span>
+<span><span class="co">#&gt; 3         4792</span></span>
+<span><span class="co">#&gt; 4         4793</span></span>
+<span><span class="co">#&gt; 5         4795</span></span>
+<span><span class="co">#&gt; 6         4787</span></span></code></pre></div>
+<p>The returned data frame includes information about thematic areas,
+dimensions, subdimensions, groups, indicator names, and indicator
+identifiers.</p>
+</div>
+<div class="section level2">
+<h2 id="listing-available-countries">Listing available countries<a class="anchor" aria-label="anchor" href="#listing-available-countries"></a>
+</h2>
+<p>The function <code><a href="../reference/countries.html">countries()</a></code> returns the countries available
+in the statistical dimensions used by the API.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/countries.html">countries</a></span><span class="op">(</span>language.en <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;             Countries</span></span>
+<span><span class="co">#&gt; 1            Anguilla</span></span>
+<span><span class="co">#&gt; 2 Antigua and Barbuda</span></span>
+<span><span class="co">#&gt; 3           Argentina</span></span>
+<span><span class="co">#&gt; 4               Aruba</span></span>
+<span><span class="co">#&gt; 5             Bahamas</span></span>
+<span><span class="co">#&gt; 6            Barbados</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="retrieving-indicator-data">Retrieving indicator data<a class="anchor" aria-label="anchor" href="#retrieving-indicator-data"></a>
+</h2>
+<p>The main data retrieval function is <code><a href="../reference/call.data.html">call.data()</a></code>. Users
+provide an indicator identifier and obtain an analysis-ready data
+frame.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">population</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/call.data.html">call.data</a></span><span class="op">(</span>id.indicator <span class="op">=</span> <span class="fl">1</span>, progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">population</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 15</span></span></span>
+<span><span class="co">#&gt;    Value Sex    Country Years indicator_meta_name unit  definition data_features</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> <span style="text-decoration: underline;">31</span>216. Both … Argent… 1987  Total population, … Thou… <span style="color: #949494;">"</span>&lt;p align… Annual estim…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> <span style="text-decoration: underline;">33</span>568. Both … Argent… 1992  Total population, … Thou… <span style="color: #949494;">"</span>&lt;p align… Annual estim…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> <span style="text-decoration: underline;">34</span>489. Both … Argent… 1994  Total population, … Thou… <span style="color: #949494;">"</span>&lt;p align… Annual estim…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> <span style="text-decoration: underline;">37</span>480. Both … Argent… 2001  Total population, … Thou… <span style="color: #949494;">"</span>&lt;p align… Annual estim…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> <span style="text-decoration: underline;">38</span>278. Both … Argent… 2003  Total population, … Thou… <span style="color: #949494;">"</span>&lt;p align… Annual estim…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> <span style="text-decoration: underline;">40</span>684. Both … Argent… 2009  Total population, … Thou… <span style="color: #949494;">"</span>&lt;p align… Annual estim…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7 more variables: calculation_methodology &lt;chr&gt;, comments &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   theme &lt;chr&gt;, area_meta &lt;chr&gt;, last_update &lt;chr&gt;, indicator_id &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   indicator_name &lt;chr&gt;</span></span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="interactive-tools">Interactive tools<a class="anchor" aria-label="anchor" href="#interactive-tools"></a>
+</h2>
+<p><code>CepalStatR</code> also includes interactive tools to explore
+the indicator catalogue.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/viewer.indicators.html">viewer.indicators</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/topic_map.html">topic_map</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>These functions return HTML-based outputs that are useful for
+exploring metadata and thematic hierarchies.</p>
+</div>
+<div class="section level2">
+<h2 id="visualization-examples">Visualization examples<a class="anchor" aria-label="anchor" href="#visualization-examples"></a>
+</h2>
+<p>The package includes functions for common visual outputs, such as
+population pyramids and rankings for indicators related to sustainable
+development goals.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/pyramids.html">pyramids</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Honduras"</span>, years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">15</span><span class="op">)</span>, progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/ranking.sdg.html">ranking.sdg</a></span><span class="op">(</span>id.indicator <span class="op">=</span> <span class="fl">3682</span>, progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p>When saving output files, use <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> in examples and
+reproducible scripts.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ranking.sdg.html">ranking.sdg</a></span><span class="op">(</span>id.indicator <span class="op">=</span> <span class="fl">3682</span>, save <span class="op">=</span> <span class="cn">TRUE</span>, file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"ranking_sdg.png"</span><span class="op">)</span>, progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="reproducibility-notes">Reproducibility notes<a class="anchor" aria-label="anchor" href="#reproducibility-notes"></a>
+</h2>
+<p>The package retrieves data from a public API. Therefore, results may
+depend on internet connectivity and the availability of the external
+service at runtime. Functions include progress messages and basic error
+handling to support reproducible workflows.</p>
+</div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
