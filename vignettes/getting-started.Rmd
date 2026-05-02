@@ -1,19 +1,87 @@
 ---
-title: "getting-started"
+title: "Getting Started with CepalStatR"
+author: "Henry Osorto"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{getting-started}
+  %\VignetteIndexEntry{Getting Started with CepalStatR}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r, include=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  warning = FALSE,
+  message = FALSE
 )
 ```
 
-```{r setup}
+# Overview
+
+`CepalStatR` provides functions to access, explore, and visualize data from the statistical data portal of the Economic Commission for Latin America and the Caribbean. The package is designed to support reproducible workflows in R by retrieving metadata and indicator data through a public statistical API.
+
+# Loading the package
+
+```{r}
 library(CepalStatR)
 ```
+
+# Exploring available indicators
+
+The function `call.indicators()` retrieves the hierarchical structure of available indicators.
+
+```{r}
+indicators <- call.indicators(progress = FALSE)
+head(indicators)
+```
+
+The returned data frame includes information about thematic areas, dimensions, subdimensions, groups, indicator names, and indicator identifiers.
+
+# Listing available countries
+
+The function `countries()` returns the countries available in the statistical dimensions used by the API.
+
+```{r}
+head(countries(language.en = TRUE))
+```
+
+# Retrieving indicator data
+
+The main data retrieval function is `call.data()`. Users provide an indicator identifier and obtain an analysis-ready data frame.
+
+```{r}
+population <- call.data(id.indicator = 1, progress = FALSE)
+head(population)
+```
+
+# Interactive tools
+
+`CepalStatR` also includes interactive tools to explore the indicator catalogue.
+
+```{r, eval=FALSE}
+viewer.indicators()
+topic_map()
+```
+
+These functions return HTML-based outputs that are useful for exploring metadata and thematic hierarchies.
+
+# Visualization examples
+
+The package includes functions for common visual outputs, such as population pyramids and rankings for indicators related to sustainable development goals.
+
+```{r, eval=FALSE}
+pyramids(country = "Honduras", years = c(1, 5, 10, 15), progress = FALSE)
+
+ranking.sdg(id.indicator = 3682, progress = FALSE)
+```
+
+When saving output files, use `tempdir()` in examples and reproducible scripts.
+
+```{r, eval=FALSE}
+ranking.sdg(id.indicator = 3682, save = TRUE, file = file.path(tempdir(), "ranking_sdg.png"), progress = FALSE)
+```
+
+# Reproducibility notes
+
+The package retrieves data from a public API. Therefore, results may depend on internet connectivity and the availability of the external service at runtime. Functions include progress messages and basic error handling to support reproducible workflows.
