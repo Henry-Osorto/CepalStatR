@@ -106,7 +106,10 @@ pyramids(country = "Honduras", years = c(1, 5, 10, 15))
 
 
 #' # Save as PNG
-pyramids(country = "Honduras", years = c(1, 5, 10, 15), save = TRUE, file = file.path(tempdir(), "pyramids.png"))
+pyramids(country = "Honduras",
+         years = c(1, 5, 10, 15),
+         save = TRUE,
+         file = file.path(tempdir(), "pyramids.png"))
 #> Preparing population pyramids...
 #> Downloading indicator data from CEPALSTAT...
 #> Indicator: Population, by age group and sex (ID: 31)
@@ -119,7 +122,11 @@ pyramids(country = "Honduras", years = c(1, 5, 10, 15), save = TRUE, file = file
 #> Saving output...
 
 # Save as PDF
-pyramids(country = "Honduras", years = c(1, 5, 10, 15), save = TRUE, format = "pdf", file = file.path(tempdir(), "pyramids.pdf"))
+pyramids(country = "Honduras",
+         years = c(1, 5, 10, 15),
+         save = TRUE,
+         format = "pdf",
+         file = file.path(tempdir(), "pyramids.pdf"))
 #> Preparing population pyramids...
 #> Downloading indicator data from CEPALSTAT...
 #> Indicator: Population, by age group and sex (ID: 31)
@@ -132,7 +139,11 @@ pyramids(country = "Honduras", years = c(1, 5, 10, 15), save = TRUE, format = "p
 #> Saving output...
 
 # Save as SVG
-pyramids(country = "Honduras", years = c(1, 5, 10, 15), save = TRUE, format = "svg", file = file.path(tempdir(), "pyramids.svg"))
+pyramids(country = "Honduras",
+         years = c(1, 5, 10, 15),
+         save = TRUE,
+         format = "svg",
+         file = file.path(tempdir(), "pyramids.svg"))
 #> Preparing population pyramids...
 #> Downloading indicator data from CEPALSTAT...
 #> Indicator: Population, by age group and sex (ID: 31)
