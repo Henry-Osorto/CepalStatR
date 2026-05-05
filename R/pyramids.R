@@ -32,13 +32,24 @@
 #' pyramids(country = "Honduras", years = c(1, 5, 10, 15))
 #'
 #' #' # Save as PNG
-#' pyramids(country = "Honduras", years = c(1, 5, 10, 15), save = TRUE, file = file.path(tempdir(), "pyramids.png"))
+#' pyramids(country = "Honduras",
+#'          years = c(1, 5, 10, 15),
+#'          save = TRUE,
+#'          file = file.path(tempdir(), "pyramids.png"))
 #'
 #' # Save as PDF
-#' pyramids(country = "Honduras", years = c(1, 5, 10, 15), save = TRUE, format = "pdf", file = file.path(tempdir(), "pyramids.pdf"))
+#' pyramids(country = "Honduras",
+#'          years = c(1, 5, 10, 15),
+#'          save = TRUE,
+#'          format = "pdf",
+#'          file = file.path(tempdir(), "pyramids.pdf"))
 #'
 #' # Save as SVG
-#' pyramids(country = "Honduras", years = c(1, 5, 10, 15), save = TRUE, format = "svg", file = file.path(tempdir(), "pyramids.svg"))
+#' pyramids(country = "Honduras",
+#'          years = c(1, 5, 10, 15),
+#'          save = TRUE,
+#'          format = "svg",
+#'          file = file.path(tempdir(), "pyramids.svg"))
 #' }
 pyramids <- function(country,
                      years = 1:31,
