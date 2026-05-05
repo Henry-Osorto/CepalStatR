@@ -32,11 +32,19 @@
 #'
 #' ranking.sdg(id.indicator = 3682, language.en = FALSE)
 #'
-#' ranking.sdg(id.indicator = 3682, save = TRUE, file = file.path(tempdir(), "ranking_sdg.png"))
+#' ranking.sdg(id.indicator = 3682,
+#'             save = TRUE,
+#'             file = file.path(tempdir(), "ranking_sdg.png"))
 #'
-#' ranking.sdg(id.indicator = 3682, save = TRUE, format = "pdf", file = file.path(tempdir(), "ranking_sdg.pdf"))
+#' ranking.sdg(id.indicator = 3682,
+#'             save = TRUE,
+#'             format = "pdf",
+#'             file = file.path(tempdir(), "ranking_sdg.pdf"))
 #'
-#' ranking.sdg(id.indicator = 3682, save = TRUE, format = "svg", file = file.path(tempdir(), "ranking_sdg.svg"))
+#' ranking.sdg(id.indicator = 3682,
+#'             save = TRUE,
+#'             format = "svg",
+#'             file = file.path(tempdir(), "ranking_sdg.svg"))
 #' }
 ranking.sdg <- function(id.indicator,
                         language.en = TRUE,
