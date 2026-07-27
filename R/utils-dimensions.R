@@ -6,5 +6,7 @@ get_cepal_dimensions <- function(id.indicator, lang = "en") {
     "/dimensions?lang=", lang, "&format=json&in=1&path=0"
   )
 
-  jsonlite::fromJSON(url)
+  cepal_get(url,
+            format = "json",
+            simplify_vector = TRUE)
 }
