@@ -70,12 +70,11 @@ call.indicators <- function(language.en = TRUE, progress = TRUE) {
 
   # Download JSON safely ----
   indicadores <- tryCatch(
-    jsonlite::fromJSON(url.indicators, simplifyVector = FALSE),
+    cepal_get(url.indicators, format = "json", simplify_vector = FALSE),
     error = function(e) {
-      stop(
-        paste0("Could not retrieve the thematic tree from CEPALSTAT: ", e$message),
-        call. = FALSE
-      )
+      stop(paste0("Could not retrieve the thematic tree from CEPALSTAT: ",
+                  conditionMessage(e)),
+           call. = FALSE)
     }
   )
 

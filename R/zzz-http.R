@@ -1,6 +1,7 @@
 #' Internal helper to retrieve CEPALSTAT resources
 #' @keywords internal
-cepal_get <- function(url, format = c("json", "csv"), timeout_sec = 60) {
+cepal_get <- function(url, format = c("json", "csv"), timeout_sec = 60, simplify_vector = FALSE) {
+
   format <- match.arg(format)
 
   req <- httr2::request(url) |>
@@ -36,7 +37,7 @@ cepal_get <- function(url, format = c("json", "csv"), timeout_sec = 60) {
   }
 
   if (format == "json") {
-    return(httr2::resp_body_json(resp, simplifyVector = TRUE))
+    return(httr2::resp_body_json(resp, simplifyVector = simplify_vector))
   }
 
   utils::read.csv(
