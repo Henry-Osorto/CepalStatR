@@ -331,7 +331,7 @@ topic_map <- function(language.en = TRUE,
     htmltools::save_html(out, file = tmp)
     utils::browseURL(tmp)
   } else {
-    if (interactive()) {
+    if (interactive() && isTRUE(progress)) {
       message(
         if (isTRUE(language.en)) {
           "Rendering in Viewer pane. Use open.browser = TRUE to open in browser."

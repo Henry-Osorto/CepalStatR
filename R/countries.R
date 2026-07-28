@@ -38,7 +38,7 @@ countries <- function(language.en = TRUE) {
   country_dim <- dims[grepl("Pa\u00eds__ESTANDAR|Country__ESTANDAR", dims$name),]
 
 
-  if (length(country_dim) == 0) {
+  if (nrow(country_dim) == 0L) {
     stop("Country dimension not found.", call. = FALSE)
   }
 

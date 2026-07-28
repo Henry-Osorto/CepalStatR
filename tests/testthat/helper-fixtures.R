@@ -95,32 +95,34 @@ fixture_indicator_response <- function() {
 }
 
 fixture_dimensions_response <- function() {
+  country_members <- data.frame(
+    id = c(1, 2, 3),
+    name = c("Honduras", "Guatemala", "Honduras"),
+    order = c(2, 1, 3),
+    stringsAsFactors = FALSE
+  )
+
+  sex_members <- data.frame(
+    id = c(1, 2),
+    name = c("Men", "Women"),
+    order = c(1, 2),
+    stringsAsFactors = FALSE
+  )
+
+  dimensions <- data.frame(
+    id = c(1, 2),
+    name = c("Country__ESTANDAR", "Sex__ESTANDAR"),
+    stringsAsFactors = FALSE
+  )
+
+  dimensions$members <- I(list(
+    country_members,
+    sex_members
+  ))
+
   list(
     header = list(success = TRUE),
-    body = list(
-      dimensions = list(
-        list(
-          id = 1,
-          name = "Country__ESTANDAR",
-          members = data.frame(
-            id = c(1, 2, 3),
-            name = c("Honduras", "Guatemala", "Honduras"),
-            order = c(2, 1, 3),
-            stringsAsFactors = FALSE
-          )
-        ),
-        list(
-          id = 2,
-          name = "Sex__ESTANDAR",
-          members = data.frame(
-            id = c(1, 2),
-            name = c("Men", "Women"),
-            order = c(1, 2),
-            stringsAsFactors = FALSE
-          )
-        )
-      )
-    )
+    body = list(dimensions = dimensions)
   )
 }
 

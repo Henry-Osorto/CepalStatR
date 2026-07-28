@@ -31,7 +31,7 @@ test_that("topic_map creates a browsable tree from mocked indicators", {
     open.browser = FALSE
   )
 
-  expect_true(inherits(out, "html_browsable"))
+  expect_true(htmltools::is.browsable(out))
   expect_true(inherits(out, "shiny.tag"))
   expect_match(as.character(out), "Interactive thematic map", fixed = TRUE)
   expect_match(as.character(out), "Generated with CepalStatR", fixed = TRUE)
