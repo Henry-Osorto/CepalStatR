@@ -24,7 +24,7 @@ test_that("viewer.indicators creates a browsable object from mocked indicators",
     open.browser = FALSE
   )
 
-  expect_true(inherits(out, "html_browsable"))
+  expect_true(htmltools::is.browsable(out))
   expect_true(inherits(out, "shiny.tag"))
   expect_match(as.character(out), "Available indicators", fixed = TRUE)
   expect_match(as.character(out), "Generated with CepalStatR", fixed = TRUE)

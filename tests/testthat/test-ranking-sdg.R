@@ -1,20 +1,30 @@
 test_that("ranking.sdg validates arguments without using the API", {
   expect_error(
-    ranking.sdg(id.indicator = c(1, 2)),
+    ranking.sdg(
+      id.indicator = c(1, 2),
+      progress = FALSE
+    ),
     "id.indicator must be a single numeric or character value",
-    progress = FALSE,
     fixed = TRUE
   )
+
   expect_error(
-    ranking.sdg(id.indicator = 3682, height = 0),
+    ranking.sdg(
+      id.indicator = 3682,
+      height = 0,
+      progress = FALSE
+    ),
     "height must be a positive number",
-    progress = FALSE,
     fixed = TRUE
   )
+
   expect_error(
-    ranking.sdg(id.indicator = 3682, color = NA_character_),
+    ranking.sdg(
+      id.indicator = 3682,
+      color = NA_character_,
+      progress = FALSE
+    ),
     "color must be a single character string",
-    progress = FALSE,
     fixed = TRUE
   )
 })
