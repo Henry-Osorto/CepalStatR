@@ -66,11 +66,9 @@ call.data <- function(id.indicator,
   lang <- if (isTRUE(language.en)) "en" else "es"
 
   # 2. Build URL ----
-  url.data <- paste0(
-    "https://api-cepalstat.cepal.org/cepalstat/api/v1/indicator/",
-    id.indicator,
-    "/data?lang=", lang, "&format=json&in=1"
-  )
+  url.data <- cepalstat_build_url(path = paste0("indicator/", id.indicator, "/data"),
+                                  query = list(lang = if (isTRUE(language.en)) "en" else "es",
+                                               format = "json", `in` = 1))
 
   if (progress) {
     if (isTRUE(language.en)) {
@@ -82,7 +80,7 @@ call.data <- function(id.indicator,
 
   # 3. Download JSON safely ----
   data.lista <- tryCatch(
-    cepal_get(url.data, format = "json", simplify_vector = FALSE),
+    cepal_get(url.data, format = "json", timeout_sec = 60, simplify_vector = FALSE),
     error = function(e) {
       stop(paste0("Could not retrieve indicator data from CEPALSTAT: ",
                   conditionMessage(e)),
