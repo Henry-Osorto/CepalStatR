@@ -2,11 +2,34 @@
 % Please edit documentation in R/zzz-http.R
 \name{cepal_get}
 \alias{cepal_get}
-\title{Internal helper to retrieve CEPALSTAT resources}
+\title{Internal CEPALSTAT GET request helper}
 \usage{
-cepal_get(url, format = c("json", "csv"), timeout_sec = 60)
+cepal_get(
+  url,
+  format = c("json", "csv"),
+  timeout_sec = 60,
+  simplify_vector = FALSE
+)
+}
+\arguments{
+\item{url}{Character string with the request URL.}
+
+\item{format}{Character string indicating the response format. One of
+\code{"json"} or \code{"csv"}.}
+
+\item{timeout_sec}{Numeric value indicating the request timeout in seconds.
+Default is \code{60}.}
+
+\item{simplify_vector}{Logical. If \code{TRUE}, JSON responses are simplified
+into vectors, matrices, or data frames when possible. If \code{FALSE}, the
+parsed JSON structure is returned without vector simplification. Default
+is \code{FALSE}.}
+}
+\value{
+Parsed CEPALSTAT response.
 }
 \description{
-Internal helper to retrieve CEPALSTAT resources
+Performs HTTP GET requests to CEPALSTAT endpoints and parses responses
+according to the requested format.
 }
 \keyword{internal}
