@@ -38,7 +38,10 @@ call.data(id.indicator, language.en = TRUE, notes = FALSE,
 
 A data frame with indicator values, dimension labels, and metadata. When
 `add.indicator.name = TRUE`, the indicator identifier is included as a
-character string.
+character string. \#' @details Returned objects include provenance
+metadata attributes that record the retrieval timestamp, package
+version, indicator identifier, language and API endpoint used for the
+request.
 
 ## Examples
 
