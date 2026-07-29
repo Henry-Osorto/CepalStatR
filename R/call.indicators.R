@@ -197,7 +197,7 @@ call.indicators <- function(language.en = TRUE, progress = TRUE) {
     lang
 
   attr(df, "api_endpoint") <-
-    url.tree
+    url.indicators
 
   return(df)
 }
