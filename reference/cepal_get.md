@@ -1,7 +1,7 @@
-# Internal CEPALSTAT GET request helper
+# Internal helper to retrieve CEPALSTAT resources
 
-Performs HTTP GET requests to CEPALSTAT endpoints and parses responses
-according to the requested format.
+Performs an HTTP GET request to a CEPALSTAT endpoint and parses the
+response according to the requested format.
 
 ## Usage
 
@@ -18,25 +18,21 @@ cepal_get(
 
 - url:
 
-  Character string with the request URL.
+  A non-empty character string containing the complete request URL.
 
 - format:
 
-  Character string indicating the response format. One of `"json"` or
-  `"csv"`.
+  Response format. One of `"json"` or `"csv"`.
 
 - timeout_sec:
 
-  Numeric value indicating the request timeout in seconds. Default is
-  `60`.
+  Positive numeric value indicating the request timeout in seconds.
 
 - simplify_vector:
 
-  Logical. If `TRUE`, JSON responses are simplified into vectors,
-  matrices, or data frames when possible. If `FALSE`, the parsed JSON
-  structure is returned without vector simplification. Default is
-  `FALSE`.
+  Logical. If `TRUE`, JSON arrays are simplified when possible. If
+  `FALSE`, the original nested list structure is preserved.
 
 ## Value
 
-Parsed CEPALSTAT response.
+The parsed response returned by CEPALSTAT.
