@@ -99,7 +99,7 @@ head(population)
 #> 5 38278. Both … Argent… 2003  Total population, … Thou… "<p align… Annual estim…
 #> 6 40684. Both … Argent… 2009  Total population, … Thou… "<p align… Annual estim…
 #> # ℹ 7 more variables: calculation_methodology <chr>, comments <chr>,
-#> #   theme <chr>, area_meta <chr>, last_update <chr>, indicator_id <dbl>,
+#> #   theme <chr>, area_meta <chr>, last_update <chr>, indicator_id <chr>,
 #> #   indicator_name <chr>
 ```
 
