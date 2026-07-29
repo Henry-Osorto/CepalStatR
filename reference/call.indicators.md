@@ -23,7 +23,7 @@ call.indicators(language.en = TRUE, progress = TRUE)
 ## Value
 
 A data frame with the hierarchical thematic structure of CEPALSTAT
-indicators and the corresponding indicator ID.
+indicators. Indicator IDs are returned as character strings.
 
 ## Examples
 

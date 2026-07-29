@@ -15,7 +15,7 @@ call.data(id.indicator, language.en = TRUE, notes = FALSE,
 
 - id.indicator:
 
-  A single CEPALSTAT indicator ID.
+  A single numeric or character CEPALSTAT indicator ID.
 
 - language.en:
 
@@ -36,7 +36,9 @@ call.data(id.indicator, language.en = TRUE, notes = FALSE,
 
 ## Value
 
-A data frame with indicator values, dimension labels, and metadata.
+A data frame with indicator values, dimension labels, and metadata. When
+`add.indicator.name = TRUE`, the indicator identifier is included as a
+character string.
 
 ## Examples
 
