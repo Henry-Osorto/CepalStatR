@@ -194,7 +194,7 @@ call.indicators <- function(language.en = TRUE, progress = TRUE) {
     as.character(utils::packageVersion("CepalStatR"))
 
   attr(df, "language") <-
-    language
+    lang
 
   attr(df, "api_endpoint") <-
     url.tree

@@ -406,7 +406,7 @@ call.data <- function(id.indicator,
     as.character(id.indicator)
 
   attr(data, "language") <-
-    language
+    lang
 
   attr(data, "api_endpoint") <-
     url.data
