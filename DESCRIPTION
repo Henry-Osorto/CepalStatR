@@ -17,7 +17,6 @@ Imports:
     dplyr,
     httr2,
     htmltools,
-    jsonlite,
     reactable,
     stringr,
     tidyselect,
