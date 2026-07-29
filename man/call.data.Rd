@@ -8,7 +8,7 @@ call.data(id.indicator, language.en = TRUE, notes = FALSE,
                  progress = TRUE, add.indicator.name = TRUE)
 }
 \arguments{
-\item{id.indicator}{A single CEPALSTAT indicator ID.}
+\item{id.indicator}{A single numeric or character CEPALSTAT indicator ID.}
 
 \item{language.en}{Logical. If \code{TRUE} (default), the output uses English labels.
 If \code{FALSE}, Spanish labels are used when applicable.}
@@ -21,6 +21,8 @@ If \code{FALSE}, Spanish labels are used when applicable.}
 }
 \value{
 A data frame with indicator values, dimension labels, and metadata.
+When \code{add.indicator.name = TRUE}, the indicator identifier is included as
+a character string.
 }
 \description{
 Retrieves indicator data from the CEPALSTAT API in JSON format and returns

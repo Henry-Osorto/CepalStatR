@@ -14,7 +14,7 @@ If \code{FALSE}, labels are returned in Spanish.}
 }
 \value{
 A data frame with the hierarchical thematic structure of CEPALSTAT
-indicators and the corresponding indicator ID.
+indicators. Indicator IDs are returned as character strings.
 }
 \description{
 Retrieves the thematic tree from the CEPALSTAT API in JSON format and
