@@ -80,13 +80,22 @@ call.data <- function(id.indicator,
 
   # 3. Download JSON safely ----
   data.lista <- tryCatch(
-    cepal_get(url.data, format = "json", timeout_sec = 60, simplify_vector = FALSE),
-    error = function(e) {
-      stop(paste0("Could not retrieve indicator data from CEPALSTAT: ",
-                  conditionMessage(e)),
-           call. = FALSE)
-      }
-    )
+    cepal_get(
+      url = url.data,
+      format = "json",
+      timeout_sec = 60,
+      simplify_vector = FALSE
+    ),
+    error = function(error) {
+      stop(
+        paste0(
+          "Could not retrieve indicator data from CEPALSTAT: ",
+          conditionMessage(error)
+        ),
+        call. = FALSE
+      )
+    }
+  )
 
   # 4. Validate JSON structure ----
   if (!is.list(data.lista) || is.null(data.lista$body)) {
