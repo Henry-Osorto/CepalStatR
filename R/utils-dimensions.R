@@ -1,12 +1,23 @@
 #' @keywords internal
-get_cepal_dimensions <- function(id.indicator, lang = "en") {
-  url <- paste0(
-    "https://api-cepalstat.cepal.org/cepalstat/api/v1/indicator/",
+get_cepal_dimensions <- function(
     id.indicator,
-    "/dimensions?lang=", lang, "&format=json&in=1&path=0"
+    lang = "en"
+) {
+  url <- paste0(
+    "https://api-cepalstat.cepal.org",
+    "/cepalstat/api/v1/indicator/",
+    id.indicator,
+    "/dimensions",
+    "?lang=", lang,
+    "&format=json",
+    "&in=1",
+    "&path=0"
   )
 
-  cepal_get(url,
-            format = "json",
-            simplify_vector = TRUE)
+  cepal_get(
+    url = url,
+    format = "json",
+    timeout_sec = 60,
+    simplify_vector = TRUE
+  )
 }
