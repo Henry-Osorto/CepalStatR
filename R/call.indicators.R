@@ -54,9 +54,12 @@ call.indicators <- function(language.en = TRUE, progress = TRUE) {
     "Nombre Indicador", "ID Indicador"
   )
 
-  url.indicators <- cepalstat_build_url(path = "indicator",
-                                        query = list(lang = if (isTRUE(language.en)) "en" else "es",
-                                                     format = "json"))
+  url.indicators <- paste0(
+    "https://api-cepalstat.cepal.org",
+    "/cepalstat/api/v1/thematic-tree",
+    "?lang=", lang,
+    "&format=json"
+  )
 
   if (progress) {
     if (isTRUE(language.en)) {
@@ -68,11 +71,20 @@ call.indicators <- function(language.en = TRUE, progress = TRUE) {
 
   # Download JSON safely ----
   indicadores <- tryCatch(
-    cepal_get(url.indicators, format = "json", timeout_sec = 60, simplify_vector = FALSE),
-    error = function(e) {
-      stop(paste0("Could not retrieve the thematic tree from CEPALSTAT: ",
-                  conditionMessage(e)),
-           call. = FALSE)
+    cepal_get(
+      url = url.indicators,
+      format = "json",
+      timeout_sec = 60,
+      simplify_vector = FALSE
+    ),
+    error = function(error) {
+      stop(
+        paste0(
+          "Could not retrieve the thematic tree from CEPALSTAT: ",
+          conditionMessage(error)
+        ),
+        call. = FALSE
+      )
     }
   )
 
