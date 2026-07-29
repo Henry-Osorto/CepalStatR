@@ -58,10 +58,6 @@ call.data <- function(id.indicator,
     stop("add.indicator.name must be TRUE or FALSE.", call. = FALSE)
   }
 
-  # Internal helper ----
-  `%||%` <- function(x, y) {
-    if (is.null(x)) y else x
-  }
 
   lang <- if (isTRUE(language.en)) "en" else "es"
 

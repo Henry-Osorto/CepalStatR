@@ -35,10 +35,6 @@ call.indicators <- function(language.en = TRUE, progress = TRUE) {
     stop("progress must be TRUE or FALSE.", call. = FALSE)
   }
 
-  # Internal helper ----
-  `%||%` <- function(x, y) {
-    if (is.null(x)) y else x
-  }
 
   lang <- if (isTRUE(language.en)) "en" else "es"
 
