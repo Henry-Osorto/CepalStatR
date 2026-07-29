@@ -2,9 +2,13 @@
 
 Convert an image file to a data URI
 
+Internal helper
+
 ## Usage
 
 ``` r
+img_to_data_uri(path)
+
 img_to_data_uri(path)
 ```
 
