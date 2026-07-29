@@ -60,12 +60,6 @@ call.data <- function(id.indicator,
   }
 
 
-  if (!is.logical(add.indicator.name) ||
-      length(add.indicator.name) != 1 ||
-      is.na(add.indicator.name)) {
-    stop("add.indicator.name must be TRUE or FALSE.", call. = FALSE)
-  }
-
   indicator_id_chr <- trimws(as.character(id.indicator))
 
   lang <- if (isTRUE(language.en)) "en" else "es"

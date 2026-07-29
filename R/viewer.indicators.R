@@ -136,11 +136,13 @@ viewer.indicators <- function(language.en = TRUE,
 
   search_label <- if (isTRUE(language.en)) "Search" else "Buscar"
   no_data_label <- if (isTRUE(language.en)) "No rows found" else "No se encontraron registros"
+
   page_info_text <- if (isTRUE(language.en)) {
-    "{rowStart}<e2><80><93>{rowEnd} of {rows} rows"
+    "{rowStart}\u2013{rowEnd} of {rows} rows"
   } else {
-    "{rowStart}<e2><80><93>{rowEnd} de {rows} registros"
+    "{rowStart}\u2013{rowEnd} de {rows} registros"
   }
+
   page_numbers_text <- if (isTRUE(language.en)) {
     "{page} of {pages}"
   } else {
