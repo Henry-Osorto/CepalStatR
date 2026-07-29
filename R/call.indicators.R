@@ -11,6 +11,10 @@
 #' @return A data frame with the hierarchical thematic structure of CEPALSTAT
 #' indicators. Indicator IDs are returned as character strings.
 #'
+#'#' @details
+#' The returned indicator catalogue includes provenance metadata attributes
+#' describing the retrieval conditions of the CEPALSTAT query.
+#'
 #' @export
 #'
 #' @importFrom dplyr bind_rows
@@ -181,6 +185,19 @@ call.indicators <- function(language.en = TRUE, progress = TRUE) {
       message("Descarga de indicadores finalizada.")
     }
   }
+
+  # Metadata computacional ----
+
+  attr(df, "retrieved_at") <- Sys.time()
+
+  attr(df, "package_version") <-
+    as.character(utils::packageVersion("CepalStatR"))
+
+  attr(df, "language") <-
+    language
+
+  attr(df, "api_endpoint") <-
+    url.tree
 
   return(df)
 }

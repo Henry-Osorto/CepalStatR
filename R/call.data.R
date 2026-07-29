@@ -17,6 +17,10 @@
 #' @return A data frame with indicator values, dimension labels, and metadata.
 #' When `add.indicator.name = TRUE`, the indicator identifier is included as
 #' a character string.
+#' #' @details
+#' Returned objects include provenance metadata attributes that record
+#' the retrieval timestamp, package version, indicator identifier,
+#' language and API endpoint used for the request.
 #' @export
 #'
 #' @importFrom dplyr select
@@ -389,6 +393,23 @@ call.data <- function(id.indicator,
       }
     }
   }
+
+
+  # 19. Metadata computacional ----
+
+  attr(data, "retrieved_at") <- Sys.time()
+
+  attr(data, "package_version") <-
+    as.character(utils::packageVersion("CepalStatR"))
+
+  attr(data, "indicator_id") <-
+    as.character(id.indicator)
+
+  attr(data, "language") <-
+    language
+
+  attr(data, "api_endpoint") <-
+    url.data
 
   return(data)
 }
