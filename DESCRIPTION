@@ -22,7 +22,6 @@ Imports:
     reactable,
     stringr,
     tidyselect,
-    rlang,
     collapsibleTree,
     gridExtra,
     htmlwidgets
