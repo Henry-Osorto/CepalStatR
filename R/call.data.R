@@ -7,7 +7,7 @@
 #' @usage call.data(id.indicator, language.en = TRUE, notes = FALSE,
 #'                  progress = TRUE, add.indicator.name = TRUE)
 #'
-#' @param id.indicator A single CEPALSTAT indicator ID.
+#' @param id.indicator A single numeric or character CEPALSTAT indicator ID.
 #' @param language.en Logical. If `TRUE` (default), the output uses English labels.
 #' If `FALSE`, Spanish labels are used when applicable.
 #' @param notes Logical. If `TRUE`, footnotes are joined when available.
@@ -15,13 +15,14 @@
 #' @param add.indicator.name Logical. If `TRUE`, adds indicator ID and indicator name.
 #'
 #' @return A data frame with indicator values, dimension labels, and metadata.
+#' When `add.indicator.name = TRUE`, the indicator identifier is included as
+#' a character string.
 #' @export
 #'
 #' @importFrom dplyr select
 #' @importFrom dplyr left_join
 #' @importFrom dplyr mutate
 #' @importFrom dplyr across
-#' @importFrom jsonlite fromJSON
 #' @importFrom stringr str_remove
 #' @importFrom stats setNames
 #'
@@ -59,7 +60,16 @@ call.data <- function(id.indicator,
   }
 
 
+  if (!is.logical(add.indicator.name) ||
+      length(add.indicator.name) != 1 ||
+      is.na(add.indicator.name)) {
+    stop("add.indicator.name must be TRUE or FALSE.", call. = FALSE)
+  }
+
+  indicator_id_chr <- trimws(as.character(id.indicator))
+
   lang <- if (isTRUE(language.en)) "en" else "es"
+
 
   # 2. Build URL ----
   url.data <- cepalstat_build_url(path = paste0("indicator/", id.indicator, "/data"),
@@ -351,13 +361,14 @@ call.data <- function(id.indicator,
   # 16. Add indicator name and ID optionally ----
   if (isTRUE(add.indicator.name)) {
     if (isTRUE(language.en)) {
-      data$indicator_id <- suppressWarnings(as.numeric(id.indicator))
+      data$indicator_id <- indicator_id_chr
       data$indicator_name <- indicator_name
     } else {
-      data$id_indicador <- suppressWarnings(as.numeric(id.indicator))
+      data$id_indicador <- indicator_id_chr
       data$nombre_indicador <- indicator_name
     }
   }
+
 
   # 17. Trim character columns ----
   data <- data |>

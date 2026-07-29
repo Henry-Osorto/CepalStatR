@@ -175,7 +175,7 @@ viewer.indicators <- function(language.en = TRUE,
   }
 
   if (length(id_col) == 1) {
-    df[[id_col]] <- suppressWarnings(as.numeric(df[[id_col]]))
+    df[[id_col]] <- trimws(as.character(df[[id_col]]))
   }
 
   default_coldef <- reactable::colDef(
@@ -227,7 +227,6 @@ viewer.indicators <- function(language.en = TRUE,
     columns_list[[id_col]] <- reactable::colDef(
       minWidth = 120,
       align = "center",
-      format = reactable::colFormat(separators = TRUE, digits = 0),
       headerStyle = list(
         background = "#0C4A61",
         color = "white",

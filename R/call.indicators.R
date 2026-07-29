@@ -9,7 +9,7 @@
 #' @param progress Logical. If `TRUE` (default), progress messages are displayed.
 #'
 #' @return A data frame with the hierarchical thematic structure of CEPALSTAT
-#' indicators and the corresponding indicator ID.
+#' indicators. Indicator IDs are returned as character strings.
 #'
 #' @export
 #'
@@ -17,7 +17,6 @@
 #' @importFrom dplyr select
 #' @importFrom dplyr mutate
 #' @importFrom dplyr across
-#' @importFrom jsonlite fromJSON
 #'
 #' @examples
 #' \donttest{
@@ -120,7 +119,7 @@ call.indicators <- function(language.en = TRUE, progress = TRUE) {
         level_6 = if (length(current_path) >= 6) current_path[6] else NA_character_,
         level_7 = if (length(current_path) >= 7) current_path[7] else NA_character_,
         node_name = current_name,
-        indicator_id = suppressWarnings(as.numeric(node$indicator_id)),
+        indicator_id = as.character(node$indicator_id),
         area_id = if (!is.null(node$area_id)) suppressWarnings(as.numeric(node$area_id)) else NA_real_,
         order = if (!is.null(node$order)) suppressWarnings(as.numeric(node$order)) else NA_real_,
         node_type = "indicator",
@@ -162,7 +161,6 @@ call.indicators <- function(language.en = TRUE, progress = TRUE) {
   df <- df |>
     dplyr::select(level_2:node_name, indicator_id) |>
     dplyr::mutate(
-      indicator_id = suppressWarnings(as.numeric(indicator_id)),
       dplyr::across(
         .cols = tidyselect::where(is.character),
         .fns = ~ trimws(.x)
