@@ -18,7 +18,6 @@ Imports:
     httr2,
     htmltools,
     jsonlite,
-    magrittr,
     reactable,
     stringr,
     tidyselect,
