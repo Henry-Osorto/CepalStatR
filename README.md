@@ -56,6 +56,14 @@ Install the development version from GitHub:
 devtools::install_github("Henry-Osorto/CepalStatR")
 ```
 
+### Install the SoftwareX review release
+
+The source-code version associated with the revised SoftwareX manuscript
+is available as GitHub release v0.9.1:
+
+```r
+remotes::install_github("Henry-Osorto/CepalStatR@v0.9.1")
+
 ## Quick start
 
 ```r
