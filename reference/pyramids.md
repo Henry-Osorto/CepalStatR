@@ -105,7 +105,7 @@ pyramids(country = "Honduras", years = c(1, 5, 10, 15))
 #> Creating plots...
 
 
-#' # Save as PNG
+# Save as PNG
 pyramids(country = "Honduras",
          years = c(1, 5, 10, 15),
          save = TRUE,

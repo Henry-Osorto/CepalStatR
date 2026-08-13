@@ -25,9 +25,10 @@ call.indicators(language.en = TRUE, progress = TRUE)
 A data frame with the hierarchical thematic structure of CEPALSTAT
 indicators. Indicator IDs are returned as character strings.
 
-\#' @details The returned indicator catalogue includes provenance
-metadata attributes describing the retrieval conditions of the CEPALSTAT
-query.
+## Details
+
+The returned indicator catalogue includes provenance metadata attributes
+describing the retrieval conditions of the CEPALSTAT query.
 
 ## Examples
 
