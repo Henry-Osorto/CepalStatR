@@ -60,7 +60,7 @@ pyramids(country = "Honduras", years = 16)
 # Multiple years
 pyramids(country = "Honduras", years = c(1, 5, 10, 15))
 
-#' # Save as PNG
+# Save as PNG
 pyramids(country = "Honduras",
          years = c(1, 5, 10, 15),
          save = TRUE,

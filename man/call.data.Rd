@@ -23,14 +23,15 @@ If \code{FALSE}, Spanish labels are used when applicable.}
 A data frame with indicator values, dimension labels, and metadata.
 When \code{add.indicator.name = TRUE}, the indicator identifier is included as
 a character string.
-#' @details
-Returned objects include provenance metadata attributes that record
-the retrieval timestamp, package version, indicator identifier,
-language and API endpoint used for the request.
 }
 \description{
 Retrieves indicator data from the CEPALSTAT API in JSON format and returns
 a data frame with values, dimensions, metadata, and optionally footnotes.
+}
+\details{
+Returned objects include provenance metadata attributes that record
+the retrieval timestamp, package version, indicator identifier,
+language and API endpoint used for the request.
 }
 \examples{
 \donttest{

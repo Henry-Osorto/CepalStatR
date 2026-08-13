@@ -15,14 +15,14 @@ If \code{FALSE}, labels are returned in Spanish.}
 \value{
 A data frame with the hierarchical thematic structure of CEPALSTAT
 indicators. Indicator IDs are returned as character strings.
-
-#' @details
-The returned indicator catalogue includes provenance metadata attributes
-describing the retrieval conditions of the CEPALSTAT query.
 }
 \description{
 Retrieves the thematic tree from the CEPALSTAT API in JSON format and
 returns a data frame with the hierarchical structure of indicators.
+}
+\details{
+The returned indicator catalogue includes provenance metadata attributes
+describing the retrieval conditions of the CEPALSTAT query.
 }
 \examples{
 \donttest{
