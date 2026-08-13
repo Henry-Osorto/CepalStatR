@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/Henry-Osorto/CepalStatR/blob/main/inst/CITATION)
+[`inst/CITATION`](https://github.com/Henry-Osorto/CepalStatR/blob/v0.9.2/inst/CITATION)
 
 Osorto H (2024). *CepalStatR: a package in R for access to ECLAC
 statistics*.
