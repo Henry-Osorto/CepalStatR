@@ -182,7 +182,7 @@ pyramids <- function(country,
     ylab <- "Edad"
     caption_text <- paste(
       "Fuente: CEPALSTAT (CEPAL).",
-      "Estimaciones y proyecciones por grupos quinquenales de edad de la poblaci<c3><b3>n para el 1950-2100."
+      "Estimaciones y proyecciones por grupos quinquenales de edad de la poblaci\u00f3n para 1950-2100."
     )
     default_file <- paste0("Piramides_poblacionales.", format)
   }
