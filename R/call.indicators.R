@@ -11,7 +11,7 @@
 #' @return A data frame with the hierarchical thematic structure of CEPALSTAT
 #' indicators. Indicator IDs are returned as character strings.
 #'
-#'#' @details
+#' @details
 #' The returned indicator catalogue includes provenance metadata attributes
 #' describing the retrieval conditions of the CEPALSTAT query.
 #'
@@ -53,12 +53,8 @@ call.indicators <- function(language.en = TRUE, progress = TRUE) {
     "Nombre Indicador", "ID Indicador"
   )
 
-  url.indicators <- paste0(
-    "https://api-cepalstat.cepal.org",
-    "/cepalstat/api/v1/thematic-tree",
-    "?lang=", lang,
-    "&format=json"
-  )
+  url.indicators <- cepalstat_build_url(path = "thematic-tree",
+                                        query = list(lang = lang, format = "json"))
 
   if (progress) {
     if (isTRUE(language.en)) {
