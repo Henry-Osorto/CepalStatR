@@ -1,4 +1,4 @@
-# CepalStatR 0.9.1
+# CepalStatR 0.9.2
 
 ## SoftwareX peer-review revision
 
